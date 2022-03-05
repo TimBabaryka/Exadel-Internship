@@ -1,0 +1,31 @@
+{
+  "name": "Exadel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimBabaryka/Exadel-Internship.git"
+  },
+  "keywords": [],
+  "author": "Tim Babaryka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimBabaryka/Exadel-Internship/issues"
+  },
+  "homepage": "https://github.com/TimBabaryka/Exadel-Internship#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "colors": "^1.4.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.4"
+  }
+}
