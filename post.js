@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const Post = new mongoose.Schema({
-  author: { type: String, required: true },
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-  //   picture: { type: String },
+  user: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  role: { type: String, required: true },
 });
 
 export default mongoose.model("Post", Post);
