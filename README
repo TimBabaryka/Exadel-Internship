@@ -4,3 +4,10 @@ Use postman and write http://localhost:3000/api/posts/  and use get to receive a
  Use postman to delete, update, or get one of the users.
 
 Mongodb is used to store database information about users
+
+
+delete user by id http://localhost:3000/api/posts/{id} without id get al users
+
+change user http://localhost:3000/api/users/{id}
+
+create user http://localhost:3000/api/users

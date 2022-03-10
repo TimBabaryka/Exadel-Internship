@@ -1,10 +1,10 @@
-import Post from "./post.js";
+import User from "./user.js";
 
 class PostController {
   async create(req, res) {
     try {
-      const { user, email, password, role } = req.body;
-      const post = await Post.create({ user, email, password, role });
+      const { userName, email, password, role } = req.body;
+      const post = await User.create({ userName, email, password, role });
       res.json(post);
     } catch (e) {
       res.status(500).json(e);
@@ -13,7 +13,7 @@ class PostController {
 
   async getAll(req, res) {
     try {
-      const posts = await Post.find();
+      const posts = await User.find();
       return res.json(posts);
     } catch (e) {
       res.status(500).json(e);
@@ -26,7 +26,7 @@ class PostController {
       if (!id) {
         res.status(400).json({ message: ` ID does not exist` });
       }
-      const post = await Post.findById(id);
+      const post = await User.findById(id);
       return res.json(post);
     } catch (e) {
       res.status(500).json(e);
@@ -38,7 +38,7 @@ class PostController {
       if (!post._id) {
         res.status(400).json({ message: ` ID does not exist` });
       }
-      const updatedPost = await Post.findByIdAndUpdate(post._id, post, {
+      const updatedPost = await User.findByIdAndUpdate(post._id, post, {
         new: true,
       });
       return res.json(updatedPost);
@@ -53,7 +53,7 @@ class PostController {
       if (!id) {
         res.status(400).json(` ID was not found`);
       }
-      const deletedPost = await Post.findByIdAndDelete(id);
+      const deletedPost = await User.findByIdAndDelete(id);
       return res.json(deletedPost);
     } catch (e) {
       res.status(500).json(e);
