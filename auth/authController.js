@@ -1,7 +1,7 @@
 import authRole from "./authRole.js";
 import authUser from "./authUser.js";
 import bcrypt from "bcryptjs";
-import { validationResult } from "express-validator";
+import { cookie, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import secret from "dotenv/config";
 
@@ -55,12 +55,32 @@ class AuthController {
         return res.status(400).json({ message: `Invalid password` });
       }
       const token = generateAccessToken(user._id, user.roles);
+      document.cookie = `token=${token}`; // might be useless
       return res.json({ token });
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Login failed" });
     }
   }
+
+  async logout(req, res) {
+    try {
+      const { userName } = req.body;
+      const user = await authUser.findOne({ userName });
+      if (!user) {
+        return res.status(400).json({ message: `Can't find the user ${user}` });
+      }
+
+      const token = req.headers.authorization.split(" ")[1];
+      res.clearCookie(`${token}`, " ");
+
+      return res.json({ message: `${token} deleted from cookie` });
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: "Logout failed" });
+    }
+  } // check when frontend is ready!
+
   async getUsers(req, res) {
     try {
       const users = await authUser.find();
