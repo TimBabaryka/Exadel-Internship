@@ -19,7 +19,7 @@ class PostController {
       res.status(500).json(e);
     }
   }
-  async getOne(req, res) {
+  async getOneById(req, res) {
     try {
       const { id } = req.params;
 

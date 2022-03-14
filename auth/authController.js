@@ -5,8 +5,6 @@ import { cookie, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import secret from "dotenv/config";
 
-// import { json } from "express";
-
 const generateAccessToken = (id, roles) => {
   const payload = {
     id,
@@ -55,7 +53,6 @@ class AuthController {
         return res.status(400).json({ message: `Invalid password` });
       }
       const token = generateAccessToken(user._id, user.roles);
-      // document.cookie = `token=${token}`; // might be useless
       return res.json({ token });
     } catch (e) {
       console.log(e);
@@ -79,15 +76,11 @@ class AuthController {
       console.log(e);
       res.status(400).json({ message: "Logout failed" });
     }
-  } // check when frontend is ready!
+  }
 
   async getUsers(req, res) {
     try {
       const users = await authUser.find();
-      //   const userRole = new authRole();
-      //   const adminRole = new authRole({ value: "ADMIN" });
-      //   await userRole.save();
-      //   await adminRole.save();
       res.json(users);
     } catch (e) {
       console.log(e);
