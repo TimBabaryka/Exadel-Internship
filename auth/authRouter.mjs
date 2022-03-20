@@ -1,10 +1,13 @@
 import Router from "express";
-import authController from "./authController.js";
+import authController from "./authController.mjs";
 import { check } from "express-validator";
 import { authMiddleware } from "./middlwear/authMiddleware.js";
 import { roleMiddleware } from "./middlwear/roleMiddleware.js";
+import mongoose from "mongoose";
+import authUser from "./authUser.js";
 
 const authRouter = new Router();
+
 
 authRouter.post(
   "/registration",
@@ -22,5 +25,8 @@ authRouter.post(
 authRouter.post("/login", authController.login);
 authRouter.get("/logout", authController.logout);
 authRouter.get("/users", roleMiddleware(["ADMIN"]), authController.getUsers);
+
+authRouter.put("/users", authController.updatePost);
+authRouter.delete("/users/:id", authController.postDelete);
 
 export default authRouter;

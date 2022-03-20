@@ -14,6 +14,8 @@ const generateAccessToken = (id, roles) => {
 };
 
 class AuthController {
+
+
   async registration(req, res) {
     try {
       const errors = validationResult(req);
@@ -35,7 +37,7 @@ class AuthController {
         roles: [userRole.value],
       });
       await user.save();
-      return res.json({ message: "User was successfully registered" });
+      return res.status(200).json({ message: "User was successfully registered" });
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration failed" });
@@ -85,6 +87,35 @@ class AuthController {
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration failed" });
+    }
+  }
+
+  async updatePost(req, res) {
+    try {
+      const post = req.body;
+      if (!post._id) {
+        res.status(400).json({ message: ` ID does not exist` });
+      }
+      const updatedPost = await authUser.findByIdAndUpdate(post._id, post, {
+        new: true,
+      });
+      return res.json(updatedPost);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+  
+  async postDelete(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!id) {
+        res.status(400).json({ message: ` ID was not found` });
+      }
+      const deletedPost = await authUser.findByIdAndDelete(id);
+      return res.json(deletedPost);
+    } catch (e) {
+      res.status(500).json(e);
     }
   }
 }
