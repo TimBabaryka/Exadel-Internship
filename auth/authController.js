@@ -27,16 +27,14 @@ class AuthController {
         return res.status(400).json({ message: "User exist" });
       }
       const hashPassword = bcrypt.hashSync(password, 5);
-      // const userRole = await authRole.findOne({ value: "USER" });
       const user = new authUser({
         userName,
         email,
         password: hashPassword,
-        // roles: [userRole.value],
+        roles: ["USER"],
       });
       await user.save();
       res.send(user);
-      // return res.status(200).json({ message: "User was successfully registered" });
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration failed" });
