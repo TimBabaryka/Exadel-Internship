@@ -14,8 +14,6 @@ const generateAccessToken = (id, roles) => {
 };
 
 class AuthController {
-
-
   async registration(req, res) {
     try {
       const errors = validationResult(req);
@@ -29,15 +27,16 @@ class AuthController {
         return res.status(400).json({ message: "User exist" });
       }
       const hashPassword = bcrypt.hashSync(password, 5);
-      const userRole = await authRole.findOne({ value: "USER" });
+      // const userRole = await authRole.findOne({ value: "USER" });
       const user = new authUser({
         userName,
         email,
         password: hashPassword,
-        roles: [userRole.value],
+        // roles: [userRole.value],
       });
       await user.save();
-      return res.status(200).json({ message: "User was successfully registered" });
+      res.send(user);
+      // return res.status(200).json({ message: "User was successfully registered" });
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration failed" });
@@ -104,7 +103,7 @@ class AuthController {
       res.status(500).json(e);
     }
   }
-  
+
   async postDelete(req, res) {
     try {
       const { id } = req.params;

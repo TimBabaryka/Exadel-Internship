@@ -1,5 +1,5 @@
 import Router from "express";
-import authController from "./authController.mjs";
+import authController from "./authController.js";
 import { check } from "express-validator";
 import { authMiddleware } from "./middlwear/authMiddleware.js";
 import { roleMiddleware } from "./middlwear/roleMiddleware.js";
@@ -7,7 +7,6 @@ import mongoose from "mongoose";
 import authUser from "./authUser.js";
 
 const authRouter = new Router();
-
 
 authRouter.post(
   "/registration",
