@@ -1,0 +1,29 @@
+homework 1
+
+Start local server with "npm run start"
+
+Use postman and write http://localhost:3000/api/users/ and use get to receive all available users
+Use postman to delete, update, or get one of the users.
+
+Mongodb is used to store database information about users
+
+delete user by id http://localhost:3000/api/posts/{id} without id get al users
+
+change user http://localhost:3000/api/users/{id}
+
+create user http://localhost:3000/api/users
+
+homework 2
+
+I did registration, login and authorization. It is connected to mongodb database which contains two users and one admin.
+
+In order to get info about all users as admin via postman use:
+
+as Admin(authorized)
+userName:Sasha,
+password:4321
+
+as User(unauthorized)
+
+userName: Timos,
+password: 1234
