@@ -27,15 +27,14 @@ class AuthController {
         return res.status(400).json({ message: "User exist" });
       }
       const hashPassword = bcrypt.hashSync(password, 5);
-      const userRole = await authRole.findOne({ value: "USER" });
       const user = new authUser({
         userName,
         email,
         password: hashPassword,
-        roles: [userRole.value],
+        roles: ["USER"],
       });
       await user.save();
-      return res.json({ message: "User was successfully registered" });
+      res.send(user);
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration failed" });
@@ -85,6 +84,35 @@ class AuthController {
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration failed" });
+    }
+  }
+
+  async updatePost(req, res) {
+    try {
+      const post = req.body;
+      if (!post._id) {
+        res.status(400).json({ message: ` ID does not exist` });
+      }
+      const updatedPost = await authUser.findByIdAndUpdate(post._id, post, {
+        new: true,
+      });
+      return res.json(updatedPost);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  async postDelete(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!id) {
+        res.status(400).json({ message: ` ID was not found` });
+      }
+      const deletedPost = await authUser.findByIdAndDelete(id);
+      return res.json(deletedPost);
+    } catch (e) {
+      res.status(500).json(e);
     }
   }
 }
