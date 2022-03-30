@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-auth-form',
@@ -11,10 +13,16 @@ export class AuthFormComponent {
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    console.log('onSubmit');
-    console.log(this.loginForm.value);
+    const { email, password } = this.loginForm.value;
+    this.authService.login(email, password).subscribe((data) => {
+      console.log('Successful login');
+      console.log(data);
+      this.router.navigateByUrl('/todo');
+    });
+    // console.log('onSubmit');
+    // console.log(this.loginForm.value);
   }
 }

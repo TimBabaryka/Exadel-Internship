@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { TodoModule } from './todo/todo.module';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
@@ -18,6 +19,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SharedModule,
     AuthModule,
     TodoModule,
+    HttpClientModule,
     AppRoutingModule,
   ],
   providers: [],

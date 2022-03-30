@@ -18,6 +18,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+
     RouterModule.forChild(routes),
   ],
   exports: [AuthFormComponent],
