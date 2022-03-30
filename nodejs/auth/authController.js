@@ -1,5 +1,6 @@
 import authRole from "./authRole.js";
 import authUser from "./authUser.js";
+
 import bcrypt from "bcryptjs";
 import { cookie, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
@@ -20,18 +21,37 @@ class AuthController {
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: "Registration failed", errors });
       }
-      const { userName, email, password } = req.body;
+      const {
+        userName,
+        email,
+        password,
+        cardName,
+        cardAmount,
+        currency,
+        country,
+        dateOfBirth,
+      } = req.body;
       const candidate = await authUser.findOne({ userName });
       const candidate2 = await authUser.findOne({ email });
       if (candidate || candidate2) {
         return res.status(400).json({ message: "User exist" });
       }
+      const userRole = await authRole.findOne({ value: "USER" });
       const hashPassword = bcrypt.hashSync(password, 5);
       const user = new authUser({
         userName,
         email,
         password: hashPassword,
-        roles: ["USER"],
+        roles: [userRole.value],
+        dateOfBirth,
+        country,
+        cards: [
+          {
+            cardName: cardName,
+            cardAmount: cardAmount,
+            currency: currency,
+          },
+        ],
       });
       await user.save();
       res.send(user);
@@ -116,5 +136,8 @@ class AuthController {
     }
   }
 }
+
+
+
 
 export default new AuthController();
