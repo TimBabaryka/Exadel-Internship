@@ -6,6 +6,9 @@ import { roleMiddleware } from "./middlwear/roleMiddleware.js";
 import mongoose from "mongoose";
 import authUser from "./authUser.js";
 
+import jwt from "jsonwebtoken";
+import secret from "dotenv/config";
+
 const authRouter = new Router();
 
 authRouter.post(
@@ -21,11 +24,17 @@ authRouter.post(
   ],
   authController.registration
 );
-authRouter.post("/login", authController.login);
+// authRouter.post("/login", authController.login);
 authRouter.get("/logout", authController.logout);
 authRouter.get("/users", roleMiddleware(["ADMIN"]), authController.getUsers);
 
 authRouter.put("/users", authController.updatePost);
 authRouter.delete("/users/:id", authController.postDelete);
+
+authRouter.get("/login", authController.login);
+
+authRouter.post("/healthCheck", (req, res) => {
+  return res.send({ message: "Health is ok!" });
+});
 
 export default authRouter;

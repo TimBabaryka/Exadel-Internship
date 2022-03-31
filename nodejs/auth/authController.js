@@ -1,6 +1,5 @@
 import authRole from "./authRole.js";
 import authUser from "./authUser.js";
-
 import bcrypt from "bcryptjs";
 import { cookie, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
@@ -15,6 +14,22 @@ const generateAccessToken = (id, roles) => {
 };
 
 class AuthController {
+  async login(req, res) {
+    const { email, password } = req.query;
+    // const user = await authUser.findOne({ email });
+    // const validPassword = bcrypt.compareSync(password, user.password);
+    // console.log(user);
+    // console.log(email);
+    // console.log(validPassword);
+    if (email && password) {
+      return res.send({
+        apiKey: generateAccessToken(),
+        expiresIn: 10 * 60 * 1000,
+      });
+    }
+    return res.status(401).send("non auth");
+  }
+
   async registration(req, res) {
     try {
       const errors = validationResult(req);
@@ -60,24 +75,25 @@ class AuthController {
       res.status(400).json({ message: "Registration failed" });
     }
   }
-  async login(req, res) {
-    try {
-      const { userName, password } = req.body;
-      const user = await authUser.findOne({ userName });
-      if (!user) {
-        return res.status(400).json({ message: `Can't find the user ${user}` });
-      }
-      const validPassword = bcrypt.compareSync(password, user.password);
-      if (!validPassword) {
-        return res.status(400).json({ message: `Invalid password` });
-      }
-      const token = generateAccessToken(user._id, user.roles);
-      return res.json({ token });
-    } catch (e) {
-      console.log(e);
-      res.status(400).json({ message: "Login failed" });
-    }
-  }
+
+  // async login(req, res) {
+  //   try {
+  //     const { email, password } = req.body;
+  //     const user = await authUser.findOne({ email });
+  //     if (!user) {
+  //       return res.status(400).json({ message: `Can't find the user ${user}` });
+  //     }
+  //     const validPassword = bcrypt.compareSync(password, user.password);
+  //     if (!validPassword) {
+  //       return res.status(400).json({ message: `Invalid password` });
+  //     }
+  //     const token = generateAccessToken(user._id, user.roles);
+  //     return res.json({ token });
+  //   } catch (e) {
+  //     console.log(e);
+  //     res.status(400).json({ message: "Login failed" });
+  //   }
+  // }
 
   async logout(req, res) {
     try {
@@ -136,8 +152,5 @@ class AuthController {
     }
   }
 }
-
-
-
 
 export default new AuthController();
