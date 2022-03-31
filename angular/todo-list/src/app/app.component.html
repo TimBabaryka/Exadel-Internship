@@ -1,3 +1,5 @@
-<button routerLink="/todo">Todo</button>
-<button routerLink="/login">Login</button>
+<button routerLink="/todo" *ngIf="isLoggedIn">Todo</button>
+<!-- <button routerLink="/login" *ngIf="!isLoggedIn">Login</button> -->
+<button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+<button *ngIf="isLoggedIn" (click)="healthCheck()">Health Check</button>
 <router-outlet></router-outlet>

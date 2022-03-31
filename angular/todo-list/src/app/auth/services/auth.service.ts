@@ -17,9 +17,28 @@ export class AuthService {
       .pipe(tap((res) => this.setSession(res)));
   }
 
+  healthCheck() {
+    return this.http.post('http://localhost:3000/api/healthCheck', {
+      test: 'test',
+    });
+  }
+
+  isLoggedIn() {
+    const expiresIn = localStorage.getItem('expiresIn');
+    if (expiresIn) {
+      return Date.now() < Number(expiresIn);
+    }
+    return false;
+  }
+
+  logout() {
+    localStorage.removeItem('expiresIn');
+    localStorage.removeItem('idToken');
+  }
+
   private setSession(res: any) {
     const expiresIn = Date.now() + Number(res.expiresIn);
-    localStorage.setItem(' idToken', res.apiKey);
+    localStorage.setItem('idToken', res.apiKey);
     localStorage.setItem('expiresIn', String(expiresIn));
   }
 }
