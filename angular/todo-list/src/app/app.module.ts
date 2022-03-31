@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
@@ -21,6 +22,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     AuthModule,
     TodoModule,
     HttpClientModule,
+    LayoutModule,
     AppRoutingModule,
   ],
   providers: [
