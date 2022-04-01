@@ -1,5 +1,6 @@
 <header class="header">
   <button
+    *ngIf="isLoggedIn"
     class="header__icon-button"
     mat-icon-button
     (click)="menuButtonClicked.emit()"
@@ -7,7 +8,7 @@
     <mat-icon>menu</mat-icon>
   </button>
   <div class="header__logo">Todo Appp</div>
-  <div class="header__logout">
-    <a href="#">Logout</a>
+  <div *ngIf="isLoggedIn" class="header__logout">
+    <a (click)="onClick()" href="#">Logout</a>
   </div>
 </header>

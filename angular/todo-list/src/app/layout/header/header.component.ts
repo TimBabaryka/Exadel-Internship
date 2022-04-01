@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +6,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  @Input() isLoggedIn!: boolean;
   @Output() menuButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+  @Output() loggedOutClicked: EventEmitter<void> = new EventEmitter<void>();
   constructor() {}
+
+  onClick(): boolean {
+    this.loggedOutClicked.emit();
+    return false;
+  }
 }

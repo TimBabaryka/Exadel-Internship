@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IMenuItem } from './menu-item.model';
+import { MENU_CONFIG } from './menu.config';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
+  menu: IMenuItem[] = MENU_CONFIG;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  trackBy(index: number, item: IMenuItem): string | number {
+    return item.id;
   }
-
 }
