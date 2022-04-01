@@ -18,9 +18,7 @@ export class AuthService {
   }
 
   healthCheck() {
-    return this.http.post('http://localhost:3000/api/healthCheck', {
-      test: 'test',
-    });
+    return this.http.post('http://localhost:3000/api/healthCheck', {});
   }
 
   isLoggedIn() {
