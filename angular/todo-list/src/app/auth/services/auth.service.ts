@@ -9,11 +9,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string) {
-    const params = new HttpParams()
-      .set('email', email)
-      .set('password', password);
     return this.http
-      .get('http://localhost:3000/api/login', { params })
+      .post('http://localhost:3000/api/login', {
+        email,
+        password,
+      })
       .pipe(tap((res) => this.setSession(res)));
   }
 

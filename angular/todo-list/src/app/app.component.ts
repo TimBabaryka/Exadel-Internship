@@ -9,6 +9,7 @@ import { AuthService } from './auth/services/auth.service';
 })
 export class AppComponent {
   title = 'todo-list';
+  user: any;
 
   constructor(private authService: AuthService, private router: Router) {}
   get isLoggedIn() {
@@ -21,6 +22,8 @@ export class AppComponent {
   }
 
   healthCheck() {
-    this.authService.healthCheck().subscribe((data) => console.log(data));
+    this.authService.healthCheck().subscribe((data) => {
+      (this.user = data), console.log(this.user.user.country);
+    });
   }
 }
