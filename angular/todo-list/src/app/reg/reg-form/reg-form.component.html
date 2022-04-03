@@ -1,0 +1,49 @@
+<div class="reg-form">
+  <h3>Registration page</h3>
+  <form [formGroup]="RegForm" (ngSubmit)="onSubmitReg()" class="reg-form__form">
+    <mat-form-field class="reg-form__row" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="email@domain.com"
+        formControlName="email"
+      />
+    </mat-form-field>
+    <mat-form-field class="reg-form__row" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password" />
+    </mat-form-field>
+    <mat-form-field class="reg-form__row" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="John Doe"
+        formControlName="userName"
+      />
+    </mat-form-field>
+    <mat-form-field class="reg-form__row" appearance="fill">
+      <mat-label>Country</mat-label>
+      <input type="text" matInput placeholder="USA" formControlName="country" />
+    </mat-form-field>
+    <mat-form-field class="reg-form__row" appearance="fill">
+      <mat-label>Date of birth</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="01.01.1990"
+        formControlName="dateOfBirth"
+      />
+    </mat-form-field>
+    <button
+      type="submit"
+      color="primary"
+      [disabled]="RegForm.invalid"
+      mat-raised-button
+    >
+      Sign Up
+    </button>
+    <button routerLink="/login" mat-raised-button color="primary">Login</button>
+  </form>
+</div>
