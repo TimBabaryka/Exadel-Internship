@@ -58,16 +58,7 @@ class AuthController {
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: "Registration failed", errors });
       }
-      const {
-        userName,
-        email,
-        password,
-        country,
-        dateOfBirth,
-        cardName,
-        cardAmount,
-        currency,
-      } = req.body;
+      const { userName, email, password, country, dateOfBirth } = req.body;
       const candidate = await authUser.findOne({ userName });
       const candidate2 = await authUser.findOne({ email });
       if (candidate || candidate2) {
@@ -82,13 +73,6 @@ class AuthController {
         roles: [userRole.value],
         dateOfBirth,
         country,
-        cards: [
-          {
-            cardName: cardName,
-            cardAmount: cardAmount,
-            currency: currency,
-          },
-        ],
       });
       await user.save();
       res.send(user);
