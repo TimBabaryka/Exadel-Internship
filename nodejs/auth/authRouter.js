@@ -31,10 +31,13 @@ authRouter.get("/users", roleMiddleware(["ADMIN"]), authController.getUsers);
 authRouter.put("/users", authController.updatePost);
 authRouter.delete("/users/:id", authController.postDelete);
 
-authRouter.get("/login", authController.login);
+authRouter.post("/login", authController.login);
 
-authRouter.post("/healthCheck", (req, res) => {
-  return res.send({ message: "Health is ok!" });
-});
+authRouter.post("/healthCheck", authController.check);
+
+authRouter.post("/createCard", authController.addCard);
+authRouter.post("/createTransaction", authController.addTransaction);
+authRouter.delete("/deleteCard", authController.deleteCard);
+authRouter.delete("/deleteTransaction", authController.deletedTransaction);
 
 export default authRouter;

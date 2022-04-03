@@ -15,19 +15,41 @@ const generateAccessToken = (id, roles) => {
 
 class AuthController {
   async login(req, res) {
-    const { email, password } = req.query;
-    // const user = await authUser.findOne({ email });
-    // const validPassword = bcrypt.compareSync(password, user.password);
-    // console.log(user);
-    // console.log(email);
-    // console.log(validPassword);
-    if (email && password) {
+    const { email, password } = req.body;
+    console.log("body", req.body);
+
+    const user = await authUser.findOne({ email });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: `Can't find the email: ${email}` });
+    }
+    const validPassword = bcrypt.compareSync(password, user.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: `Invalid password` });
+    }
+    if (email && validPassword === true) {
       return res.send({
-        apiKey: generateAccessToken(),
+        apiKey: generateAccessToken(user._id, user.roles),
         expiresIn: 10 * 60 * 1000,
       });
     }
-    return res.status(401).send("non auth");
+    return res.status(401).send("Login failed");
+  }
+
+  async check(req, res) {
+    try {
+      const userName = "Nancy Gonich";
+      const user = await authUser.findOne({ userName });
+      if (user) {
+        console.log(user);
+        return res.json({ user });
+      }
+      return res.send(user);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: "Registration failed" });
+    }
   }
 
   async registration(req, res) {
@@ -40,11 +62,11 @@ class AuthController {
         userName,
         email,
         password,
+        country,
+        dateOfBirth,
         cardName,
         cardAmount,
         currency,
-        country,
-        dateOfBirth,
       } = req.body;
       const candidate = await authUser.findOne({ userName });
       const candidate2 = await authUser.findOne({ email });
@@ -75,25 +97,6 @@ class AuthController {
       res.status(400).json({ message: "Registration failed" });
     }
   }
-
-  // async login(req, res) {
-  //   try {
-  //     const { email, password } = req.body;
-  //     const user = await authUser.findOne({ email });
-  //     if (!user) {
-  //       return res.status(400).json({ message: `Can't find the user ${user}` });
-  //     }
-  //     const validPassword = bcrypt.compareSync(password, user.password);
-  //     if (!validPassword) {
-  //       return res.status(400).json({ message: `Invalid password` });
-  //     }
-  //     const token = generateAccessToken(user._id, user.roles);
-  //     return res.json({ token });
-  //   } catch (e) {
-  //     console.log(e);
-  //     res.status(400).json({ message: "Login failed" });
-  //   }
-  // }
 
   async logout(req, res) {
     try {
@@ -147,6 +150,87 @@ class AuthController {
       }
       const deletedPost = await authUser.findByIdAndDelete(id);
       return res.json(deletedPost);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  async deleteCard(req, res) {
+    try {
+      const { id, cardName } = req.body;
+      console.log(id);
+      const findClone = await authUser.updateOne(
+        { _id: `${id}` },
+        { $pull: { cards: { cardName: cardName } } }
+      );
+      return res.json(findClone);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  async deletedTransaction(req, res) {
+    try {
+      const { id, paidCard } = req.body;
+
+      const deletedTran = await authUser.updateOne(
+        { _id: `${id}` },
+        { $pull: { transaction: { paidCard: paidCard } } }
+      );
+      return res.json(deletedTran);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  async addCard(req, res) {
+    try {
+      const { id, cardName, cardAmount, currency } = req.body;
+
+      const createdCard = await authUser.findOneAndUpdate(
+        { _id: `${id}` },
+        {
+          $addToSet: {
+            cards: [
+              {
+                cardName: `${cardName}`,
+                currency: `${currency}`,
+                cardAmount: cardAmount,
+              },
+            ],
+          },
+        }
+      );
+      return res.json(createdCard);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  async addTransaction(req, res) {
+    try {
+      const { id, activity, paidCard, amount, date, payee, status, moneyIn } =
+        req.body;
+
+      const createdTran = await authUser.findOneAndUpdate(
+        { _id: `${id}` },
+        {
+          $addToSet: {
+            transaction: [
+              {
+                activity: `${activity}`,
+                paidCard: `${paidCard}`,
+                amount: amount,
+                date: `${date}`,
+                payee: `${payee}`,
+                status: `${status}`,
+                moneyIn: `${moneyIn}`,
+              },
+            ],
+          },
+        }
+      );
+      return res.json(createdTran);
     } catch (e) {
       res.status(500).json(e);
     }
