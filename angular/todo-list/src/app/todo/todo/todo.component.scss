@@ -1,0 +1,26 @@
+.main-app-container {
+  width: 98%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 0.6fr;
+  grid-template-rows: 2.5fr;
+  grid-auto-columns: 1fr;
+  gap: 1% 11px;
+  grid-auto-flow: row;
+  grid-template-areas: 'left-main center-main right-main';
+  margin-left: 1%;
+}
+
+.left-main {
+  background-color: aqua;
+  grid-area: left-main;
+}
+
+.center-main {
+  grid-area: center-main;
+}
+
+.right-main {
+  background-color: aquamarine;
+  grid-area: right-main;
+}
