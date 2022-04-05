@@ -16,8 +16,6 @@ const generateAccessToken = (id, roles) => {
 class AuthController {
   async login(req, res) {
     const { email, password } = req.body;
-    console.log("body", req.body);
-
     const user = await authUser.findOne({ email });
     if (!user) {
       return res
@@ -42,7 +40,6 @@ class AuthController {
       const userName = "Nancy Gonich";
       const user = await authUser.findOne({ userName });
       if (user) {
-        console.log(user);
         return res.json({ user });
       }
       return res.send(user);
@@ -142,7 +139,6 @@ class AuthController {
   async deleteCard(req, res) {
     try {
       const { id, cardName } = req.body;
-      console.log(id);
       const findClone = await authUser.updateOne(
         { _id: `${id}` },
         { $pull: { cards: { cardName: cardName } } }
@@ -156,7 +152,6 @@ class AuthController {
   async deletedTransaction(req, res) {
     try {
       const { id, paidCard } = req.body;
-
       const deletedTran = await authUser.updateOne(
         { _id: `${id}` },
         { $pull: { transaction: { paidCard: paidCard } } }
