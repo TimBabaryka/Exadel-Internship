@@ -1,0 +1,66 @@
+@use 'src/variable' as var;
+.left-section-box {
+  font-family: Space Grotesk;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-section-header {
+  font-family: Alata;
+  font-size: 3rem;
+  margin-left: 6%;
+}
+
+.left-section-card {
+  margin: 0 auto;
+  width: 90%;
+  min-height: 200px;
+  background: linear-gradient(
+      217deg,
+      rgba(255, 0, 0, 0.8),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+  box-shadow: 21px 23px 11px -1px rgba(34, 60, 80, 0.29);
+  margin-bottom: 5%;
+  border-radius: 25px;
+}
+
+.left-section-card:hover {
+  border: 2px solid black;
+  transition: 0.1s ease-in-out;
+}
+
+.card-content-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5%;
+  margin-top: 3%;
+  margin-left: 20%;
+  margin-right: 5%;
+}
+
+.card-name {
+  font-size: 3rem;
+  color: var.$app-white;
+}
+
+.card-currency {
+  width: 10rem;
+  height: 7rem;
+  border-radius: 50%;
+  background-color: var.$app-white;
+  color: #d376d7;
+  text-align: center;
+  padding-top: 10%;
+}
+
+.card-sum {
+  margin-right: 12%;
+  margin-bottom: 10%;
+  font-size: 5rem;
+  color: var.$app-white;
+  display: flex;
+  justify-content: center;
+}
