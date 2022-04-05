@@ -14,22 +14,18 @@
 .left-main {
   width: 100%;
   //   display: flex;
-  justify-content: center;
+  //   justify-content: center;
   grid-area: left-main;
 }
 
 .center-main {
-  background-color: rgb(74, 26, 92);
   width: 100%;
-  display: flex;
-  justify-content: center;
   grid-area: center-main;
 }
 
 .right-main {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: aquamarine;
+  //   display: flex;
+  //   justify-content: center;
   grid-area: right-main;
 }

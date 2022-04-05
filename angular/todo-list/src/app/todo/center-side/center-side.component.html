@@ -1,1 +1,56 @@
-<p>center-side works!</p>
+<div class="center-box">
+  <div class="center-header">
+    <a class="link-categories" href="#">Categories</a>
+    <a class="link-categories" href="#">Subscription</a>
+    <a class="link-categories" href="#">Obligatory</a>
+    <a class="link-categories" href="#">Statistic</a>
+    <a class="link-categories" href="#">Admin</a>
+  </div>
+
+  <div class="search-box">
+    <input class="my-input" autocomplete="off" />
+    <mat-icon class="search-icon" (click)="doSomething()">search</mat-icon>
+  </div>
+
+  <div class="transaction-box">
+    <div class="transaction-card-red">
+      <div class="card-content">
+        <button class="card-content-button">Home</button>
+        <div class="card-center">
+          <h1>Flat rent</h1>
+
+          <div class="card-center-bottom">
+            <div class="arrow-red">
+              <p><i class="arrow up"></i></p>
+            </div>
+            <h1>Expenses</h1>
+            <h1>Data</h1>
+            <h1>name</h1>
+          </div>
+        </div>
+
+        <h1 class="amount-red">12344</h1>
+      </div>
+    </div>
+
+    <div class="transaction-card-green">
+      <div class="card-content">
+        <button class="card-content-button">Home</button>
+        <div class="card-center">
+          <h1>Flat rent</h1>
+
+          <div class="card-center-bottom">
+            <div class="arrow-green">
+              <p><i class="arrow down"></i></p>
+            </div>
+            <h1>Expenses</h1>
+            <h1>Data</h1>
+            <h1>name</h1>
+          </div>
+        </div>
+
+        <h1 class="amount-green">12344</h1>
+      </div>
+    </div>
+  </div>
+</div>

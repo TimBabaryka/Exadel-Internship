@@ -1,0 +1,141 @@
+.center-box {
+  font-family: Space Grotesk;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2%;
+}
+
+.search-box {
+  margin-left: 5%;
+  display: flex;
+  justify-content: center;
+}
+
+.my-input {
+  width: 90%;
+  border-radius: 3px;
+  border: 1px solid rgb(156, 156, 156);
+  background-color: rgb(247, 247, 247);
+  min-height: 1.5rem;
+}
+.search-icon {
+  position: relative;
+  right: 32px;
+  top: 0px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.link-categories {
+  font-family: Space Grotesk;
+  text-decoration: none;
+  color: black;
+}
+
+.link-categories:hover {
+  color: violet;
+  transition: 0.5s ease-in-out;
+}
+
+.transaction-box {
+  width: 100%;
+  margin-top: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.transaction-card-red {
+  margin-top: 2%;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 90px;
+  background-color: rgb(241, 241, 241);
+}
+
+.transaction-card-green {
+  margin-top: 2%;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 90px;
+  background-color: rgb(241, 241, 241);
+}
+
+.card-content {
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-center {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-center-bottom {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-center-bottom {
+  h1 {
+    margin-left: 3%;
+  }
+}
+
+.card-content-button {
+  border-radius: 5px;
+  width: 15%;
+  height: 8rem;
+}
+.card-content-button:hover {
+  background-color: rgb(60, 198, 233);
+  transition: 0.5s ease-in-out;
+}
+
+.arrow-red {
+  width: 7rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: rgb(243, 25, 5);
+  text-align: center;
+  padding-top: 5%;
+}
+
+.arrow-green {
+  width: 7rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: #21c206;
+  text-align: center;
+  padding-top: 5%;
+}
+
+.arrow {
+  border: 10px solid rgb(255, 255, 255);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 10px;
+}
+
+.up {
+  transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+}
+
+.amount-green {
+  color: #21c206;
+}
+.amount-red {
+  color: rgb(255, 13, 13);
+}
