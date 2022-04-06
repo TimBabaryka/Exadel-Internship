@@ -28,6 +28,7 @@ class AuthController {
     }
     if (email && validPassword === true) {
       return res.send({
+        authuser: { user },
         apiKey: generateAccessToken(user._id, user.roles),
         expiresIn: 10 * 60 * 1000,
       });
@@ -100,6 +101,7 @@ class AuthController {
   async getUsers(req, res) {
     try {
       const users = await authUser.find();
+
       res.json(users);
     } catch (e) {
       console.log(e);
@@ -136,14 +138,77 @@ class AuthController {
     }
   }
 
+  async editCard(req, res) {
+    try {
+      const { id } = req.params;
+      const { idCard, currency, cardAmount, cardName } = req.body;
+      console.log(idCard);
+      const user = await authUser.updateOne(
+        {
+          "cards._id": idCard,
+        },
+        {
+          $set: {
+            "cards.$.cardAmount": cardAmount,
+            "cards.$.currency": currency,
+            "cards.$.cardName": cardName,
+          },
+        },
+        { multi: true }
+      );
+      return res.json(user);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: "Registration failed" });
+    }
+  }
+
+  async editTransaction(req, res) {
+    try {
+      const { id } = req.params;
+      const {
+        idTrans,
+        activity,
+        paidCard,
+        amount,
+        date,
+        payee,
+        status,
+        moneyIn,
+      } = req.body;
+
+      const user = await authUser.updateOne(
+        {
+          "transaction._id": idTrans,
+        },
+        {
+          $set: {
+            "transaction.$.activity": activity,
+            "transaction.$.paidCard": paidCard,
+            "transaction.$.amount": amount,
+            "transaction.$.date": date,
+            "transaction.$.payee": payee,
+            "transaction.$.status": status,
+            "transaction.$.moneyIn": moneyIn,
+          },
+        },
+        { multi: true }
+      );
+      return res.json(user);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: "Registration failed" });
+    }
+  }
+
   async deleteCard(req, res) {
     try {
       const { id, cardName } = req.body;
-      const findClone = await authUser.updateOne(
+      const deletedCard = await authUser.updateOne(
         { _id: `${id}` },
         { $pull: { cards: { cardName: cardName } } }
       );
-      return res.json(findClone);
+      return res.json(deletedCard);
     } catch (e) {
       res.status(500).json(e);
     }
@@ -151,9 +216,9 @@ class AuthController {
 
   async deletedTransaction(req, res) {
     try {
-      const { id, paidCard } = req.body;
+      const { idTrans, paidCard } = req.body;
       const deletedTran = await authUser.updateOne(
-        { _id: `${id}` },
+        { _id: `${idTrans}` },
         { $pull: { transaction: { paidCard: paidCard } } }
       );
       return res.json(deletedTran);
@@ -161,6 +226,20 @@ class AuthController {
       res.status(500).json(e);
     }
   }
+
+  // async deletedTransaction(req, res) {
+  //   try {
+  //     const { idTrans, paidCard } = req.body;
+  //     console.log(idTrans);
+  //     const deletedTran = await authUser.updateOne(
+  //       { _id: `6249c47b11b8dc8598349adf`, "transaction._id": idTrans },
+  //       { $pull: { "transaction.$.": paidCard } }
+  //     );
+  //     return res.json(deletedTran);
+  //   } catch (e) {
+  //     res.status(500).json(e);
+  //   }
+  // }
 
   async addCard(req, res) {
     try {
