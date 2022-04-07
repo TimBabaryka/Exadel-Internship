@@ -1,4 +1,5 @@
 <div class="left-box">
+  <!-- <app-card-create></app-card-create> -->
   <div class="name-box">
     <h1>{{ user?.user?.userName }}</h1>
   </div>
@@ -28,7 +29,7 @@
     </div>
   </a>
 
-  <a href="#" class="create-box">
+  <a (click)="createCard()" class="create-box">
     <div class="sizing-box">
       <h1>+</h1>
       <p class="add-content" href="#">Add account</p>

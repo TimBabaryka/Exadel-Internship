@@ -7,6 +7,8 @@ import { LeftSideComponent } from './left-side/left-side.component';
 import { CenterSideComponent } from './center-side/center-side.component';
 import { RightSideComponent } from './right-side/right-side.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CardCreateComponent } from './right-side/card-create/card-create.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -22,7 +24,13 @@ const routes: Routes = [
     LeftSideComponent,
     CenterSideComponent,
     RightSideComponent,
+    CardCreateComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), MatIconModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+    MatIconModule,
+  ],
 })
 export class TodoModule {}

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CardCreateComponent } from './card-create/card-create.component';
 
 @Component({
   selector: 'app-right-side',
@@ -8,7 +10,11 @@ import { TodoService } from '../services/todo.service';
 })
 export class RightSideComponent implements OnInit {
   user: any;
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService, private dialogRef: MatDialog) {}
+
+  createCard() {
+    this.dialogRef.open(CardCreateComponent);
+  }
 
   healthCheck() {
     this.todoService.healthCheck().subscribe((data) => {
