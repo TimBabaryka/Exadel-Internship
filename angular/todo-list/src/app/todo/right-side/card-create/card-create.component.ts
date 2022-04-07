@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-card-create',
   templateUrl: './card-create.component.html',
-  styleUrls: ['./card-create.component.scss']
+  styleUrls: ['./card-create.component.scss'],
 })
-export class CardCreateComponent implements OnInit {
+export class CardCreateComponent {
+  CardForm: FormGroup = new FormGroup({
+    cardAmount: new FormControl('', [Validators.required]),
+    currency: new FormControl('', [Validators.required]),
+    cardName: new FormControl('', [Validators.required]),
+  });
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  onSubmitCreate() {
+    // const { cardAmount, currency, cardName } = this.CardForm.value;
+
+    console.log(this.CardForm.value);
   }
-
 }
