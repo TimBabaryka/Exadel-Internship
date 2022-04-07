@@ -109,6 +109,21 @@ class AuthController {
     }
   }
 
+  async getUser(req, res) {
+    try {
+      const { id } = req.params;
+      const ID = "6249c47b11b8dc8598349adf";
+      const user = await authUser.findById(ID);
+      if (user) {
+        return res.json({ user });
+      }
+      return res.send(user);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: "User search failed" });
+    }
+  }
+
   async updatePost(req, res) {
     try {
       const post = req.body;
@@ -226,20 +241,6 @@ class AuthController {
       res.status(500).json(e);
     }
   }
-
-  // async deletedTransaction(req, res) {
-  //   try {
-  //     const { idTrans, paidCard } = req.body;
-  //     console.log(idTrans);
-  //     const deletedTran = await authUser.updateOne(
-  //       { _id: `6249c47b11b8dc8598349adf`, "transaction._id": idTrans },
-  //       { $pull: { "transaction.$.": paidCard } }
-  //     );
-  //     return res.json(deletedTran);
-  //   } catch (e) {
-  //     res.status(500).json(e);
-  //   }
-  // }
 
   async addCard(req, res) {
     try {

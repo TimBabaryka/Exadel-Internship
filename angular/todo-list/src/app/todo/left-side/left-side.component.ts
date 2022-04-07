@@ -11,9 +11,14 @@ export class LeftSideComponent implements OnInit {
 
   constructor(private todoService: TodoService) {}
   healthCheck() {
-    this.todoService.healthCheck().subscribe((data) => {
+    this.todoService.healthCheck().subscribe((data: any) => {
       this.user = data;
     });
+  }
+
+  render() {
+    let res = this.getData();
+    console.log(res.user);
   }
 
   getData() {
@@ -21,9 +26,14 @@ export class LeftSideComponent implements OnInit {
     return JSON.parse(data);
   }
 
-  render() {
-    let res = this.getData();
-    console.log(res.user);
+  send() {
+    // let data = document.querySelector('.card-name')?.innerHTML;
+    // if (data !== null && data !== undefined) {
+    //   localStorage.removeItem('cardname');
+    //   localStorage.setItem('cardname', data);
+    // }
+    // let nameCard = localStorage.getItem('cardname');
+    console.log('Hello');
   }
 
   ngOnInit(): void {

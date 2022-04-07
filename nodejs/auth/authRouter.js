@@ -43,4 +43,6 @@ authRouter.post("/createTransaction", authController.addTransaction);
 authRouter.delete("/deleteCard", authController.deleteCard);
 authRouter.delete("/deleteTransaction", authController.deletedTransaction);
 
+authRouter.get("/user", authController.getUser);
+
 export default authRouter;

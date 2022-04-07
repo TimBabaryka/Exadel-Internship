@@ -25,10 +25,4 @@ export class AppComponent {
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }
-
-  // healthCheck() {
-  //   this.todoService.healthCheck().subscribe((data) => {
-  //     (this.user = data), console.log(this.user.user.country);
-  //   });
-  // }
 }
