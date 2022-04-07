@@ -31,7 +31,8 @@
         <input
           type="number"
           matInput
-          placeholder="Sum"
+          placeholder="Amount of money"
+          step="0.01"
           formControlName="amount"
         />
       </mat-form-field>
@@ -56,6 +57,7 @@
         color="primary"
         [disabled]="TransactionForm.invalid"
         mat-raised-button
+        mat-dialog-close
       >
         Accept
       </button>

@@ -33,6 +33,7 @@
           matInput
           placeholder="Card amount"
           formControlName="cardAmount"
+          step="0.01"
         />
       </mat-form-field>
 
@@ -41,6 +42,7 @@
         color="primary"
         [disabled]="CardForm.invalid"
         mat-raised-button
+        mat-dialog-close
       >
         Accept
       </button>
