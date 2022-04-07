@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CardCreateComponent } from './right-side/card-create/card-create.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TransactionCreateComponent } from './right-side/transaction-create/transaction-create.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     CenterSideComponent,
     RightSideComponent,
     CardCreateComponent,
+    TransactionCreateComponent,
   ],
   imports: [
     CommonModule,

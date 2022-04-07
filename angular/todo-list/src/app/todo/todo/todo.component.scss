@@ -8,7 +8,6 @@
   gap: 1% 11px;
   grid-auto-flow: row;
   grid-template-areas: 'left-main center-main right-main';
-  margin-left: 1%;
 }
 
 .left-main {
@@ -24,6 +23,7 @@
 }
 
 .right-main {
+  margin-left: 3%;
   margin-top: 1%;
   width: 100%;
   grid-area: right-main;

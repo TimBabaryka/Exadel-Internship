@@ -1,0 +1,65 @@
+<div class="transaction-box">
+  <div class="transaction-form">
+    <h3>Add Transaction</h3>
+    <form
+      [formGroup]="TransactionForm"
+      (ngSubmit)="onSubmitCreateTransaction()"
+      class="transaction-form__form"
+    >
+      <mat-form-field class="transaction-form__row" appearance="fill">
+        <mat-label>Activity</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Your description"
+          formControlName="activity"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="transaction-form__row" appearance="fill">
+        <mat-label>Paid by</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Your payment card"
+          formControlName="paidCard"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="transaction-form__row" appearance="fill">
+        <mat-label>Sum</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="Sum"
+          formControlName="amount"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="transaction-form__row" appearance="fill">
+        <mat-label>Payee</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="John Doe"
+          formControlName="payee"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="transaction-form__row" appearance="fill">
+        <mat-label>Date</mat-label>
+        <input type="date" matInput formControlName="date" />
+      </mat-form-field>
+
+      <button
+        type="submit"
+        color="primary"
+        [disabled]="TransactionForm.invalid"
+        mat-raised-button
+      >
+        Accept
+      </button>
+    </form>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</div>
