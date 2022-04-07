@@ -1,8 +1,3 @@
-<link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet"
-/>
-
 <mat-sidenav-container class="sidenav">
   <mat-sidenav class="sidenav__aside" #aside><app-menu></app-menu></mat-sidenav>
   <mat-sidenav-content class="sidenav__content">
@@ -13,10 +8,7 @@
     >
     </app-header>
     <section class="sidenav__main-content">
-      <button routerLink="/todo" *ngIf="isLoggedIn">Todo</button>
-      <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
-      <button *ngIf="isLoggedIn" (click)="healthCheck()">Health Check</button>
-      <div>{{ user?.user?.country }}</div>
+      <!-- <button *ngIf="isLoggedIn" (click)="healthCheck()">Health Check</button> -->
       <router-outlet></router-outlet>
     </section>
     <app-footer class="sidenav__footer"> </app-footer>

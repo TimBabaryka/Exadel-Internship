@@ -4,10 +4,10 @@
   <div class="left-section-card">
     <div class="card-content">
       <div class="card-content-top">
-        <div class="card-name">Debit</div>
-        <div class="card-currency">Currency</div>
+        <div class="card-name">{{ user?.user?.cards[0].cardName }}</div>
+        <div class="card-currency">{{ user?.user?.cards[0].currency }}</div>
       </div>
-      <div class="card-sum">121441412</div>
+      <div class="card-sum">{{ user?.user?.cards[0].cardAmount }}</div>
     </div>
   </div>
 
