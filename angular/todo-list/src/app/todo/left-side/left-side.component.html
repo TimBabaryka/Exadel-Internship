@@ -4,7 +4,7 @@
   <div class="left-section-card" (click)="send()">
     <div class="card-content">
       <div class="card-content-top">
-        <div class="card-name">Credit</div>
+        <div class="card-name">{{ user?.user?.cards[0].cardName }}</div>
         <div class="card-currency">{{ user?.user?.cards[0].currency }}</div>
       </div>
       <div class="card-sum">{{ user?.user?.cards[0].cardAmount }}</div>

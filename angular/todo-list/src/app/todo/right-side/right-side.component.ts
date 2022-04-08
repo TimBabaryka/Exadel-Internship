@@ -3,6 +3,7 @@ import { TodoService } from '../services/todo.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CardCreateComponent } from './card-create/card-create.component';
 import { TransactionCreateComponent } from './transaction-create/transaction-create.component';
+import { CategoryCreateComponent } from './category-create/category-create.component';
 
 @Component({
   selector: 'app-right-side',
@@ -27,6 +28,9 @@ export class RightSideComponent implements OnInit {
 
   createCard() {
     this.dialogRef.open(CardCreateComponent);
+  }
+  createCategory() {
+    this.dialogRef.open(CategoryCreateComponent);
   }
 
   healthCheck() {

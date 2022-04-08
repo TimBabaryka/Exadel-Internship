@@ -1,0 +1,14 @@
+.admin-box {
+  border-radius: 5px;
+  margin-top: 3%;
+  font-family: Space Grotesk;
+  background-color: rgb(209, 209, 209);
+  display: flex;
+  justify-content: center;
+}
+
+.admin-box-content {
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}

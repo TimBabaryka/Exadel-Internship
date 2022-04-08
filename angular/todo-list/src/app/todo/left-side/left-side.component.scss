@@ -10,6 +10,7 @@
   font-family: Alata;
   font-size: 3rem;
   margin-left: 6%;
+  text-transform: uppercase;
 }
 
 .left-section-card {
@@ -49,13 +50,15 @@
 }
 
 .card-currency {
-  width: 10rem;
-  height: 7rem;
+  margin-top: 5%;
+  width: 6em;
+  height: 6em;
+  display: flex;
+  background: rgb(255, 255, 255);
   border-radius: 50%;
-  background-color: var.$app-white;
-  color: #d376d7;
-  text-align: center;
-  padding-top: 10%;
+  color: #000000;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-sum {

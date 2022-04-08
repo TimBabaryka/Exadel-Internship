@@ -1,6 +1,7 @@
 <div class="left-box">
   <div class="name-box">
-    <h1>{{ user?.user?.userName }}</h1>
+    <mat-icon>face</mat-icon>
+    <h1 class="icon-name">{{ user?.user?.userName }}</h1>
   </div>
 
   <a (click)="filterByIncome()" class="box-filter">
@@ -20,14 +21,21 @@
   <a (click)="createTransaction()" class="box-add">
     <div class="box-content">
       <div class="circle">+</div>
-      <h1 class="form-size-text">Add transaction</h1>
+      <h1 class="form-size-text">Add Transaction</h1>
     </div>
   </a>
 
   <a (click)="createCard()" class="box-add">
     <div class="box-content">
       <div class="circle">+</div>
-      <h1 class="form-size-text">Add transaction</h1>
+      <h1 class="form-size-text">Add Card</h1>
+    </div>
+  </a>
+
+  <a (click)="createCategory()" class="box-add">
+    <div class="box-content">
+      <div class="circle">+</div>
+      <h1 class="form-size-text">Add Category</h1>
     </div>
   </a>
 </div>

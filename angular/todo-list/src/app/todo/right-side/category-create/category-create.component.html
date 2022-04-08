@@ -1,0 +1,39 @@
+<div class="category-box">
+  <div class="category-form">
+    <h3>Add Category</h3>
+    <form
+      [formGroup]="CategoryForm"
+      (ngSubmit)="onSubmitCreate()"
+      class="category-form__form"
+    >
+      <mat-form-field class="category-form__row" appearance="fill">
+        <mat-label>Category Name</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Your category name"
+          formControlName="categoryName"
+        />
+      </mat-form-field>
+
+      <label>
+        <input type="radio" value="expense" formControlName="expense" /> But
+      </label>
+
+      <label>
+        <input type="radio" value="income" formControlName="income" /> But
+      </label>
+
+      <button
+        type="submit"
+        color="primary"
+        [disabled]="CategoryForm.invalid"
+        mat-raised-button
+        mat-dialog-close
+      >
+        Accept
+      </button>
+    </form>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</div>

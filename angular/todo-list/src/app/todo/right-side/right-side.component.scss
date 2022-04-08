@@ -3,6 +3,16 @@
   flex-direction: column;
 }
 
+.name-box {
+  display: flex;
+  justify-content: center;
+}
+
+.icon-name {
+  line-height: 2.5rem;
+  margin-left: 2%;
+}
+
 .box-filter {
   border-radius: 5px;
   margin-top: 5%;
