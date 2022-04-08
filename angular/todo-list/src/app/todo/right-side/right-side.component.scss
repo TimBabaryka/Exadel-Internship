@@ -38,7 +38,7 @@
   width: 2em;
   height: 2em;
   display: flex;
-  background: rgb(4, 179, 51);
+  background: #00da3a;
   border-radius: 50%;
   color: #ffffff;
   justify-content: center;
@@ -61,7 +61,7 @@
   }
   .circle-green {
     background: #ffffff;
-    color: rgb(4, 179, 51);
+    color: #00da3a;
     transition: 0.4s ease-in-out;
   }
 }

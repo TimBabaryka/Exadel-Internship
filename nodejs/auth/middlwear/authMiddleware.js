@@ -13,6 +13,7 @@ export const authMiddleware = function (req, res, next) {
     }
     const decodedData = jwt.verify(token, process.env.secret);
     req.authUser = decodedData;
+
     next();
   } catch (e) {
     return res.status(403).json({ message: " User is not authorized2" });

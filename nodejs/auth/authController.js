@@ -111,9 +111,15 @@ class AuthController {
 
   async getUser(req, res) {
     try {
-      const { id } = req.params;
-      const ID = "6249c47b11b8dc8598349adf";
-      const user = await authUser.findById(ID);
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+
+      const user = await authUser.findById(decodedData.id);
+
       if (user) {
         return res.json({ user });
       }
@@ -123,6 +129,21 @@ class AuthController {
       res.status(400).json({ message: "User search failed" });
     }
   }
+
+  // async getUser(req, res) {
+  //   try {
+  //     const { id } = req.params;
+  //     const ID = "6249c47b11b8dc8598349adf";
+  //     const user = await authUser.findById(ID);
+  //     if (user) {
+  //       return res.json({ user });
+  //     }
+  //     return res.send(user);
+  //   } catch (e) {
+  //     console.log(e);
+  //     res.status(400).json({ message: "User search failed" });
+  //   }
+  // }
 
   async updatePost(req, res) {
     try {
