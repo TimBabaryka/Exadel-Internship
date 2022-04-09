@@ -7,8 +7,7 @@ const transactionSchema = new mongoose.Schema(
     amount: { type: Number, required: true },
     date: { type: String, required: true },
     payee: { required: true, type: String },
-    status: { required: true, type: Boolean },
-    moneyIn: { required: true, type: Boolean },
+    typeOfTransaction: { required: true, type: String },
   },
   {
     timestamps: true,
@@ -17,7 +16,7 @@ const transactionSchema = new mongoose.Schema(
 
 const cardSchema = new mongoose.Schema(
   {
-    cardName: { type: String, required: true, unique: true },
+    cardName: { type: String, required: true },
     cardAmount: { type: Number, required: true },
     currency: { type: String, required: true },
   },
@@ -35,6 +34,7 @@ const authUser = new mongoose.Schema({
   roles: [{ type: String, ref: "Role" }],
   cards: [cardSchema],
   transaction: [transactionSchema],
+  categories: [],
 });
 
 export default mongoose.model("AuthUser", authUser);

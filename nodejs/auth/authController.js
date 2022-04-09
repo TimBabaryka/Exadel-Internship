@@ -36,20 +36,6 @@ class AuthController {
     return res.status(401).send("Login failed");
   }
 
-  async check(req, res) {
-    try {
-      const userName = "Nancy Gonich";
-      const user = await authUser.findOne({ userName });
-      if (user) {
-        return res.json({ user });
-      }
-      return res.send(user);
-    } catch (e) {
-      console.log(e);
-      res.status(400).json({ message: "Registration failed" });
-    }
-  }
-
   async registration(req, res) {
     try {
       const errors = validationResult(req);
@@ -71,6 +57,7 @@ class AuthController {
         roles: [userRole.value],
         dateOfBirth,
         country,
+        categories: [],
       });
       await user.save();
       res.send(user);
@@ -130,21 +117,6 @@ class AuthController {
     }
   }
 
-  // async getUser(req, res) {
-  //   try {
-  //     const { id } = req.params;
-  //     const ID = "6249c47b11b8dc8598349adf";
-  //     const user = await authUser.findById(ID);
-  //     if (user) {
-  //       return res.json({ user });
-  //     }
-  //     return res.send(user);
-  //   } catch (e) {
-  //     console.log(e);
-  //     res.status(400).json({ message: "User search failed" });
-  //   }
-  // }
-
   async updatePost(req, res) {
     try {
       const post = req.body;
@@ -176,9 +148,7 @@ class AuthController {
 
   async editCard(req, res) {
     try {
-      const { id } = req.params;
       const { idCard, currency, cardAmount, cardName } = req.body;
-      console.log(idCard);
       const user = await authUser.updateOne(
         {
           "cards._id": idCard,
@@ -209,8 +179,7 @@ class AuthController {
         amount,
         date,
         payee,
-        status,
-        moneyIn,
+        typeOfTransaction,
       } = req.body;
 
       const user = await authUser.updateOne(
@@ -224,8 +193,7 @@ class AuthController {
             "transaction.$.amount": amount,
             "transaction.$.date": date,
             "transaction.$.payee": payee,
-            "transaction.$.status": status,
-            "transaction.$.moneyIn": moneyIn,
+            "transactions.$.typeOfTransaction": typeOfTransaction,
           },
         },
         { multi: true }
@@ -239,9 +207,15 @@ class AuthController {
 
   async deleteCard(req, res) {
     try {
-      const { id, cardName } = req.body;
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+      const { cardName } = req.body;
       const deletedCard = await authUser.updateOne(
-        { _id: `${id}` },
+        { _id: `${decodedData.id}` },
         { $pull: { cards: { cardName: cardName } } }
       );
       return res.json(deletedCard);
@@ -252,9 +226,15 @@ class AuthController {
 
   async deletedTransaction(req, res) {
     try {
-      const { idTrans, paidCard } = req.body;
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+      const { paidCard } = req.body;
       const deletedTran = await authUser.updateOne(
-        { _id: `${idTrans}` },
+        { _id: `${decodedData.id}` },
         { $pull: { transaction: { paidCard: paidCard } } }
       );
       return res.json(deletedTran);
@@ -265,10 +245,17 @@ class AuthController {
 
   async addCard(req, res) {
     try {
-      const { id, cardName, cardAmount, currency } = req.body;
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+
+      const { cardName, cardAmount, currency } = req.body;
 
       const createdCard = await authUser.findOneAndUpdate(
-        { _id: `${id}` },
+        { _id: `${decodedData.id}` },
         {
           $addToSet: {
             cards: [
@@ -289,11 +276,18 @@ class AuthController {
 
   async addTransaction(req, res) {
     try {
-      const { id, activity, paidCard, amount, date, payee, status, moneyIn } =
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+
+      const { activity, paidCard, amount, date, payee, typeOfTransaction } =
         req.body;
 
       const createdTran = await authUser.findOneAndUpdate(
-        { _id: `${id}` },
+        { _id: `${decodedData.id}` },
         {
           $addToSet: {
             transaction: [
@@ -303,8 +297,7 @@ class AuthController {
                 amount: amount,
                 date: `${date}`,
                 payee: `${payee}`,
-                status: `${status}`,
-                moneyIn: `${moneyIn}`,
+                typeOfTransaction: `${typeOfTransaction}`,
               },
             ],
           },

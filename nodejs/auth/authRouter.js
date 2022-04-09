@@ -32,8 +32,6 @@ authRouter.delete("/users/:id", authController.postDelete);
 
 authRouter.post("/login", authController.login);
 
-authRouter.get("/healthCheck", authController.check);
-
 authRouter.post("/edit-card/:id", authController.editCard);
 authRouter.post("/edit-transaction/:id", authController.editTransaction);
 

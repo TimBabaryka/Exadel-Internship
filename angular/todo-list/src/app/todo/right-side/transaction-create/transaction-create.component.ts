@@ -13,11 +13,13 @@ export class TransactionCreateComponent {
     activity: new FormControl('', [Validators.required]),
     amount: new FormControl('', [Validators.required]),
     paidCard: new FormControl('', [Validators.required]),
+    typeOfTransaction: new FormControl('', [Validators.required]),
   });
   constructor() {}
 
   onSubmitCreateTransaction() {
-    // const { payee,date, activity,amount,paidCard} = this.CardForm.value;
+    const { payee, date, activity, amount, paidCard } =
+      this.TransactionForm.value;
 
     console.log(this.TransactionForm.value);
   }

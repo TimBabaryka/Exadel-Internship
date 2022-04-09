@@ -9,8 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CategoryCreateComponent {
   CategoryForm: FormGroup = new FormGroup({
     categoryName: new FormControl('', [Validators.required]),
-    expense: new FormControl('', [Validators.required]),
-    income: new FormControl('', [Validators.required]),
+    incomeExpense: new FormControl('', [Validators.required]),
   });
 
   constructor() {}
