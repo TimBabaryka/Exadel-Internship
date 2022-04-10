@@ -1,10 +1,10 @@
 <div class="center-box">
   <div class="center-header">
-    <a class="link-categories" href="#">Categories</a>
-    <a class="link-categories" href="#">Subscription</a>
-    <a class="link-categories" href="#">Obligatory</a>
-    <a class="link-categories" href="#">Statistic</a>
-    <a class="link-categories" href="#">Admin</a>
+    <a class="link-categories" (click)="toggleShowCategories()">Categories</a>
+    <a class="link-categories">Subscription</a>
+    <a class="link-categories" (click)="toggleShowTransaction()">Obligatory</a>
+    <a class="link-categories" (click)="toggleShowStat()">Statistic</a>
+    <a class="link-categories" (click)="toggleShowAdmin()">Admin</a>
   </div>
 
   <div class="search-box">
@@ -12,12 +12,12 @@
     <mat-icon class="search-icon" (click)="doSomething()">search</mat-icon>
   </div>
 
-  <!-- <app-admin></app-admin> -->
+  <app-categories *ngIf="isShownCategories"></app-categories>
+  <app-statistic *ngIf="isShownStatistic"></app-statistic>
 
-  <!-- <app-categories></app-categories> -->
-  <!-- <app-statistic></app-statistic> -->
+  <app-admin *ngIf="isShownAdmin"></app-admin>
 
-  <div class="transaction-box">
+  <div *ngIf="isShownTransactions" class="transaction-box">
     <div class="left-box">
       <button class="transaction-box-button">Home</button>
     </div>
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <div class="transaction-box">
+  <!-- <div class="transaction-box">
     <div class="left-box">
       <button class="transaction-box-button">Pet</button>
     </div>
@@ -47,5 +47,5 @@
       </div>
       <div class="center-top">Food</div>
     </div>
-  </div>
+  </div>  -->
 </div>

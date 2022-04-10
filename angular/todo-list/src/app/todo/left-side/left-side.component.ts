@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
+import { CenterSideComponent } from '../center-side/center-side.component';
 
 @Component({
   selector: 'app-left-side',
@@ -8,11 +9,18 @@ import { TodoService } from '../services/todo.service';
 })
 export class LeftSideComponent implements OnInit {
   user: any;
+  arrOfCards: any;
 
   constructor(private todoService: TodoService) {}
+
   healthCheck() {
     this.todoService.healthCheck().subscribe((data: any) => {
       this.user = data;
+      this.arrOfCards = data.user.cards;
+
+      // console.log(this.user.arrOfCards.cards);
+      // this.arrOfCards = [data.user.cards];
+      // console.log(this.arrOfCards);
     });
   }
 
@@ -25,6 +33,8 @@ export class LeftSideComponent implements OnInit {
     let data: any = localStorage.getItem('authuser');
     return JSON.parse(data);
   }
+
+  //add centerSideComp
 
   send() {
     // let data = document.querySelector('.card-name')?.innerHTML;

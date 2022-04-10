@@ -38,13 +38,14 @@
 .card-content-top {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   margin-top: 3%;
   margin-left: 20%;
   margin-right: 5%;
 }
 
 .card-name {
+  margin-top: 2%;
   font-size: 3rem;
   color: var.$app-white;
 }
