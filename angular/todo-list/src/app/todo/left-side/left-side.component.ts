@@ -13,14 +13,10 @@ export class LeftSideComponent implements OnInit {
 
   constructor(private todoService: TodoService) {}
 
-  healthCheck() {
-    this.todoService.healthCheck().subscribe((data: any) => {
+  getCardDatas() {
+    this.todoService.getCardDatas().subscribe((data: any) => {
       this.user = data;
       this.arrOfCards = data.user.cards;
-
-      // console.log(this.user.arrOfCards.cards);
-      // this.arrOfCards = [data.user.cards];
-      // console.log(this.arrOfCards);
     });
   }
 
@@ -34,21 +30,13 @@ export class LeftSideComponent implements OnInit {
     return JSON.parse(data);
   }
 
-  //add centerSideComp
-
   send() {
-    // let data = document.querySelector('.card-name')?.innerHTML;
-    // if (data !== null && data !== undefined) {
-    //   localStorage.removeItem('cardname');
-    //   localStorage.setItem('cardname', data);
-    // }
-    // let nameCard = localStorage.getItem('cardname');
     console.log('Hello');
   }
 
   ngOnInit(): void {
     this.getData();
-    this.healthCheck();
+    this.getCardDatas();
     this.render();
   }
 }

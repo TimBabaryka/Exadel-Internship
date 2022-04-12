@@ -57,7 +57,6 @@ class AuthController {
         roles: [userRole.value],
         dateOfBirth,
         country,
-        categories: [],
       });
       await user.save();
       res.send(user);
@@ -238,6 +237,55 @@ class AuthController {
         { $pull: { transaction: { paidCard: paidCard } } }
       );
       return res.json(deletedTran);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  async deleteCategory(req, res) {
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+      const { categoryName } = req.body;
+      const deletedCategory = await authUser.findOneAndUpdate(
+        { _id: `${decodedData.id}` },
+        { $pull: { categories: { categoryName: categoryName } } }
+      );
+      return res.json(deletedCategory);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  async addCategory(req, res) {
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+
+      const { categoryName, categoryType } = req.body;
+
+      const createdCategory = await authUser.findOneAndUpdate(
+        { _id: `${decodedData.id}` },
+        {
+          $addToSet: {
+            categories: [
+              {
+                categoryName: categoryName,
+                categoryType: categoryType,
+              },
+            ],
+          },
+        }
+      );
+      return res.json(createdCategory);
     } catch (e) {
       res.status(500).json(e);
     }

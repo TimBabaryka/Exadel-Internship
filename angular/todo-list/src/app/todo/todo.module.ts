@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AdminComponent } from './center-side/admin/admin.component';
 import { CategoryCreateComponent } from './right-side/category-create/category-create.component';
+import { TransactionsComponent } from './center-side/transactions/transactions.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     StatisticComponent,
     AdminComponent,
     CategoryCreateComponent,
+    TransactionsComponent,
   ],
   imports: [
     CommonModule,

@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class TodoService {
   constructor(private http: HttpClient) {}
-  healthCheck() {
+  getCardDatas() {
     return this.http.get('http://localhost:3000/api/user', {});
   }
 }

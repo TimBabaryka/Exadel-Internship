@@ -9,9 +9,14 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent {
+  hide = true;
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(10),
+    ]),
   });
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -22,7 +27,5 @@ export class AuthFormComponent {
       console.log(data);
       this.router.navigateByUrl('/todo');
     });
-    // console.log('onSubmit');
-    // console.log(this.loginForm.value);
   }
 }

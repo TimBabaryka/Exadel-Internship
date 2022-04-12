@@ -24,10 +24,6 @@ export class AuthService {
     });
   }
 
-  // healthCheck() {
-  //   return this.http.post('http://localhost:3000/api/healthCheck', {});
-  // }
-
   login(email: string, password: string) {
     return this.http
       .post('http://localhost:3000/api/login', {

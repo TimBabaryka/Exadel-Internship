@@ -9,9 +9,14 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./reg-form.component.scss'],
 })
 export class RegFormComponent {
+  hide = true;
   RegForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(10),
+    ]),
     userName: new FormControl('', [Validators.required]),
     country: new FormControl('', [Validators.required]),
     dateOfBirth: new FormControl('', [Validators.required]),
@@ -24,8 +29,6 @@ export class RegFormComponent {
     this.authServices
       .registration(email, password, userName, dateOfBirth, country)
       .subscribe((data) => {
-        console.log('Successful registration');
-        console.log(data);
         this.router.navigateByUrl('/login');
       });
   }
