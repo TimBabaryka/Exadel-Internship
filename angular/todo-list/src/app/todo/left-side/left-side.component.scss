@@ -1,4 +1,5 @@
 @use 'src/variable' as var;
+
 .left-section-box {
   font-family: Space Grotesk;
   display: flex;
@@ -9,12 +10,14 @@
   font-family: Alata;
   font-size: 3rem;
   margin-left: 6%;
+  text-transform: uppercase;
 }
 
 .left-section-card {
   margin: 0 auto;
   width: 90%;
-  min-height: 200px;
+  max-width: 500px;
+  min-height: 150px;
   background: linear-gradient(
       217deg,
       rgba(255, 0, 0, 0.8),
@@ -35,25 +38,28 @@
 .card-content-top {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
   margin-top: 3%;
   margin-left: 20%;
   margin-right: 5%;
 }
 
 .card-name {
+  margin-top: 2%;
   font-size: 3rem;
   color: var.$app-white;
 }
 
 .card-currency {
-  width: 10rem;
-  height: 7rem;
+  margin-top: 5%;
+  width: 6em;
+  height: 6em;
+  display: flex;
+  background: rgb(255, 255, 255);
   border-radius: 50%;
-  background-color: var.$app-white;
-  color: #d376d7;
-  text-align: center;
-  padding-top: 10%;
+  color: #000000;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-sum {

@@ -1,0 +1,52 @@
+<div class="card-box">
+  <div class="card-form">
+    <h3>Add card</h3>
+    <form
+      [formGroup]="CardForm"
+      (ngSubmit)="onSubmitCreate()"
+      class="card-form__form"
+    >
+      <mat-form-field class="card-form__row" appearance="fill">
+        <mat-label>Card Name</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Your card name"
+          formControlName="cardName"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="card-form__row" appearance="fill">
+        <mat-label>Currency</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Your currency"
+          formControlName="currency"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="card-form__row" appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="Card amount"
+          formControlName="cardAmount"
+          step="0.01"
+        />
+      </mat-form-field>
+
+      <button
+        type="submit"
+        color="primary"
+        [disabled]="CardForm.invalid"
+        mat-raised-button
+        mat-dialog-close
+      >
+        Accept
+      </button>
+    </form>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</div>

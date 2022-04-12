@@ -24,7 +24,6 @@ authRouter.post(
   ],
   authController.registration
 );
-// authRouter.post("/login", authController.login);
 authRouter.get("/logout", authController.logout);
 authRouter.get("/users", roleMiddleware(["ADMIN"]), authController.getUsers);
 
@@ -33,11 +32,15 @@ authRouter.delete("/users/:id", authController.postDelete);
 
 authRouter.post("/login", authController.login);
 
-authRouter.post("/healthCheck", authController.check);
+authRouter.post("/edit-card/:id", authController.editCard);
+authRouter.post("/edit-transaction/:id", authController.editTransaction);
 
 authRouter.post("/createCard", authController.addCard);
 authRouter.post("/createTransaction", authController.addTransaction);
+
 authRouter.delete("/deleteCard", authController.deleteCard);
 authRouter.delete("/deleteTransaction", authController.deletedTransaction);
+
+authRouter.get("/user", authController.getUser);
 
 export default authRouter;

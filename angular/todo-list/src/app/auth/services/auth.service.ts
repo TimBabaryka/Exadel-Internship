@@ -24,6 +24,10 @@ export class AuthService {
     });
   }
 
+  // healthCheck() {
+  //   return this.http.post('http://localhost:3000/api/healthCheck', {});
+  // }
+
   login(email: string, password: string) {
     return this.http
       .post('http://localhost:3000/api/login', {
@@ -31,10 +35,6 @@ export class AuthService {
         password,
       })
       .pipe(tap((res) => this.setSession(res)));
-  }
-
-  healthCheck() {
-    return this.http.post('http://localhost:3000/api/healthCheck', {});
   }
 
   isLoggedIn() {
@@ -48,10 +48,13 @@ export class AuthService {
   logout() {
     localStorage.removeItem('expiresIn');
     localStorage.removeItem('idToken');
+    localStorage.removeItem('authuser');
+    localStorage.removeItem('cardname');
   }
 
   private setSession(res: any) {
     const expiresIn = Date.now() + Number(res.expiresIn);
+    localStorage.setItem('authuser', JSON.stringify(res.authuser));
     localStorage.setItem('idToken', res.apiKey);
     localStorage.setItem('expiresIn', String(expiresIn));
   }

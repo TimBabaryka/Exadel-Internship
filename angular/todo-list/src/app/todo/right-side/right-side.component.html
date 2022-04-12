@@ -1,37 +1,41 @@
 <div class="left-box">
   <div class="name-box">
-    <h1>Name</h1>
+    <mat-icon>face</mat-icon>
+    <h1 class="icon-name">{{ user?.user?.userName }}</h1>
   </div>
 
-  <a class="add-transaction" href="#">
-    <div class="sizing-box">
-      <div class="arrow-green">
-        <p><i class="arrow down"></i></p>
-      </div>
-      <p>Income</p>
+  <a (click)="filterByIncome()" class="box-filter">
+    <div class="filter-box-content">
+      <div class="circle-green">↓</div>
+      <h1 class="form-size-text">Incomes</h1>
     </div>
   </a>
 
-  <a class="add-transaction" href="#">
-    <div class="sizing-box">
-      <div class="arrow-red">
-        <p><i class="arrow up"></i></p>
-      </div>
-      <p>Income</p>
+  <a (click)="filterByExpense()" class="box-filter">
+    <div class="filter-box-content">
+      <div class="circle-red">↑</div>
+      <h1 class="form-size-text">Expenses</h1>
     </div>
   </a>
 
-  <a href="#" class="create-box">
-    <div class="sizing-box">
-      <h1>+</h1>
-      <p class="add-content">Add Transaction</p>
+  <a (click)="createTransaction()" class="box-add">
+    <div class="box-content">
+      <div class="circle">+</div>
+      <h1 class="form-size-text">Add Transaction</h1>
     </div>
   </a>
 
-  <a href="#" class="create-box">
-    <div class="sizing-box">
-      <h1>+</h1>
-      <p class="add-content" href="#">Add account</p>
+  <a (click)="createCard()" class="box-add">
+    <div class="box-content">
+      <div class="circle">+</div>
+      <h1 class="form-size-text">Add Card</h1>
+    </div>
+  </a>
+
+  <a (click)="createCategory()" class="box-add">
+    <div class="box-content">
+      <div class="circle">+</div>
+      <h1 class="form-size-text">Add Category</h1>
     </div>
   </a>
 </div>

@@ -5,6 +5,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -15,6 +21,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatSidenavModule,
     MatIconModule,
+    MatDialogModule,
+    MatRadioModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatButtonModule,
@@ -22,6 +34,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatSidenavModule,
     MatIconModule,
+    MatDialogModule,
+    MatRadioModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class SharedModule {}
