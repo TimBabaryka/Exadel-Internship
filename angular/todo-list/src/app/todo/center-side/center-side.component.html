@@ -4,7 +4,12 @@
     <a class="link-categories">Subscription</a>
     <a class="link-categories">Obligatory</a>
     <a class="link-categories" [routerLink]="['statistic']">Statistic</a>
-    <a class="link-categories" [routerLink]="['admin']">Admin</a>
+    <a
+      [hidden]="!admPermission"
+      class="link-categories"
+      [routerLink]="['admin']"
+      >Admin</a
+    >
   </div>
 
   <div class="search-box">

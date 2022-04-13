@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
-import { CenterSideComponent } from '../center-side/center-side.component';
 
 @Component({
   selector: 'app-left-side',
