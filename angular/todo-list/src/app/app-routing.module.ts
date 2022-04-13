@@ -1,5 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AthGuardGuard } from './todo/center-side/ath-guard.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminComponent } from './todo/center-side/admin/admin.component';
 import { CategoriesComponent } from './todo/center-side/categories/categories.component';
@@ -19,7 +20,11 @@ const routes: Routes = [
     children: [
       { path: 'categories', component: CategoriesComponent },
       { path: 'statistic', component: StatisticComponent },
-      { path: 'admin', component: AdminComponent },
+      {
+        path: 'admin',
+        component: AdminComponent,
+        canActivate: [AthGuardGuard],
+      },
       { path: 'transactions', component: TransactionsComponent },
     ],
   },

@@ -22,7 +22,7 @@ export class CenterSideComponent implements OnInit {
       this.user = data;
       this.role = data.user.roles;
 
-      if (this.role[0] === 'USER') {
+      if (this.role[0] === 'ADMIN') {
         this.admPermission = true;
       }
     });
