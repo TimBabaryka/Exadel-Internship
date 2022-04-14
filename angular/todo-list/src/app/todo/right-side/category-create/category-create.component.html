@@ -16,12 +16,33 @@
         />
       </mat-form-field>
 
-      <label class="expenseIncome">
-        <input type="radio" value="expense" formControlName="incomeExpense" />
+      <div class="expenseIncome">
+        <input
+          class="expense-radio-input"
+          type="radio"
+          id="expense"
+          value="expense"
+          formControlName="incomeExpense"
+        />
         Expense
-        <input type="radio" value="income" formControlName="incomeExpense" />
+
+        <label class="expense-radio" for="expense">
+          <mat-icon class="expense-radio-position">arrow_upward</mat-icon>
+        </label>
+
+        <input
+          class="income-radio-input"
+          type="radio"
+          id="income"
+          value="income"
+          formControlName="incomeExpense"
+        />
+
+        <label class="income-radio" for="income">
+          <mat-icon class="income-radio-position">arrow_downward</mat-icon>
+        </label>
         Income
-      </label>
+      </div>
 
       <button
         type="submit"
