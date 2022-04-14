@@ -1,6 +1,6 @@
 <div class="reg-box">
   <div class="reg-form">
-    <h3>Registration page</h3>
+    <h1 class="title">Registration page</h1>
     <form
       [formGroup]="RegForm"
       (ngSubmit)="onSubmitReg()"
@@ -13,6 +13,7 @@
           matInput
           placeholder="email@domain.com"
           formControlName="email"
+          autocomplete="off"
         />
       </mat-form-field>
 
@@ -27,6 +28,7 @@
           formControlName="password"
           matInput
           [type]="hide ? 'password' : 'text'"
+          autocomplete="off"
         />
         <button
           mat-icon-button
@@ -39,13 +41,14 @@
         </button>
       </mat-form-field>
 
-      <mat-form-field class="reg-form__row" appearance="fill">
+      <mat-form-field class="reg-form__row --username" appearance="fill">
         <mat-label>Username</mat-label>
         <input
           type="text"
           matInput
           placeholder="John Doe"
           formControlName="userName"
+          autocomplete="off"
         />
       </mat-form-field>
       <mat-form-field class="reg-form__row" appearance="fill">
@@ -55,6 +58,7 @@
           matInput
           placeholder="USA"
           formControlName="country"
+          autocomplete="off"
         />
       </mat-form-field>
       <mat-form-field class="reg-form__row" appearance="fill">
@@ -62,6 +66,7 @@
         <input type="date" matInput formControlName="dateOfBirth" />
       </mat-form-field>
       <button
+        class="submit-btn"
         type="submit"
         color="primary"
         [disabled]="RegForm.invalid"

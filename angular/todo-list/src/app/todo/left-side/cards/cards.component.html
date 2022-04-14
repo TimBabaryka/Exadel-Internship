@@ -1,0 +1,15 @@
+<div *ngFor="let n of arrOfCards">
+  <div
+    id="{{ n._id }}"
+    class="left-section-card"
+    [routerLink]="['transactions']"
+  >
+    <div class="card-content">
+      <div class="card-content-top">
+        <div class="card-name">{{ n.cardName }}</div>
+        <div class="card-currency">{{ n.currency }}</div>
+      </div>
+      <div class="card-sum">{{ n.cardAmount }}</div>
+    </div>
+  </div>
+</div>

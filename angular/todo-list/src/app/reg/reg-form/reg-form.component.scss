@@ -14,6 +14,10 @@
   flex-direction: column;
   align-items: center;
 
+  &__title {
+    color: rgb(0, 0, 0);
+  }
+
   &__row {
     width: 30rem;
   }

@@ -12,30 +12,9 @@ export class LeftSideComponent implements OnInit {
 
   constructor(private todoService: TodoService) {}
 
-  getCardDatas() {
-    this.todoService.getCardDatas().subscribe((data: any) => {
-      this.user = data;
-      this.arrOfCards = data.user.cards;
-    });
-  }
-
-  render() {
-    let res = this.getData();
-    console.log(res.user);
-  }
-
-  getData() {
-    let data: any = localStorage.getItem('authuser');
-    return JSON.parse(data);
-  }
-
   send() {
     console.log('Hello');
   }
 
-  ngOnInit(): void {
-    this.getData();
-    this.getCardDatas();
-    this.render();
-  }
+  ngOnInit(): void {}
 }

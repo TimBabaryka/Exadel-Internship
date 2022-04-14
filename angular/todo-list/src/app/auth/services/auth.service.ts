@@ -8,22 +8,6 @@ import { tap } from 'rxjs/operators';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  registration(
-    email: string,
-    password: string,
-    userName: string,
-    dateOfBirth: string,
-    country: string
-  ) {
-    return this.http.post('http://localhost:3000/api/registration', {
-      email,
-      password,
-      userName,
-      dateOfBirth,
-      country,
-    });
-  }
-
   login(email: string, password: string) {
     return this.http
       .post('http://localhost:3000/api/login', {
