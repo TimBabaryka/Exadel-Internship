@@ -147,10 +147,18 @@ class AuthController {
 
   async editCard(req, res) {
     try {
-      const { idCard, currency, cardAmount, cardName } = req.body;
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+      const { id } = req.params;
+      const { currency, cardAmount, cardName } = req.body;
       const user = await authUser.updateOne(
         {
-          "cards._id": idCard,
+          _id: `${decodedData.id}`,
+          "cards._id": id,
         },
         {
           $set: {
@@ -170,20 +178,20 @@ class AuthController {
 
   async editTransaction(req, res) {
     try {
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
       const { id } = req.params;
-      const {
-        idTrans,
-        activity,
-        paidCard,
-        amount,
-        date,
-        payee,
-        typeOfTransaction,
-      } = req.body;
+      const { activity, paidCard, amount, date, payee, typeOfTransaction } =
+        req.body;
 
       const user = await authUser.updateOne(
         {
-          "transaction._id": idTrans,
+          _id: `${decodedData.id}`,
+          "transaction._id": id,
         },
         {
           $set: {
@@ -326,7 +334,7 @@ class AuthController {
     try {
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
-        return res.status(403).json({ message: " User is not authorized1" });
+        return res.status(403).json({ message: "User is not authorized1" });
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
@@ -351,7 +359,22 @@ class AuthController {
           },
         }
       );
-      return res.json(createdTran);
+
+      const { id } = req.body;
+
+      const editCard = await authUser.updateOne(
+        {
+          _id: `${decodedData.id}`,
+          "cards._id": id,
+        },
+        {
+          $inc: {
+            "cards.$.cardAmount": amount,
+          },
+        }
+      );
+      const obj = { createdTran, editCard };
+      return res.status(200).json(obj);
     } catch (e) {
       res.status(500).json(e);
     }
