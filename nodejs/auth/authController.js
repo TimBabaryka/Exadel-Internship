@@ -279,6 +279,7 @@ class AuthController {
       req.authUser = decodedData;
 
       const { categoryName, categoryType } = req.body;
+      const { id } = req.params;
 
       const createdCategory = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
@@ -286,6 +287,7 @@ class AuthController {
           $addToSet: {
             categories: [
               {
+                cardId: id,
                 categoryName: categoryName,
                 categoryType: categoryType,
               },
@@ -339,8 +341,8 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
 
-      const { activity, paidCard, amount, date, payee, typeOfTransaction } =
-        req.body;
+      const { activity, amount, date, payee, typeOfTransaction } = req.body;
+      const { id } = req.params;
 
       const createdTran = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
@@ -349,7 +351,7 @@ class AuthController {
             transaction: [
               {
                 activity: `${activity}`,
-                paidCard: `${paidCard}`,
+                paidCard: `${id}`,
                 amount: amount,
                 date: `${date}`,
                 payee: `${payee}`,
@@ -360,19 +362,35 @@ class AuthController {
         }
       );
 
-      const { id } = req.body;
+      let editCard;
 
-      const editCard = await authUser.updateOne(
-        {
-          _id: `${decodedData.id}`,
-          "cards._id": id,
-        },
-        {
-          $inc: {
-            "cards.$.cardAmount": amount,
+      if (typeOfTransaction === "income") {
+        editCard = await authUser.updateOne(
+          {
+            _id: `${decodedData.id}`,
+            "cards._id": id,
           },
-        }
-      );
+          {
+            $inc: {
+              "cards.$.cardAmount": amount,
+            },
+          }
+        );
+      }
+
+      if (typeOfTransaction === "expense") {
+        editCard = await authUser.updateOne(
+          {
+            _id: `${decodedData.id}`,
+            "cards._id": id,
+          },
+          {
+            $inc: {
+              "cards.$.cardAmount": -amount,
+            },
+          }
+        );
+      }
       const obj = { createdTran, editCard };
       return res.status(200).json(obj);
     } catch (e) {

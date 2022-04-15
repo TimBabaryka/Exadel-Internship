@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const categoryName = new mongoose.Schema({
+  cardId: { type: String, required: true },
   categoryName: { type: String, required: true },
   categoryType: { type: String, required: true },
 });
