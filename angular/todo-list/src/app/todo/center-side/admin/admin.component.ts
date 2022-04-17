@@ -8,12 +8,14 @@ import { TodoService } from '../../services/todo.service';
 })
 export class AdminComponent implements OnInit {
   admin: any;
+  transactionData: any;
 
   constructor(private todoService: TodoService) {}
 
   importData() {
     this.todoService.getAdminData().subscribe((data) => {
       this.admin = data;
+      this.transactionData = this.admin.length;
     });
   }
 

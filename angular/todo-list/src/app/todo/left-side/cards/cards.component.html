@@ -1,8 +1,8 @@
-<div *ngFor="let n of arrOfCards">
+<div *ngFor="let n of arrOfCards; let i = index">
   <div
-    id="{{ n._id }}"
+    routerLinkActive="activeCard"
+    routerLink="transactions/{{ n._id }}"
     class="left-section-card"
-    [routerLink]="['transactions']"
   >
     <div class="card-content">
       <div class="card-content-top">

@@ -11,6 +11,7 @@
   gap: 1% 11px;
   grid-template-areas: 'left-box central-box right-box';
   background-color: #d2d1d1;
+  min-height: 100px;
 }
 .left-box {
   display: flex;
@@ -29,6 +30,8 @@
   grid-area: central-box;
 }
 .center-top {
+  margin-top: 10px;
+  font-size: 2rem;
   grid-area: 1 / 1 / 2 / 5;
 }
 .center-bottom {
@@ -68,12 +71,16 @@
 }
 
 .red-amount {
+  margin-top: 10%;
+  font-size: 2rem;
   display: flex;
   justify-content: center;
   color: red;
   align-items: baseline;
 }
 .green-amount {
+  margin-top: 10%;
+  font-size: 2rem;
   display: flex;
   justify-content: center;
   color: #00da3a;

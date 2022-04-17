@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
+  addNewCard$ = new Subject();
   constructor(private http: HttpClient) {}
   getCardDatas() {
     return this.http.get('http://localhost:3000/api/user', {});

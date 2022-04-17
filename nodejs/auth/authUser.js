@@ -9,6 +9,7 @@ const categoryName = new mongoose.Schema({
 const transactionSchema = new mongoose.Schema(
   {
     activity: { type: String, required: true },
+    description: { type: String, required: true },
     paidCard: { type: String, required: true },
     amount: { type: Number, required: true },
     date: { type: String, required: true },

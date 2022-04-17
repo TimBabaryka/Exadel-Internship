@@ -185,8 +185,15 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
       const { id } = req.params;
-      const { activity, paidCard, amount, date, payee, typeOfTransaction } =
-        req.body;
+      const {
+        activity,
+        description,
+        paidCard,
+        amount,
+        date,
+        payee,
+        typeOfTransaction,
+      } = req.body;
 
       const user = await authUser.updateOne(
         {
@@ -196,6 +203,7 @@ class AuthController {
         {
           $set: {
             "transaction.$.activity": activity,
+            "transaction.$.description": activity,
             "transaction.$.paidCard": paidCard,
             "transaction.$.amount": amount,
             "transaction.$.date": date,
@@ -341,7 +349,8 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
 
-      const { activity, amount, date, payee, typeOfTransaction } = req.body;
+      const { activity, description, amount, date, payee, typeOfTransaction } =
+        req.body;
       const { id } = req.params;
 
       const createdTran = await authUser.findOneAndUpdate(
@@ -351,6 +360,7 @@ class AuthController {
             transaction: [
               {
                 activity: `${activity}`,
+                description: `${description}`,
                 paidCard: `${id}`,
                 amount: amount,
                 date: `${date}`,

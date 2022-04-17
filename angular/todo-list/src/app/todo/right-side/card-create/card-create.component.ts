@@ -17,11 +17,8 @@ export class CardCreateComponent {
 
   onSubmitCreate() {
     const { cardName, cardAmount, currency } = this.CardForm.value;
-    console.log(this.CardForm.value);
-    this.todoService
-      .addCard(cardName, currency, cardAmount)
-      .subscribe((data) => {
-        console.log(data);
-      });
+    this.todoService.addCard(cardName, currency, cardAmount).subscribe(() => {
+      this.todoService.addNewCard$.next(null);
+    });
   }
 }

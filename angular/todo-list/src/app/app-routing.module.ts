@@ -7,6 +7,7 @@ import { CategoriesComponent } from './todo/center-side/categories/categories.co
 import { StatisticComponent } from './todo/center-side/statistic/statistic.component';
 import { TransactionsComponent } from './todo/center-side/transactions/transactions.component';
 import { TodoComponent } from './todo/todo/todo.component';
+import { CardsComponent } from './todo/left-side/cards/cards.component';
 
 const routes: Routes = [
   {
@@ -20,12 +21,13 @@ const routes: Routes = [
     children: [
       { path: 'categories', component: CategoriesComponent },
       { path: 'statistic', component: StatisticComponent },
+      { path: 'transactions/:id', component: TransactionsComponent },
       {
         path: 'admin',
         component: AdminComponent,
         canActivate: [AthGuardGuard],
       },
-      { path: 'transactions', component: TransactionsComponent },
+      // { path: 'transactions', component: TransactionsComponent },
     ],
   },
   {

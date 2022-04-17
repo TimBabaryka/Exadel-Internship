@@ -15,8 +15,6 @@ export class CategoryCreateComponent {
   constructor() {}
 
   onSubmitCreate() {
-    // const { cardAmount, currency, cardName } = this.CardForm.value;
-
-    console.log(this.CategoryForm.value);
+    const { category, incomeExpense } = this.CategoryForm.value;
   }
 }

@@ -1,11 +1,22 @@
 <div class="center-box">
   <div class="center-header">
-    <a class="link-categories" [routerLink]="['categories']">Categories</a>
+    <a
+      routerLinkActive="active"
+      class="link-categories"
+      [routerLink]="['categories']"
+      >Categories</a
+    >
     <a class="link-categories">Subscription</a>
     <a class="link-categories">Obligatory</a>
-    <a class="link-categories" [routerLink]="['statistic']">Statistic</a>
+    <a
+      routerLinkActive="active"
+      class="link-categories"
+      [routerLink]="['statistic']"
+      >Statistic</a
+    >
     <a
       [hidden]="!admPermission"
+      routerLinkActive="active"
       class="link-categories"
       [routerLink]="['admin']"
       >Admin</a
@@ -18,10 +29,4 @@
   </div>
 
   <router-outlet></router-outlet>
-
-  <!-- <app-categories></app-categories>
-  <app-statistic></app-statistic>
-
-  <app-admin></app-admin>
-  <app-transactions></app-transactions> -->
 </div>

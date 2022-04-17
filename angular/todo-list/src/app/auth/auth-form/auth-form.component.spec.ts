@@ -26,21 +26,4 @@ describe('AuthFormComponent', () => {
     router = TestBed.get(Router);
     httpTestingController = TestBed.get(HttpTestingController);
   });
-
-  // describe('AuthService', () => {
-  // beforeEach(async () => {
-  //   await TestBed.configureTestingModule({
-  //     declarations: [ AuthFormComponent ]
-  //   })
-  //   .compileComponents();
-  // });
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(AuthFormComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
-  // });
 });
