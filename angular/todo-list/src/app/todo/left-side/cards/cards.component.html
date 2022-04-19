@@ -1,4 +1,4 @@
-<div *ngFor="let n of arrOfCards; let i = index">
+<!-- <div *ngFor="let n of arrOfCards; let i = index">
   <div
     routerLinkActive="activeCard"
     routerLink="transactions/{{ n._id }}"
@@ -11,5 +11,20 @@
       </div>
       <div class="card-sum">{{ n.cardAmount }}</div>
     </div>
+  </div>
+</div> -->
+
+<div *ngFor="let n of arrOfCards; let i = index">
+  <div
+    routerLinkActive="activeCard"
+    routerLink="transactions/{{ n._id }}"
+    class="left-section-card"
+  >
+    <div class="left-side">
+      <h1 class="cardName">{{ n.cardName }}</h1>
+      <h1 class="cardAmount">{{ n.cardAmount }}</h1>
+    </div>
+
+    <div class="card-currency">{{ n.currency }}</div>
   </div>
 </div>

@@ -15,6 +15,32 @@
   box-shadow: 21px 23px 11px -1px rgba(34, 60, 80, 0.29);
   margin-bottom: 5%;
   border-radius: 25px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.left-side {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardAmount {
+  font-size: 2.2rem;
+  color: var.$app-white;
+  display: flex;
+  justify-content: center;
+  width: 242px;
+  height: 50px;
+  margin-left: 3%;
+}
+.cardName {
+  font-size: 3em;
+  color: var.$app-white;
+  max-width: fit-content;
+  height: 50px;
 }
 
 .left-section-card:hover {
@@ -46,8 +72,8 @@
 }
 
 .card-currency {
-  margin-top: 5%;
-  width: 6em;
+  margin-right: 2%;
+  width: 7em;
   height: 6em;
   display: flex;
   background: rgb(255, 255, 255);

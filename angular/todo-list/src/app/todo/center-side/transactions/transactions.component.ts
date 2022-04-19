@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CardsService } from '../../left-side/cards.service';
+
 import { TodoService } from '../../services/todo.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class TransactionsComponent implements OnInit {
   transactionsData: any;
   constructor(
     private todoService: TodoService,
-    private data: CardsService,
+
     private route: ActivatedRoute
   ) {}
 
