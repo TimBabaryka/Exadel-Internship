@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class TodoService {
   activeId: any;
   addNewCard$ = new Subject();
+  addNewTransaction$ = new Subject();
   constructor(private http: HttpClient) {}
 
   setActiveId(data: any) {
@@ -30,6 +31,14 @@ export class TodoService {
       cardName,
       currency,
       cardAmount,
+    });
+  }
+
+  addCategory(categoryName: string, categoryType: string, cardId: string) {
+    return this.http.post('http://localhost:3000/api/createCategory', {
+      categoryName,
+      categoryType,
+      cardId,
     });
   }
   addTransaction(

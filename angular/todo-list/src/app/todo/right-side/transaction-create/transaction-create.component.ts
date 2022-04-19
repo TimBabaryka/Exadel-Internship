@@ -7,13 +7,12 @@ import { TodoService } from '../../services/todo.service';
   styleUrls: ['./transaction-create.component.scss'],
 })
 export class TransactionCreateComponent implements OnInit {
-  message: any;
+  activeId: any;
   TransactionForm: FormGroup = new FormGroup({
     payee: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required]),
     activity: new FormControl('', [Validators.required]),
     amount: new FormControl('', [Validators.required]),
-    // paidCard: new FormControl('', [Validators.required]),
     typeOfTransaction: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   });
@@ -22,7 +21,7 @@ export class TransactionCreateComponent implements OnInit {
   onSubmitCreateTransaction() {
     const { description, payee, date, activity, amount, typeOfTransaction } =
       this.TransactionForm.value;
-    const paidCard = (this.message = this.todoService.getActiveId());
+    const paidCard = (this.activeId = this.todoService.getActiveId());
     this.todoService
       .addTransaction(
         description,
@@ -33,10 +32,12 @@ export class TransactionCreateComponent implements OnInit {
         paidCard,
         typeOfTransaction
       )
-      .subscribe((data) => {
-        console.log(data);
+      .subscribe(() => {
+        this.todoService.addNewTransaction$.next(null);
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log((this.activeId = this.todoService.getActiveId())); //how does it know the active number?
+  }
 }

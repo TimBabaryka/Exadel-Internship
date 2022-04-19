@@ -7,11 +7,11 @@
       class="transaction-form__form"
     >
       <mat-form-field class="transaction-form__row" appearance="fill">
-        <mat-label>Activity</mat-label>
+        <mat-label>Category</mat-label>
         <input
           type="text"
           matInput
-          placeholder="Your activity"
+          placeholder="Your category"
           formControlName="activity"
         />
       </mat-form-field>
@@ -24,16 +24,6 @@
           formControlName="description"
         />
       </mat-form-field>
-
-      <!-- <mat-form-field class="transaction-form__row" appearance="fill">
-        <mat-label>Paid by</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Your payment card"
-          formControlName="paidCard"
-        />
-      </mat-form-field> -->
 
       <mat-form-field class="transaction-form__row" appearance="fill">
         <mat-label>Sum</mat-label>
@@ -90,6 +80,7 @@
       </div>
 
       <button
+        *ngIf="activeId !== undefined"
         type="submit"
         color="primary"
         [disabled]="TransactionForm.invalid"
@@ -101,5 +92,4 @@
     </form>
     <button mat-button mat-dialog-close>Close</button>
   </div>
-  <p>{{ message }}</p>
 </div>

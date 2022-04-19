@@ -11,6 +11,7 @@ import { CategoryCreateComponent } from './category-create/category-create.compo
   styleUrls: ['./right-side.component.scss'],
 })
 export class RightSideComponent implements OnInit {
+  activeId: any;
   user: any;
   constructor(private todoService: TodoService, private dialogRef: MatDialog) {}
 

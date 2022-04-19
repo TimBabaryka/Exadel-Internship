@@ -29,5 +29,8 @@ export class CardsComponent implements OnInit {
     this.todoService.addNewCard$.subscribe(() => {
       this.getCardDatas();
     });
+    this.todoService.addNewTransaction$.subscribe(() => {
+      this.getCardDatas();
+    });
   }
 }

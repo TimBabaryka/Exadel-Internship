@@ -1,73 +1,23 @@
 <div class="category-box">
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
+  <div *ngFor="let n of arrOfCategories">
+    <div
+      class="category-expense"
+      *ngIf="n.categoryType === 'expense' && n.cardId === this.activeId"
+    >
+      <h1 class="category-name">{{ n.categoryName }}</h1>
+      <mat-icon>build</mat-icon>
+      <mat-icon>delete_forever</mat-icon>
+    </div>
   </div>
 
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
+  <div *ngFor="let n of arrOfCategories">
+    <div
+      class="category-income"
+      *ngIf="n.categoryType === 'income' && n.cardId === this.activeId"
+    >
+      <h1 class="category-name">{{ n.categoryName }}</h1>
+      <mat-icon>build</mat-icon>
+      <mat-icon>delete_forever</mat-icon>
+    </div>
   </div>
 </div>

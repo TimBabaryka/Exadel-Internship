@@ -29,11 +29,10 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
-  // getId() {
-  //   this.activeId.id;
-  // }
-
   ngOnInit(): void {
     this.getTransdData();
+    this.todoService.addNewTransaction$.subscribe(() => {
+      this.getTransdData();
+    });
   }
 }
