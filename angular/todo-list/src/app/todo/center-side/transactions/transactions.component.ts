@@ -21,12 +21,17 @@ export class TransactionsComponent implements OnInit {
   getTransdData() {
     this.route.params.subscribe((params: Params) => {
       this.activeId = params;
+      this.todoService.setActiveId(this.activeId.id);
     });
     this.todoService.getCardDatas().subscribe((data: any) => {
       this.user = data;
       this.transactionsData = data.user.transaction;
     });
   }
+
+  // getId() {
+  //   this.activeId.id;
+  // }
 
   ngOnInit(): void {
     this.getTransdData();

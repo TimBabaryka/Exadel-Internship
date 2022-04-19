@@ -6,8 +6,18 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class TodoService {
+  activeId: any;
   addNewCard$ = new Subject();
   constructor(private http: HttpClient) {}
+
+  setActiveId(data: any) {
+    this.activeId = data;
+  }
+
+  getActiveId() {
+    return this.activeId;
+  }
+
   getCardDatas() {
     return this.http.get('http://localhost:3000/api/user', {});
   }
@@ -20,6 +30,25 @@ export class TodoService {
       cardName,
       currency,
       cardAmount,
+    });
+  }
+  addTransaction(
+    description: string,
+    payee: string,
+    date: string,
+    activity: string,
+    amount: number,
+    paidCard: string,
+    typeOfTransaction: string
+  ) {
+    return this.http.post('http://localhost:3000/api/createTransaction', {
+      description,
+      payee,
+      date,
+      activity,
+      amount,
+      paidCard,
+      typeOfTransaction,
     });
   }
 }
