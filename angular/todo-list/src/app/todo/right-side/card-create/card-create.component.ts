@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { TodoService } from '../../services/todo.service';
 @Component({
   selector: 'app-card-create',
   templateUrl: './card-create.component.html',
@@ -8,16 +8,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CardCreateComponent {
   CardForm: FormGroup = new FormGroup({
-    cardAmount: new FormControl('', [Validators.required]),
-    currency: new FormControl('', [Validators.required]),
     cardName: new FormControl('', [Validators.required]),
+    currency: new FormControl('', [Validators.required]),
+    cardAmount: new FormControl('', [Validators.required]),
   });
 
-  constructor() {}
+  constructor(private todoService: TodoService) {}
 
   onSubmitCreate() {
-    // const { cardAmount, currency, cardName } = this.CardForm.value;
-
-    console.log(this.CardForm.value);
+    const { cardName, cardAmount, currency } = this.CardForm.value;
+    this.todoService.addCard(cardName, currency, cardAmount).subscribe(() => {
+      this.todoService.addNewCard$.next(null);
+    });
   }
 }

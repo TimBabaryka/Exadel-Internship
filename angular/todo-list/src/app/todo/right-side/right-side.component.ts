@@ -33,12 +33,12 @@ export class RightSideComponent implements OnInit {
     this.dialogRef.open(CategoryCreateComponent);
   }
 
-  healthCheck() {
-    this.todoService.healthCheck().subscribe((data) => {
+  getCardDatas() {
+    this.todoService.getCardDatas().subscribe((data) => {
       this.user = data;
     });
   }
   ngOnInit(): void {
-    this.healthCheck();
+    this.getCardDatas();
   }
 }

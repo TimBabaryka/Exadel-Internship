@@ -1,10 +1,26 @@
 <div class="center-box">
   <div class="center-header">
-    <a class="link-categories" (click)="toggleShowCategories()">Categories</a>
+    <a
+      routerLinkActive="active"
+      class="link-categories"
+      [routerLink]="['categories']"
+      >Categories</a
+    >
     <a class="link-categories">Subscription</a>
-    <a class="link-categories" (click)="toggleShowTransaction()">Obligatory</a>
-    <a class="link-categories" (click)="toggleShowStat()">Statistic</a>
-    <a class="link-categories" (click)="toggleShowAdmin()">Admin</a>
+    <a class="link-categories">Obligatory</a>
+    <a
+      routerLinkActive="active"
+      class="link-categories"
+      [routerLink]="['statistic']"
+      >Statistic</a
+    >
+    <a
+      [hidden]="!admPermission"
+      routerLinkActive="active"
+      class="link-categories"
+      [routerLink]="['admin']"
+      >Admin</a
+    >
   </div>
 
   <div class="search-box">
@@ -12,40 +28,5 @@
     <mat-icon class="search-icon" (click)="doSomething()">search</mat-icon>
   </div>
 
-  <app-categories *ngIf="isShownCategories"></app-categories>
-  <app-statistic *ngIf="isShownStatistic"></app-statistic>
-
-  <app-admin *ngIf="isShownAdmin"></app-admin>
-
-  <div *ngIf="isShownTransactions" class="transaction-box">
-    <div class="left-box">
-      <button class="transaction-box-button">Home</button>
-    </div>
-    <div class="right-box red-amount">12344</div>
-    <div class="central-box">
-      <div class="center-bottom">
-        <div class="circle-box circle-red">↑</div>
-        <div class="transaction-name">Expense</div>
-        <div class="date">march 27</div>
-        <div class="payee">John</div>
-      </div>
-      <div class="center-top">Flat rent</div>
-    </div>
-  </div>
-
-  <!-- <div class="transaction-box">
-    <div class="left-box">
-      <button class="transaction-box-button">Pet</button>
-    </div>
-    <div class="right-box green-amount">12344</div>
-    <div class="central-box">
-      <div class="center-bottom">
-        <div class="circle-box circle-green">↓</div>
-        <div class="transaction-name">Income</div>
-        <div class="date">April 27</div>
-        <div class="payee">Ben</div>
-      </div>
-      <div class="center-top">Food</div>
-    </div>
-  </div>  -->
+  <router-outlet></router-outlet>
 </div>

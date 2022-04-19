@@ -1,0 +1,45 @@
+<div *ngFor="let n of transactionsData">
+  <div
+    *ngIf="n.typeOfTransaction === 'expense' && n.paidCard === this.activeId.id"
+    class="transaction-box"
+  >
+    <div class="left-box">
+      <button class="transaction-box-button">
+        {{ n.activity }}
+      </button>
+    </div>
+    <div class="right-box red-amount">{{ n.amount }}</div>
+    <div class="central-box">
+      <div class="center-bottom">
+        <div class="circle-box circle-red">↑</div>
+        <div class="transaction-name">{{ n.typeOfTransaction }}</div>
+        <div class="date">{{ n.date }}</div>
+        <div class="payee">{{ n.payee }}</div>
+      </div>
+      <div class="center-top">{{ n.description }}</div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let n of transactionsData">
+  <div
+    *ngIf="n.typeOfTransaction === 'income' && n.paidCard === this.activeId.id"
+    class="transaction-box"
+  >
+    <div class="left-box">
+      <button class="transaction-box-button">
+        {{ n.activity }}
+      </button>
+    </div>
+    <div class="right-box green-amount">{{ n.amount }}</div>
+    <div class="central-box">
+      <div class="center-bottom">
+        <div class="circle-box circle-green">↓</div>
+        <div class="transaction-name">{{ n.typeOfTransaction }}</div>
+        <div class="date">{{ n.date }}</div>
+        <div class="payee">{{ n.payee }}</div>
+      </div>
+      <div class="center-top">{{ n.description }}</div>
+    </div>
+  </div>
+</div>
