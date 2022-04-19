@@ -11,7 +11,10 @@ export class TransactionCreateComponent implements OnInit {
   TransactionForm: FormGroup = new FormGroup({
     payee: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required]),
-    activity: new FormControl('', [Validators.required]),
+    activity: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(15),
+    ]),
     amount: new FormControl('', [Validators.required]),
     typeOfTransaction: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),

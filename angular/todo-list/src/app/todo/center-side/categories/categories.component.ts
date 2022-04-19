@@ -22,6 +22,8 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.getCardDatas();
     this.activeId = this.todoService.getActiveId();
-    console.log(this.activeId);
+    this.todoService.addNewCategory$.subscribe(() => {
+      this.getCardDatas();
+    });
   }
 }

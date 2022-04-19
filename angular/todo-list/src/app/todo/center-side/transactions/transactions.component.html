@@ -1,4 +1,4 @@
-<div *ngFor="let n of transactionsData">
+<ng-container *ngFor="let n of transactionsData">
   <div
     *ngIf="n.typeOfTransaction === 'expense' && n.paidCard === this.activeId.id"
     class="transaction-box"
@@ -19,9 +19,9 @@
       <div class="center-top">{{ n.description }}</div>
     </div>
   </div>
-</div>
+</ng-container>
 
-<div *ngFor="let n of transactionsData">
+<ng-container *ngFor="let n of transactionsData">
   <div
     *ngIf="n.typeOfTransaction === 'income' && n.paidCard === this.activeId.id"
     class="transaction-box"
@@ -42,4 +42,4 @@
       <div class="center-top">{{ n.description }}</div>
     </div>
   </div>
-</div>
+</ng-container>

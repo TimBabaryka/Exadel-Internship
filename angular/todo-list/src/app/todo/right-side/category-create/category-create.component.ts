@@ -10,7 +10,10 @@ import { TodoService } from '../../services/todo.service';
 export class CategoryCreateComponent implements OnInit {
   activeId: any;
   CategoryForm: FormGroup = new FormGroup({
-    categoryName: new FormControl('', [Validators.required]),
+    categoryName: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(15),
+    ]),
     categoryType: new FormControl('', [Validators.required]),
   });
 
@@ -21,8 +24,8 @@ export class CategoryCreateComponent implements OnInit {
     const cardId = (this.activeId = this.todoService.getActiveId());
     this.todoService
       .addCategory(categoryName, categoryType, cardId)
-      .subscribe((data) => {
-        console.log(data);
+      .subscribe(() => {
+        this.todoService.addNewCategory$.next(null);
       });
   }
   ngOnInit(): void {

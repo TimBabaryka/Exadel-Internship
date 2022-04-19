@@ -27,7 +27,6 @@ const routes: Routes = [
         component: AdminComponent,
         canActivate: [AthGuardGuard],
       },
-      // { path: 'transactions', component: TransactionsComponent },
     ],
   },
   {

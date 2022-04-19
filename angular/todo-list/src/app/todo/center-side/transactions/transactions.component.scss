@@ -1,5 +1,5 @@
 .transaction-box {
-  margin-top: 3%;
+  margin: 5% auto;
   border-radius: 5px;
   height: 10vh;
   max-height: 250px;
@@ -12,8 +12,10 @@
   grid-template-areas: 'left-box central-box right-box';
   background-color: #d2d1d1;
   min-height: 100px;
+  max-width: 350px;
 }
 .left-box {
+  margin-left: 1%;
   display: flex;
   justify-content: center;
   align-items: center;

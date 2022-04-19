@@ -33,3 +33,9 @@
   font-size: 2rem;
   transition: ease-in-out 1s;
 }
+
+@media screen and (max-width: 900px) {
+  .auth-box {
+    width: 100%;
+  }
+}

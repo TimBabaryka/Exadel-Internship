@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 })
 export class TodoService {
   activeId: any;
+  addNewCategory$ = new Subject();
   addNewCard$ = new Subject();
   addNewTransaction$ = new Subject();
   constructor(private http: HttpClient) {}
