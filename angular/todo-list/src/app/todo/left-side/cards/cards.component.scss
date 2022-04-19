@@ -52,7 +52,17 @@
   border: 5px solid black;
   .card-currency {
     background-color: #b8e2e4;
-    color: white;
+    color: rgb(0, 0, 0);
+    border: 3px solid black;
+    transition: 0.1s ease-in-out;
+  }
+  .cardName {
+    color: black;
+    transition: 0.4s ease-in-out;
+  }
+  .cardAmount {
+    color: black;
+    transition: 0.4s ease-in-out;
   }
 }
 
@@ -76,7 +86,7 @@
   width: 7em;
   height: 6em;
   display: flex;
-  background: rgb(255, 255, 255);
+  background: #ffffff;
   border-radius: 50%;
   color: #000000;
   justify-content: center;

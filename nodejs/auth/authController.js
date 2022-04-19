@@ -203,7 +203,7 @@ class AuthController {
         {
           $set: {
             "transaction.$.activity": activity,
-            "transaction.$.description": activity,
+            "transaction.$.description": description,
             "transaction.$.paidCard": paidCard,
             "transaction.$.amount": amount,
             "transaction.$.date": date,
@@ -286,8 +286,7 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
 
-      const { categoryName, categoryType } = req.body;
-      const { id } = req.params;
+      const { cardId, categoryName, categoryType } = req.body;
 
       const createdCategory = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
@@ -295,7 +294,7 @@ class AuthController {
           $addToSet: {
             categories: [
               {
-                cardId: id,
+                cardId: cardId,
                 categoryName: categoryName,
                 categoryType: categoryType,
               },
@@ -303,6 +302,7 @@ class AuthController {
           },
         }
       );
+
       return res.json(createdCategory);
     } catch (e) {
       res.status(500).json(e);
@@ -349,9 +349,15 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
 
-      const { activity, description, amount, date, payee, typeOfTransaction } =
-        req.body;
-      const { id } = req.params;
+      const {
+        paidCard,
+        activity,
+        description,
+        amount,
+        date,
+        payee,
+        typeOfTransaction,
+      } = req.body;
 
       const createdTran = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
@@ -361,11 +367,26 @@ class AuthController {
               {
                 activity: `${activity}`,
                 description: `${description}`,
-                paidCard: `${id}`,
+                paidCard: `${paidCard}`,
                 amount: amount,
                 date: `${date}`,
                 payee: `${payee}`,
                 typeOfTransaction: `${typeOfTransaction}`,
+              },
+            ],
+          },
+        }
+      );
+
+      const createdCategory = await authUser.findOneAndUpdate(
+        { _id: `${decodedData.id}` },
+        {
+          $addToSet: {
+            categories: [
+              {
+                cardId: paidCard,
+                categoryName: activity,
+                categoryType: typeOfTransaction,
               },
             ],
           },
@@ -378,7 +399,7 @@ class AuthController {
         editCard = await authUser.updateOne(
           {
             _id: `${decodedData.id}`,
-            "cards._id": id,
+            "cards._id": paidCard,
           },
           {
             $inc: {
@@ -392,7 +413,7 @@ class AuthController {
         editCard = await authUser.updateOne(
           {
             _id: `${decodedData.id}`,
-            "cards._id": id,
+            "cards._id": paidCard,
           },
           {
             $inc: {
@@ -401,7 +422,7 @@ class AuthController {
           }
         );
       }
-      const obj = { createdTran, editCard };
+      const obj = { createdTran, editCard, createdCategory };
       return res.status(200).json(obj);
     } catch (e) {
       res.status(500).json(e);
