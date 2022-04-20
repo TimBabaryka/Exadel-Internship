@@ -19,6 +19,7 @@ import { AdminComponent } from './center-side/admin/admin.component';
 import { CategoryCreateComponent } from './right-side/category-create/category-create.component';
 import { TransactionsComponent } from './center-side/transactions/transactions.component';
 import { CardsComponent } from './left-side/cards/cards.component';
+import { TransactionInfoComponent } from './center-side/transactions/transaction-info/transaction-info.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
     CategoryCreateComponent,
     TransactionsComponent,
     CardsComponent,
+    TransactionInfoComponent,
   ],
   imports: [
     CommonModule,

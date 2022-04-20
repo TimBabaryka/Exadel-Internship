@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { TodoService } from '../../services/todo.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
 
 @Component({
   selector: 'app-transactions',
@@ -14,9 +16,13 @@ export class TransactionsComponent implements OnInit {
   transactionsData: any;
   constructor(
     private todoService: TodoService,
-
+    private dialogRef: MatDialog,
     private route: ActivatedRoute
   ) {}
+
+  openTransInfo() {
+    this.dialogRef.open(TransactionInfoComponent);
+  }
 
   getTransdData() {
     this.route.params.subscribe((params: Params) => {
