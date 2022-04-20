@@ -10,7 +10,7 @@ const generateAccessToken = (id, roles) => {
     id,
     roles,
   };
-  return jwt.sign(payload, process.env.secret, { expiresIn: "1h" });
+  return jwt.sign(payload, process.env.secret, { expiresIn: "2h" });
 };
 
 class AuthController {
@@ -241,18 +241,57 @@ class AuthController {
 
   async deletedTransaction(req, res) {
     try {
+      let state = {
+        type: "",
+        amount: 0,
+        paidCard: "",
+      };
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
         return res.status(403).json({ message: " User is not authorized1" });
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
-      const { paidCard } = req.body;
-      const deletedTran = await authUser.updateOne(
-        { _id: `${decodedData.id}` },
-        { $pull: { transaction: { paidCard: paidCard } } }
+      const { id } = req.params;
+
+      const amountOfTrans = await authUser.findOne(
+        {
+          _id: decodedData.id,
+          "transaction._id": id,
+        },
+        {
+          "transaction.$": 1,
+        }
+        // async function (err, user) {
+        // state.amount = user.transaction[0].amount;
+        // state.type = user.transaction[0].typeOfTransaction;
+        // state.paidCard = user.transaction[0].paidCard;
+
+        // if (state.type === "expense") {
+        //   tempData = await authUser.updateOne(
+        //     {
+        //       _id: `${decodedData.id}`,
+        //       "cards._id": state.paidCard,
+        //     },
+        //     {
+        //       $inc: {
+        //         "cards.$.cardAmount": state.amount,
+        //       },
+        //     }
+        //   );
+        // }
+        // }
       );
-      return res.json(deletedTran);
+      state.amount = amountOfTrans.transaction[0].amount;
+      state.type = amountOfTrans.transaction[0].typeOfTransaction;
+      state.paidCard = amountOfTrans.transaction[0].paidCard;
+      console.log(state);
+      // const deletedTran = await authUser.updateOne(
+      //   { _id: `${decodedData.id}` },
+      //   { $pull: { transaction: { _id: id } } }
+      // );
+
+      return res.json(lol);
     } catch (e) {
       res.status(500).json(e);
     }
@@ -266,10 +305,10 @@ class AuthController {
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
-      const { categoryName } = req.body;
+      const { id } = req.params;
       const deletedCategory = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
-        { $pull: { categories: { categoryName: categoryName } } }
+        { $pull: { categories: { _id: id } } }
       );
       return res.json(deletedCategory);
     } catch (e) {
