@@ -6,7 +6,9 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class TodoService {
+  // activeCategoryId: any;
   activeId: any;
+  // deleteCategory$ = new Subject();
   addNewCategory$ = new Subject();
   addNewCard$ = new Subject();
   addNewTransaction$ = new Subject();
@@ -15,9 +17,20 @@ export class TodoService {
   setActiveId(data: any) {
     this.activeId = data;
   }
+  // setActiveIdCat(data: any) {
+  //   this.activeCategoryId = data;
+  // }
 
   getActiveId() {
     return this.activeId;
+  }
+
+  deleteCategory(id: string) {
+    return this.http
+      .delete(`http://localhost:3000/api/deleteCategory/${id}`)
+      .subscribe(() => {
+        this.addNewCategory$.next(null);
+      });
   }
 
   getCardDatas() {

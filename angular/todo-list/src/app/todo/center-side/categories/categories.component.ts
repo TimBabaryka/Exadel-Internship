@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
-
+import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -10,13 +10,21 @@ export class CategoriesComponent implements OnInit {
   user: any;
   arrOfCategories: any;
   activeId: any;
-  constructor(private todoService: TodoService) {}
+  activeCategoryId: any;
+  constructor(
+    private todoService: TodoService,
+    private router: ActivatedRoute
+  ) {}
 
   getCardDatas() {
     this.todoService.getCardDatas().subscribe((data: any) => {
       this.user = data;
       this.arrOfCategories = data.user.categories;
     });
+  }
+
+  getIdCatDelete(id: any) {
+    this.todoService.deleteCategory(id);
   }
 
   ngOnInit(): void {

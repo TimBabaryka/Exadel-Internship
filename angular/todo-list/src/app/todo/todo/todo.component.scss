@@ -1,5 +1,5 @@
 .main-app-container {
-  background-color: aliceblue;
+  background-color: rgb(255, 255, 255);
   width: 98%;
   height: 100vh;
   display: grid;
@@ -32,7 +32,6 @@
 
 @media screen and (max-width: 900px) {
   .main-app-container {
-    background-color: aliceblue;
     grid-template-areas: 'left-main' 'center-main' 'right-main';
     grid-template-columns: 1fr;
     height: fit-content;

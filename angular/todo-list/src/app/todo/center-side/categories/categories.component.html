@@ -1,23 +1,29 @@
 <div class="category-box">
   <ng-container *ngFor="let n of arrOfCategories">
     <div
+      routerLink="category/{{ n._id }}"
       class="category-expense"
       *ngIf="n.categoryType === 'expense' && n.cardId === this.activeId"
     >
       <h1 class="category-name">{{ n.categoryName }}</h1>
-      <mat-icon>build</mat-icon>
-      <mat-icon>delete_forever</mat-icon>
+      <mat-icon class="icon-colorRed">build</mat-icon>
+      <mat-icon class="icon-colorRed" (click)="getIdCatDelete(n._id)"
+        >delete_forever</mat-icon
+      >
     </div>
   </ng-container>
 
   <ng-container *ngFor="let n of arrOfCategories">
     <div
+      routerLink="category/{{ n._id }}"
       class="category-income"
       *ngIf="n.categoryType === 'income' && n.cardId === this.activeId"
     >
       <h1 class="category-name">{{ n.categoryName }}</h1>
-      <mat-icon>build</mat-icon>
-      <mat-icon>delete_forever</mat-icon>
+      <mat-icon class="icon-colorGreen">build</mat-icon>
+      <mat-icon class="icon-colorGreen" (click)="getIdCatDelete(n._id)"
+        >delete_forever</mat-icon
+      >
     </div>
   </ng-container>
 </div>

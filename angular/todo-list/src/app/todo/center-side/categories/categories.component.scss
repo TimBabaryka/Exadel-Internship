@@ -42,7 +42,15 @@
   overflow: hidden;
 }
 
+.icon-colorGreen:hover {
+  color: #03b24c;
+}
+.icon-colorRed:hover {
+  color: red;
+}
+
 .category-name {
+  width: 90%;
   margin-left: 3%;
   margin-right: 5%;
   line-height: 0px;
