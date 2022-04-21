@@ -230,10 +230,10 @@ class AuthController {
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
-      const { cardName } = req.body;
-      const deletedCard = await authUser.updateOne(
+      const { id } = req.params;
+      const deletedCard = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
-        { $pull: { cards: { cardName: cardName } } }
+        { $pull: { cards: { _id: id } } }
       );
       return res.json(deletedCard);
     } catch (e) {
@@ -368,7 +368,7 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
 
-      const { cardName, cardAmount, currency } = req.body;
+      const { cardName, cardAmount, currency, description } = req.body;
 
       const createdCard = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
@@ -379,6 +379,7 @@ class AuthController {
                 cardName: `${cardName}`,
                 currency: `${currency}`,
                 cardAmount: cardAmount,
+                description: `${description}`,
               },
             ],
           },

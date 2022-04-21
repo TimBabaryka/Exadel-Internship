@@ -11,14 +11,17 @@ export class CardCreateComponent {
     cardName: new FormControl('', [Validators.required]),
     currency: new FormControl('', [Validators.required]),
     cardAmount: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
   });
 
   constructor(private todoService: TodoService) {}
 
   onSubmitCreate() {
-    const { cardName, cardAmount, currency } = this.CardForm.value;
-    this.todoService.addCard(cardName, currency, cardAmount).subscribe(() => {
-      this.todoService.addNewCard$.next(null);
-    });
+    const { cardName, cardAmount, currency, description } = this.CardForm.value;
+    this.todoService
+      .addCard(cardName, currency, cardAmount, description)
+      .subscribe(() => {
+        this.todoService.addNewCard$.next(null);
+      });
   }
 }

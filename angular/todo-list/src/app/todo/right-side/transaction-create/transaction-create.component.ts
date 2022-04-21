@@ -44,7 +44,7 @@ export class TransactionCreateComponent implements OnInit {
         typeOfTransaction,
         title
       )
-      .subscribe((data) => {
+      .subscribe(() => {
         this.todoService.addNewTransaction$.next(null);
         this.todoService.addNewCategory$.next(null);
       });

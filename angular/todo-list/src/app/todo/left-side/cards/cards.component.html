@@ -7,6 +7,9 @@
     <div class="left-side">
       <h1 class="cardName">{{ n.cardName }}</h1>
       <h1 class="cardAmount">{{ n.cardAmount }}</h1>
+      <mat-icon class="cardIcon" (click)="openCardWindow(n._id)"
+        >payment</mat-icon
+      >
     </div>
 
     <div class="card-currency">{{ n.currency }}</div>

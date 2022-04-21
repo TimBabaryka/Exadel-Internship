@@ -37,6 +37,14 @@ export class TodoService {
       });
   }
 
+  deleteCard(id: string) {
+    return this.http
+      .delete(`http://localhost:3000/api/deleteCard/${id}`)
+      .subscribe((data) => {
+        this.addNewCard$.next(null);
+      });
+  }
+
   deleteTransaction(id: string) {
     return this.http
       .delete(`http://localhost:3000/api/deleteTransaction/${id}`)
@@ -52,11 +60,17 @@ export class TodoService {
     return this.http.get('http://localhost:3000/api/users', {});
   }
 
-  addCard(cardName: string, currency: string, cardAmount: number) {
+  addCard(
+    cardName: string,
+    currency: string,
+    cardAmount: number,
+    description: string
+  ) {
     return this.http.post('http://localhost:3000/api/createCard', {
       cardName,
       currency,
       cardAmount,
+      description,
     });
   }
 

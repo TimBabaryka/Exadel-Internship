@@ -10,7 +10,9 @@
   grid-template-rows: 1.7fr;
   gap: 1% 11px;
   grid-template-areas: 'left-box central-box right-box';
-  background-color: #d2d1d1;
+
+  background: linear-gradient(to right, rgb(220, 220, 220), rgb(220, 220, 220));
+
   min-height: 100px;
   max-width: 1000px;
 }

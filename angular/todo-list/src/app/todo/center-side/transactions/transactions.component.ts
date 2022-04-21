@@ -28,8 +28,6 @@ export class TransactionsComponent implements OnInit {
     this.transactionInfoData = this.user.user.transaction.filter((obj: any) => {
       return obj._id === id;
     });
-
-    // console.log(this.transactionInfoData);
     this.dialogRef.open(TransactionInfoComponent, {
       data: this.transactionInfoData,
     });

@@ -20,6 +20,7 @@ import { CategoryCreateComponent } from './right-side/category-create/category-c
 import { TransactionsComponent } from './center-side/transactions/transactions.component';
 import { CardsComponent } from './left-side/cards/cards.component';
 import { TransactionInfoComponent } from './center-side/transactions/transaction-info/transaction-info.component';
+import { CardInfoComponent } from './left-side/cards/card-info/card-info.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
     TransactionsComponent,
     CardsComponent,
     TransactionInfoComponent,
+    CardInfoComponent,
   ],
   imports: [
     CommonModule,

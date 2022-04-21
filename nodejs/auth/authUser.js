@@ -27,6 +27,7 @@ const cardSchema = new mongoose.Schema(
     cardName: { type: String, required: true },
     cardAmount: { type: Number, required: true },
     currency: { type: String, required: true },
+    description: { type: String, required: true },
   },
   {
     timestamps: true,
