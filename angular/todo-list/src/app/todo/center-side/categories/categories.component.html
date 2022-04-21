@@ -1,6 +1,7 @@
 <div class="category-box">
   <ng-container *ngFor="let n of arrOfCategories">
     <div
+      routerLinkActive="activeCatRed"
       routerLink="category/{{ n._id }}"
       class="category-expense"
       *ngIf="n.categoryType === 'expense' && n.cardId === this.activeId"
@@ -15,6 +16,7 @@
 
   <ng-container *ngFor="let n of arrOfCategories">
     <div
+      routerLinkActive="activeCatGreen"
       routerLink="category/{{ n._id }}"
       class="category-income"
       *ngIf="n.categoryType === 'income' && n.cardId === this.activeId"

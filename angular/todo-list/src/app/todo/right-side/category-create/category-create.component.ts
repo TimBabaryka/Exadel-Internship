@@ -12,7 +12,7 @@ export class CategoryCreateComponent implements OnInit {
   CategoryForm: FormGroup = new FormGroup({
     categoryName: new FormControl('', [
       Validators.required,
-      Validators.maxLength(15),
+      Validators.maxLength(10),
     ]),
     categoryType: new FormControl('', [Validators.required]),
   });

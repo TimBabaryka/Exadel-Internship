@@ -10,6 +10,7 @@ export class TransactionCreateComponent implements OnInit {
   activeId: any;
   TransactionForm: FormGroup = new FormGroup({
     payee: new FormControl('', [Validators.required]),
+    title: new FormControl('', [Validators.required, Validators.maxLength(15)]),
     date: new FormControl('', [Validators.required]),
     activity: new FormControl('', [
       Validators.required,
@@ -22,8 +23,15 @@ export class TransactionCreateComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   onSubmitCreateTransaction() {
-    const { description, payee, date, activity, amount, typeOfTransaction } =
-      this.TransactionForm.value;
+    const {
+      description,
+      payee,
+      date,
+      activity,
+      amount,
+      typeOfTransaction,
+      title,
+    } = this.TransactionForm.value;
     const paidCard = (this.activeId = this.todoService.getActiveId());
     this.todoService
       .addTransaction(
@@ -33,10 +41,12 @@ export class TransactionCreateComponent implements OnInit {
         activity,
         amount,
         paidCard,
-        typeOfTransaction
+        typeOfTransaction,
+        title
       )
-      .subscribe(() => {
+      .subscribe((data) => {
         this.todoService.addNewTransaction$.next(null);
+        this.todoService.addNewCategory$.next(null);
       });
   }
 

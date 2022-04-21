@@ -12,6 +12,7 @@ import { TransactionInfoComponent } from './transaction-info/transaction-info.co
 })
 export class TransactionsComponent implements OnInit {
   activeTransaction: any;
+  transactionInfoData: any;
   activeId: any;
   user: any;
   transactionsData: any;
@@ -24,7 +25,14 @@ export class TransactionsComponent implements OnInit {
   openTransInfo(id: string) {
     this.activeTransaction = id;
     this.todoService.setActiveTrans(this.activeTransaction);
-    this.dialogRef.open(TransactionInfoComponent);
+    this.transactionInfoData = this.user.user.transaction.filter((obj: any) => {
+      return obj._id === id;
+    });
+
+    // console.log(this.transactionInfoData);
+    this.dialogRef.open(TransactionInfoComponent, {
+      data: this.transactionInfoData,
+    });
   }
 
   getTransdData() {

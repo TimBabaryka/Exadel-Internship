@@ -74,7 +74,8 @@ export class TodoService {
     activity: string,
     amount: number,
     paidCard: string,
-    typeOfTransaction: string
+    typeOfTransaction: string,
+    title: string
   ) {
     return this.http.post('http://localhost:3000/api/createTransaction', {
       description,
@@ -84,6 +85,7 @@ export class TodoService {
       amount,
       paidCard,
       typeOfTransaction,
+      title,
     });
   }
 }

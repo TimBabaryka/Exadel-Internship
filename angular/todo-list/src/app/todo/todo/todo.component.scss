@@ -1,7 +1,7 @@
 .main-app-container {
   background-color: rgb(255, 255, 255);
   width: 98%;
-  height: 100vh;
+  max-height: 100%;
   display: grid;
   grid-template-columns: 1fr 1.4fr 0.6fr;
   grid-template-rows: 2.5fr;

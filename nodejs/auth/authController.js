@@ -193,6 +193,7 @@ class AuthController {
         date,
         payee,
         typeOfTransaction,
+        title,
       } = req.body;
 
       const user = await authUser.updateOne(
@@ -203,6 +204,7 @@ class AuthController {
         {
           $set: {
             "transaction.$.activity": activity,
+            "transaction.$.title": title,
             "transaction.$.description": description,
             "transaction.$.paidCard": paidCard,
             "transaction.$.amount": amount,
@@ -405,6 +407,7 @@ class AuthController {
         date,
         payee,
         typeOfTransaction,
+        title,
       } = req.body;
 
       const createdTran = await authUser.findOneAndUpdate(
@@ -414,6 +417,7 @@ class AuthController {
             transaction: [
               {
                 activity: `${activity}`,
+                title: `${title}`,
                 description: `${description}`,
                 paidCard: `${paidCard}`,
                 amount: amount,
