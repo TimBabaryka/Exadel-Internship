@@ -262,36 +262,46 @@ class AuthController {
         {
           "transaction.$": 1,
         }
-        // async function (err, user) {
-        // state.amount = user.transaction[0].amount;
-        // state.type = user.transaction[0].typeOfTransaction;
-        // state.paidCard = user.transaction[0].paidCard;
-
-        // if (state.type === "expense") {
-        //   tempData = await authUser.updateOne(
-        //     {
-        //       _id: `${decodedData.id}`,
-        //       "cards._id": state.paidCard,
-        //     },
-        //     {
-        //       $inc: {
-        //         "cards.$.cardAmount": state.amount,
-        //       },
-        //     }
-        //   );
-        // }
-        // }
       );
+
       state.amount = amountOfTrans.transaction[0].amount;
       state.type = amountOfTrans.transaction[0].typeOfTransaction;
       state.paidCard = amountOfTrans.transaction[0].paidCard;
-      console.log(state);
-      // const deletedTran = await authUser.updateOne(
-      //   { _id: `${decodedData.id}` },
-      //   { $pull: { transaction: { _id: id } } }
-      // );
 
-      return res.json(lol);
+      const deletedTran = await authUser.updateOne(
+        { _id: `${decodedData.id}` },
+        { $pull: { transaction: { _id: id } } }
+      );
+
+      if (state.type === "expense") {
+        tempData = await authUser.updateOne(
+          {
+            _id: `${decodedData.id}`,
+            "cards._id": state.paidCard,
+          },
+          {
+            $inc: {
+              "cards.$.cardAmount": state.amount,
+            },
+          }
+        );
+      }
+
+      if (state.type === "income") {
+        tempData = await authUser.updateOne(
+          {
+            _id: `${decodedData.id}`,
+            "cards._id": state.paidCard,
+          },
+          {
+            $inc: {
+              "cards.$.cardAmount": -state.amount,
+            },
+          }
+        );
+      }
+
+      return res.json({ message: "Successfully deleted" });
     } catch (e) {
       res.status(500).json(e);
     }
