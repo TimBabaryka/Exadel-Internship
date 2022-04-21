@@ -6,23 +6,27 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class TodoService {
-  // activeCategoryId: any;
   activeId: any;
-  // deleteCategory$ = new Subject();
+  activeTransaction: any;
   addNewCategory$ = new Subject();
   addNewCard$ = new Subject();
   addNewTransaction$ = new Subject();
+  deleteTransactions$ = new Subject();
   constructor(private http: HttpClient) {}
 
   setActiveId(data: any) {
     this.activeId = data;
   }
-  // setActiveIdCat(data: any) {
-  //   this.activeCategoryId = data;
-  // }
 
   getActiveId() {
     return this.activeId;
+  }
+
+  setActiveTrans(data: any) {
+    this.activeTransaction = data;
+  }
+  getActiveTrans() {
+    return this.activeTransaction;
   }
 
   deleteCategory(id: string) {
@@ -30,6 +34,14 @@ export class TodoService {
       .delete(`http://localhost:3000/api/deleteCategory/${id}`)
       .subscribe(() => {
         this.addNewCategory$.next(null);
+      });
+  }
+
+  deleteTransaction(id: string) {
+    return this.http
+      .delete(`http://localhost:3000/api/deleteTransaction/${id}`)
+      .subscribe(() => {
+        this.deleteTransactions$.next(null);
       });
   }
 

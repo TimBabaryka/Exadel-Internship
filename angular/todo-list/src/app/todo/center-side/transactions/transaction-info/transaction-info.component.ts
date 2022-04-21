@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService } from 'src/app/todo/services/todo.service';
 
 @Component({
   selector: 'app-transaction-info',
   templateUrl: './transaction-info.component.html',
-  styleUrls: ['./transaction-info.component.scss']
+  styleUrls: ['./transaction-info.component.scss'],
 })
 export class TransactionInfoComponent implements OnInit {
+  activeTransaction: any;
 
-  constructor() { }
+  constructor(private todoService: TodoService) {}
 
-  ngOnInit(): void {
+  deleteTrans() {
+    this.todoService.deleteTransaction(this.activeTransaction);
   }
 
+  ngOnInit(): void {
+    this.activeTransaction = this.todoService.getActiveTrans();
+  }
 }

@@ -11,6 +11,7 @@ import { TransactionInfoComponent } from './transaction-info/transaction-info.co
   styleUrls: ['./transactions.component.scss'],
 })
 export class TransactionsComponent implements OnInit {
+  activeTransaction: any;
   activeId: any;
   user: any;
   transactionsData: any;
@@ -20,7 +21,9 @@ export class TransactionsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  openTransInfo() {
+  openTransInfo(id: string) {
+    this.activeTransaction = id;
+    this.todoService.setActiveTrans(this.activeTransaction);
     this.dialogRef.open(TransactionInfoComponent);
   }
 
@@ -38,6 +41,9 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.getTransdData();
     this.todoService.addNewTransaction$.subscribe(() => {
+      this.getTransdData();
+    });
+    this.todoService.deleteTransactions$.subscribe(() => {
       this.getTransdData();
     });
   }

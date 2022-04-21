@@ -32,5 +32,8 @@ export class CardsComponent implements OnInit {
     this.todoService.addNewTransaction$.subscribe(() => {
       this.getCardDatas();
     });
+    this.todoService.deleteTransactions$.subscribe(() => {
+      this.getCardDatas();
+    });
   }
 }

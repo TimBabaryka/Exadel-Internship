@@ -268,13 +268,13 @@ class AuthController {
       state.type = amountOfTrans.transaction[0].typeOfTransaction;
       state.paidCard = amountOfTrans.transaction[0].paidCard;
 
-      const deletedTran = await authUser.updateOne(
+      const deletedTran = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
         { $pull: { transaction: { _id: id } } }
       );
 
       if (state.type === "expense") {
-        tempData = await authUser.updateOne(
+        const tempData = await authUser.updateOne(
           {
             _id: `${decodedData.id}`,
             "cards._id": state.paidCard,
@@ -288,7 +288,7 @@ class AuthController {
       }
 
       if (state.type === "income") {
-        tempData = await authUser.updateOne(
+        const tempData = await authUser.updateOne(
           {
             _id: `${decodedData.id}`,
             "cards._id": state.paidCard,
@@ -300,8 +300,7 @@ class AuthController {
           }
         );
       }
-
-      return res.json({ message: "Successfully deleted" });
+      return res.json(deletedTran);
     } catch (e) {
       res.status(500).json(e);
     }

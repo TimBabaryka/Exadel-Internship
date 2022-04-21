@@ -4,7 +4,9 @@
       <div class="transaction-form__row">
         <h1 class="transactionHeader">Transaction Information</h1>
         <mat-icon class="iconStyle">build</mat-icon>
-        <mat-icon class="iconStyle">delete_forever</mat-icon>
+        <mat-icon class="iconStyle" (click)="deleteTrans()" mat-dialog-close
+          >delete_forever</mat-icon
+        >
         <mat-icon class="iconStyle" mat-dialog-close>highlight_off</mat-icon>
       </div>
       <div class="transaction-content-top">
