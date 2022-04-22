@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./card-info.component.scss'],
 })
 export class CardInfoComponent implements OnInit {
+  activateEdit: boolean = false;
   activeCardId: any;
   dataOFActiveCard: any;
   constructor(
@@ -19,8 +20,16 @@ export class CardInfoComponent implements OnInit {
     this.todoService.deleteCard(this.activeCardId);
   }
 
+  saveAndSend() {
+    this.todoService
+      .sendCardEdit(this.activeCardId, this.dataOFActiveCard)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
   ngOnInit(): void {
     this.activeCardId = this.todoService.getActiveId();
-    this.dataOFActiveCard = this.data[0];
+    this.dataOFActiveCard = { ...this.data[0] };
   }
 }

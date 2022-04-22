@@ -29,6 +29,12 @@ export class TodoService {
     return this.activeTransaction;
   }
 
+  sendCardEdit(id: string, card: object) {
+    return this.http.post(`http://localhost:3000/api/edit-card/${id}`, {
+      card,
+    });
+  }
+
   deleteCategory(id: string) {
     return this.http
       .delete(`http://localhost:3000/api/deleteCategory/${id}`)

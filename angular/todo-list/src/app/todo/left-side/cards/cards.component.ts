@@ -28,7 +28,10 @@ export class CardsComponent implements OnInit {
       this.arrOfCards = data.user.cards;
     });
   }
-
+  onCardClick(id: string) {
+    this.activeCardId = id;
+    this.todoService.setActiveId(id);
+  }
   openCardWindow(id: any) {
     this.activeCardId = id;
     this.todoService.setActiveId(this.activeCardId);

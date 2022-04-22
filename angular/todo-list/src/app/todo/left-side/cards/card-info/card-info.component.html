@@ -3,7 +3,9 @@
     <div class="transaction-form__form">
       <div class="transaction-form__row">
         <h1 class="transactionHeader">Card Information</h1>
-        <mat-icon class="iconStyle">build</mat-icon>
+        <mat-icon class="iconStyle" (click)="activateEdit = !activateEdit"
+          >build</mat-icon
+        >
         <mat-icon class="iconStyle" mat-dialog-close (click)="deleteCard()"
           >delete_forever</mat-icon
         >
@@ -12,24 +14,62 @@
 
       <div class="transaction-content">
         <p class="trans-field">Title:</p>
-        <p class="date-content">{{ dataOFActiveCard.cardName }}</p>
+        <input
+          [disabled]="!activateEdit"
+          type="text"
+          [(ngModel)]="dataOFActiveCard.cardName"
+        />
+        <!-- <p class="date-content">{{ dataOFActiveCard.cardName }}</p> -->
       </div>
       <div class="transaction-content">
         <p class="trans-field">Currency:</p>
-        <p class="date-content">{{ dataOFActiveCard.currency }}</p>
+        <input
+          [disabled]="!activateEdit"
+          type="text"
+          [(ngModel)]="dataOFActiveCard.currency"
+        />
+        <!-- <p class="date-content">{{ dataOFActiveCard.currency }}</p> -->
       </div>
       <div class="transaction-content">
         <p class="trans-field">Balance:</p>
-        <p class="date-content">{{ dataOFActiveCard.cardAmount }}</p>
+
+        <input
+          [disabled]="!activateEdit"
+          type="text"
+          [(ngModel)]="dataOFActiveCard.cardAmount"
+        />
+        <!-- <p class="date-content">{{ dataOFActiveCard.cardAmount }}</p> -->
       </div>
       <div class="transaction-content">
         <p class="trans-field">Description:</p>
 
-        <p class="date-content">
+        <input
+          [disabled]="!activateEdit"
+          type="text"
+          [(ngModel)]="dataOFActiveCard.description"
+        />
+
+        <!-- <p class="date-content">
           {{ dataOFActiveCard.description }}
-        </p>
+        </p> -->
       </div>
     </div>
-    <button class="button-close" mat-button mat-dialog-close>Close</button>
+    <button
+      *ngIf="!activateEdit"
+      class="button-close"
+      mat-button
+      mat-dialog-close
+    >
+      Close
+    </button>
+    <button
+      *ngIf="activateEdit"
+      class="button-close"
+      (click)="saveAndSend()"
+      mat-button
+      mat-dialog-close
+    >
+      Save
+    </button>
   </div>
 </div>

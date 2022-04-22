@@ -1,8 +1,9 @@
 <div *ngFor="let n of arrOfCards; let i = index">
   <div
-    routerLinkActive="activeCard"
+    [ngClass]="{ activeCard: n._id === activeCardId }"
     routerLink="transactions/{{ n._id }}"
     class="left-section-card"
+    (click)="onCardClick(n._id)"
   >
     <div class="left-side">
       <h1 class="cardName">{{ n.cardName }}</h1>
