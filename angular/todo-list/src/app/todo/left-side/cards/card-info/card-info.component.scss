@@ -82,3 +82,27 @@
   color: #b8e2e4;
   transition: 0.3s ease-in-out;
 }
+
+@media screen and(max-width:900px) {
+  .transaction-form__row {
+    width: 25rem;
+  }
+
+  .transaction-content-top {
+    width: 25rem;
+  }
+  .transaction-content-title {
+    width: 25rem;
+    font-size: 2rem;
+  }
+  .trans-field {
+    font-size: 1.5rem;
+  }
+  .date-content {
+    width: 25rem;
+  }
+  .transaction-content {
+    flex-direction: column;
+    width: 25rem;
+  }
+}

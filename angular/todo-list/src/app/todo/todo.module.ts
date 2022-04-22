@@ -21,6 +21,7 @@ import { TransactionsComponent } from './center-side/transactions/transactions.c
 import { CardsComponent } from './left-side/cards/cards.component';
 import { TransactionInfoComponent } from './center-side/transactions/transaction-info/transaction-info.component';
 import { CardInfoComponent } from './left-side/cards/card-info/card-info.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 const routes: Routes = [
   {
@@ -53,6 +54,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatIconModule,
     ReactiveFormsModule,
+    MatChipsModule,
   ],
 })
 export class TodoModule {}

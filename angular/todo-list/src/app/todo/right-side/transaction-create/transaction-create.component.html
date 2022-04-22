@@ -1,65 +1,101 @@
 <div class="transaction-box">
   <div class="transaction-form">
-    <h3>Add Transaction</h3>
+    <h4 class="transaction-form__title">Add Transaction</h4>
     <form
       [formGroup]="TransactionForm"
       (ngSubmit)="onSubmitCreateTransaction()"
       class="transaction-form__form"
     >
       <mat-form-field class="transaction-form__row" appearance="fill">
-        <mat-label>Category</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Your category"
-          formControlName="activity"
-        />
+        <mat-label>Categories</mat-label>
+
+        <mat-chip-list
+          #chipList
+          aria-label="Fruit selection"
+          [formControl]="chipsControl"
+        >
+          <mat-chip
+            #chip="matChip"
+            *ngFor="let n of onlyCategories"
+            (click)="chip.toggleSelected(true)"
+            (removed)="remove(n)"
+          >
+            {{ n }}
+            <button matChipRemove>
+              <div class="close"></div>
+            </button>
+          </mat-chip>
+
+          <input
+            placeholder="New fruit..."
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
       </mat-form-field>
 
-      <mat-form-field class="transaction-form__row" appearance="fill">
-        <mat-label>Title</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Your title"
-          formControlName="title"
-        />
-      </mat-form-field>
-      <mat-form-field class="transaction-form__row" appearance="fill">
-        <mat-label>Description</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="Your description"
-          formControlName="description"
-        />
-      </mat-form-field>
+      <div class="form-column">
+        <div class="form-column__left">
+          <mat-form-field class="transaction-form__row" appearance="fill">
+            <mat-label>Category</mat-label>
+            <input
+              type="text"
+              matInput
+              [ngModel]="chipsValue$ | async"
+              placeholder="Your category"
+              formControlName="activity"
+            />
+          </mat-form-field>
 
-      <mat-form-field class="transaction-form__row" appearance="fill">
-        <mat-label>Sum</mat-label>
-        <input
-          type="number"
-          matInput
-          placeholder="Amount of money"
-          step="0.01"
-          formControlName="amount"
-        />
-      </mat-form-field>
+          <mat-form-field class="transaction-form__row" appearance="fill">
+            <mat-label>Title</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Your title"
+              formControlName="title"
+            />
+          </mat-form-field>
+          <mat-form-field class="transaction-form__row" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Your description"
+              formControlName="description"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-column__right">
+          <mat-form-field class="transaction-form__row" appearance="fill">
+            <mat-label>Sum</mat-label>
+            <input
+              type="number"
+              matInput
+              placeholder="Amount of money"
+              step="0.01"
+              formControlName="amount"
+            />
+          </mat-form-field>
 
-      <mat-form-field class="transaction-form__row" appearance="fill">
-        <mat-label>Payee</mat-label>
-        <input
-          type="text"
-          matInput
-          placeholder="John Doe"
-          formControlName="payee"
-        />
-      </mat-form-field>
+          <mat-form-field class="transaction-form__row" appearance="fill">
+            <mat-label>Payee</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="John Doe"
+              formControlName="payee"
+            />
+          </mat-form-field>
 
-      <mat-form-field class="transaction-form__row" appearance="fill">
-        <mat-label>Date</mat-label>
-        <input type="date" matInput formControlName="date" />
-      </mat-form-field>
+          <mat-form-field class="transaction-form__row" appearance="fill">
+            <mat-label>Date</mat-label>
+            <input type="date" matInput formControlName="date" />
+          </mat-form-field>
+        </div>
+      </div>
 
       <div class="expenseIncome">
         <input
