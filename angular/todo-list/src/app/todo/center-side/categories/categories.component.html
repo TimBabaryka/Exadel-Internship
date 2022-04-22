@@ -1,28 +1,53 @@
 <div class="category-box">
-  <ng-container *ngFor="let n of arrOfCategories">
+  <ng-container *ngFor="let n of arrOfCategories; let i = index">
     <div
       routerLinkActive="activeCatRed"
       routerLink="category/{{ n._id }}"
       class="category-expense"
       *ngIf="n.categoryType === 'expense' && n.cardId === this.activeId"
     >
-      <h1 class="category-name">{{ n.categoryName }}</h1>
-      <mat-icon class="icon-colorRed">build</mat-icon>
+      <input
+        class="category-name"
+        [disabled]="rowIWannaDisable === i"
+        type="text"
+        [(ngModel)]="n.categoryName"
+      />
+      <!-- <h1 class="category-name">{{ n.categoryName }}</h1> -->
+      <!-- <mat-icon class="icon-colorRed">build</mat-icon> -->
+      <mat-icon class="icon-colorGreen" (click)="saveAndSendCat(n._id)"
+        >done</mat-icon
+      >
       <mat-icon class="icon-colorRed" (click)="getIdCatDelete(n._id)"
         >delete_forever</mat-icon
       >
     </div>
   </ng-container>
 
-  <ng-container *ngFor="let n of arrOfCategories">
+  <ng-container *ngFor="let n of arrOfCategories; let i = index">
     <div
       routerLinkActive="activeCatGreen"
       routerLink="category/{{ n._id }}"
       class="category-income"
+      (click)="getActiveCategory(n._id)"
       *ngIf="n.categoryType === 'income' && n.cardId === this.activeId"
     >
-      <h1 class="category-name">{{ n.categoryName }}</h1>
-      <mat-icon class="icon-colorGreen">build</mat-icon>
+      <input
+        class="category-name"
+        [disabled]="rowIWannaDisable === i"
+        type="text"
+        value="n.categoryName"
+        [(ngModel)]="n.categoryName"
+      />
+      <!-- <h1 class="category-name">{{ n.categoryName }}</h1> -->
+      <!-- <mat-icon class="icon-colorGreen" (click)="toggleDisable(n._id)"
+        >build</mat-icon
+      > -->
+      <mat-icon
+        class="icon-colorGreen"
+        [ngClass]="{ disable: activeCategoryId !== n._id }"
+        (click)="saveAndSendCat(n._id)"
+        >done</mat-icon
+      >
       <mat-icon class="icon-colorGreen" (click)="getIdCatDelete(n._id)"
         >delete_forever</mat-icon
       >

@@ -10,6 +10,8 @@ export class TodoService {
   activeTransaction: any;
   addNewCategory$ = new Subject();
   addNewCard$ = new Subject();
+  editCard$ = new Subject();
+  editCategory$ = new Subject();
   addNewTransaction$ = new Subject();
   deleteTransactions$ = new Subject();
   constructor(private http: HttpClient) {}
@@ -32,6 +34,12 @@ export class TodoService {
   sendCardEdit(id: string, card: object) {
     return this.http.post(`http://localhost:3000/api/edit-card/${id}`, {
       card,
+    });
+  }
+
+  sendCategoryEdit(id: string, category: object) {
+    return this.http.post(`http://localhost:3000/api/edit-category/${id}`, {
+      category,
     });
   }
 

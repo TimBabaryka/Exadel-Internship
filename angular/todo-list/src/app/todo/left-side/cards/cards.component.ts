@@ -54,5 +54,8 @@ export class CardsComponent implements OnInit {
     this.todoService.deleteTransactions$.subscribe(() => {
       this.getCardDatas();
     });
+    this.todoService.editCard$.subscribe(() => {
+      this.getCardDatas();
+    });
   }
 }

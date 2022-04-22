@@ -23,8 +23,8 @@ export class CardInfoComponent implements OnInit {
   saveAndSend() {
     this.todoService
       .sendCardEdit(this.activeCardId, this.dataOFActiveCard)
-      .subscribe((data) => {
-        console.log(data);
+      .subscribe(() => {
+        this.todoService.editCard$.next(null);
       });
   }
 

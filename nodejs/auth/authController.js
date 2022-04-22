@@ -30,7 +30,7 @@ class AuthController {
       return res.send({
         authuser: { user },
         apiKey: generateAccessToken(user._id, user.roles),
-        expiresIn: 10 * 60 * 1000,
+        expiresIn: 30 * 60 * 1000,
       });
     }
     return res.status(401).send("Login failed");
@@ -154,7 +154,7 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
       const { id } = req.params;
-      const { currency, cardAmount, cardName } = req.body;
+      const { card } = req.body;
       const user = await authUser.updateOne(
         {
           _id: `${decodedData.id}`,
@@ -162,9 +162,10 @@ class AuthController {
         },
         {
           $set: {
-            "cards.$.cardAmount": cardAmount,
-            "cards.$.currency": currency,
-            "cards.$.cardName": cardName,
+            "cards.$.cardAmount": card.cardAmount,
+            "cards.$.currency": card.currency,
+            "cards.$.cardName": card.cardName,
+            "cards.$.description": card.description,
           },
         },
         { multi: true }
@@ -172,7 +173,38 @@ class AuthController {
       return res.json(user);
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "Registration failed" });
+      res.status(400).json({ message: "Card edition failed" });
+    }
+  }
+  async editCategory(req, res) {
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: " User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+      const { id } = req.params;
+      const { category } = req.body;
+      const user = await authUser.updateOne(
+        {
+          _id: `${decodedData.id}`,
+          "categories._id": id,
+        },
+        {
+          $set: {
+            "categories.$.cardId": category.cardId,
+            "categories.$.categoryName": category.categoryName,
+            "categories.$.categoryType": category.categoryType,
+          },
+        },
+        { multi: true }
+      );
+      console.log(user);
+      return res.json(user);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: "Category edition failed" });
     }
   }
 

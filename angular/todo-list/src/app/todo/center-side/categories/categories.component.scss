@@ -50,12 +50,12 @@
 }
 
 .category-name {
+  border: none;
   font-size: 2rem;
   text-transform: uppercase;
   width: 90%;
   margin-left: 3%;
-
-  line-height: 0px;
+  line-height: 28px;
 }
 
 .mat-icon {
@@ -79,4 +79,14 @@
   .mat-icon:hover {
     color: black;
   }
+}
+
+.disable:hover {
+  cursor: not-allowed;
+}
+.disable:active {
+  pointer-events: none;
+}
+mat-icon.disable {
+  filter: opacity(0.5);
 }
