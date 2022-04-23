@@ -81,6 +81,20 @@
   }
 }
 
+.alert {
+  background-color: rgb(255, 0, 0);
+  max-height: 30px;
+  line-height: 14px;
+}
+.alertGreen {
+  background-color: #00da3a;
+  max-height: 30px;
+  line-height: 14px;
+}
+
+.disable {
+  display: none;
+}
 .disable:hover {
   cursor: not-allowed;
 }

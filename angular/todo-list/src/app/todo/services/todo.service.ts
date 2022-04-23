@@ -42,6 +42,11 @@ export class TodoService {
       category,
     });
   }
+  sendTransactionEdit(id: string, transaction: object) {
+    return this.http.post(`http://localhost:3000/api/edit-transaction/${id}`, {
+      transaction,
+    });
+  }
 
   deleteCategory(id: string) {
     return this.http

@@ -14,6 +14,7 @@ export class CategoriesComponent implements OnInit {
   arrOfCategories: any;
   activeId: any;
   activeCategoryId: any;
+
   constructor(
     private todoService: TodoService,
     private router: ActivatedRoute

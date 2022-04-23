@@ -4,17 +4,30 @@
       routerLinkActive="activeCatRed"
       routerLink="category/{{ n._id }}"
       class="category-expense"
+      (click)="getActiveCategory(n._id)"
       *ngIf="n.categoryType === 'expense' && n.cardId === this.activeId"
     >
       <input
         class="category-name"
         [disabled]="rowIWannaDisable === i"
         type="text"
+        maxlength="10"
+        required
+        minlength="1"
+        id="name"
         [(ngModel)]="n.categoryName"
+        #name="ngModel"
+        name="name"
       />
-      <!-- <h1 class="category-name">{{ n.categoryName }}</h1> -->
-      <!-- <mat-icon class="icon-colorRed">build</mat-icon> -->
-      <mat-icon class="icon-colorGreen" (click)="saveAndSendCat(n._id)"
+
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+        <div *ngIf="name.errors?.['required']">Min 1 symbol</div>
+      </div>
+
+      <mat-icon
+        [ngClass]="{ disable: activeCategoryId !== n._id || name.errors }"
+        class="icon-colorGreen"
+        (click)="saveAndSendCat(n._id)"
         >done</mat-icon
       >
       <mat-icon class="icon-colorRed" (click)="getIdCatDelete(n._id)"
@@ -35,16 +48,25 @@
         class="category-name"
         [disabled]="rowIWannaDisable === i"
         type="text"
+        maxlength="10"
+        minlength="1"
+        required
         value="n.categoryName"
         [(ngModel)]="n.categoryName"
+        #name="ngModel"
+        name="name"
       />
-      <!-- <h1 class="category-name">{{ n.categoryName }}</h1> -->
-      <!-- <mat-icon class="icon-colorGreen" (click)="toggleDisable(n._id)"
-        >build</mat-icon
-      > -->
+
+      <div
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="alertGreen"
+      >
+        <div *ngIf="name.errors?.['required']">Min 1 symbol</div>
+      </div>
+
       <mat-icon
         class="icon-colorGreen"
-        [ngClass]="{ disable: activeCategoryId !== n._id }"
+        [ngClass]="{ disable: activeCategoryId !== n._id || name.errors }"
         (click)="saveAndSendCat(n._id)"
         >done</mat-icon
       >
