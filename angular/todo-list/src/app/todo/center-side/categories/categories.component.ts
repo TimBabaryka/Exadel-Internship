@@ -27,14 +27,10 @@ export class CategoriesComponent implements OnInit {
       return obj._id === id;
     });
     this.categoryInfoData = { ...temp[0] };
-    console.log(this.categoryInfoData);
   }
 
-  // toggleDisable(id: string) {
-  //   console.log(this.activeId);
-  //   if (this.activeCategoryId === id) {
-  //     this.activateEdit = !this.activateEdit;
-  //   }
+  // toggleDisable() {
+  //   this.buttonIcon = true;
   // }
 
   getCardDatas() {

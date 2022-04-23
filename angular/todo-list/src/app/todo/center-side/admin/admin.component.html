@@ -1,9 +1,37 @@
 <div class="admin-box">
   <div class="admin-box-content">
-    <h2>Amount of users:{{ this.transactionData }}</h2>
-    <h2>Amount of expenses:21</h2>
-    <h2>Amount of incomes:12</h2>
-    <h2>Total spent:1000$</h2>
-    <h2>Total income:1200$</h2>
+    <div class="icon-group">
+      <mat-icon class="icon">group</mat-icon>
+      <h2>Users Registered :{{ transactionData }}</h2>
+    </div>
+
+    <div class="icon-group">
+      <mat-icon class="icon">payment</mat-icon>
+      <h2>Cards Created: {{ cardsTotal }}</h2>
+    </div>
+
+    <div class="icon-group">
+      <mat-icon class="icon">account_balance_wallet</mat-icon>
+      <h2>Money on Cards: {{ cardsTotalSum }}</h2>
+    </div>
+
+    <div class="icon-group">
+      <mat-icon class="icon">input</mat-icon>
+      <h2>Transactions Conducted: {{ transactionMade }}</h2>
+    </div>
+    <div class="icon-group">
+      <div class="circle-red">↑</div>
+      <h2>Money Spent:{{ totalExpense }}</h2>
+    </div>
+
+    <div class="icon-group">
+      <div class="circle-green">↓</div>
+      <h2>Money Earned:{{ totalIncome }}</h2>
+    </div>
+
+    <div class="icon-group">
+      <mat-icon class="icon">turned_in</mat-icon>
+      <h2>Categories {{ categoriesTotal }}</h2>
+    </div>
   </div>
 </div>

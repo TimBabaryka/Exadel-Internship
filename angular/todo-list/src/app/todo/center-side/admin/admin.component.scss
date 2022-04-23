@@ -11,4 +11,43 @@
   justify-content: center;
   flex-direction: column;
   display: flex;
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+.icon-group {
+  margin-left: 15%;
+  width: 250px;
+  display: flex;
+}
+.icon {
+  color: #319fa4;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+.circle-red {
+  margin-right: 2%;
+  margin-top: 2%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: rgb(255, 0, 0);
+  border-radius: 50%;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-green {
+  margin-right: 2%;
+  margin-top: 2%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: #00da3a;
+  border-radius: 50%;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
 }
