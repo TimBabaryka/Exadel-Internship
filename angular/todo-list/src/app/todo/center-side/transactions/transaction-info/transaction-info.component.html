@@ -3,7 +3,9 @@
     <div class="transaction-form__form">
       <div class="transaction-form__row">
         <h1 class="transactionHeader">Transaction Information</h1>
-        <mat-icon class="iconStyle">build</mat-icon>
+        <mat-icon class="iconStyle" (click)="activateEdit = !activateEdit"
+          >build</mat-icon
+        >
         <mat-icon class="iconStyle" (click)="deleteTrans()" mat-dialog-close
           >delete_forever</mat-icon
         >
@@ -36,30 +38,97 @@
         >
           {{ dataOFActiveTrans.amount }}
         </p>
+
+        <!-- <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="number"
+          [(ngModel)]="dataOFActiveTrans.amount"
+        /> -->
       </div>
 
-      <div class="transaction-content-title">{{ dataOFActiveTrans.title }}</div>
+      <div class="transaction-content-title">
+        <input
+          class="row-input-title"
+          [disabled]="!activateEdit"
+          [ngClass]="{ activeTitle: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.title"
+        />
+      </div>
       <div class="transaction-content-category">
-        {{ dataOFActiveTrans.activity }}
+        <input
+          class="row-input-category"
+          [disabled]="!activateEdit"
+          [ngClass]="{ activeCategory: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.activity"
+        />
       </div>
       <div class="transaction-content">
         <p class="trans-field">Payment date:</p>
 
-        <p class="date-content">{{ dataOFActiveTrans.date }}</p>
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.date"
+        />
       </div>
       <div class="transaction-content">
         <p class="trans-field">Payee:</p>
 
-        <p class="date-content">{{ dataOFActiveTrans.payee }}</p>
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.payee"
+        />
       </div>
       <div class="transaction-content">
         <p class="trans-field">Description:</p>
 
-        <p class="date-content">
-          {{ dataOFActiveTrans.description }}
-        </p>
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.description"
+        />
       </div>
     </div>
-    <button class="button-close" mat-button mat-dialog-close>Close</button>
+    <button
+      *ngIf="!activateEdit"
+      class="button-close"
+      mat-button
+      mat-dialog-close
+    >
+      Close
+    </button>
+
+    <button
+      *ngIf="activateEdit"
+      class="button-close"
+      (click)="saveAndSend()"
+      mat-button
+      mat-dialog-close
+    >
+      Save
+    </button>
   </div>
 </div>

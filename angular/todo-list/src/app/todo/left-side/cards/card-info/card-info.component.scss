@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .transaction-box {
   height: 100%;
   min-height: 500px;
@@ -64,6 +68,16 @@
   font-weight: 200;
   font-size: 2rem;
   font-style: italic;
+}
+
+.row-input {
+  background-color: transparent;
+  border: none;
+}
+.active {
+  border-radius: 5px;
+  padding: 0px 5px;
+  border: 1px solid black;
 }
 
 .trans-field {

@@ -14,6 +14,7 @@ export class TodoService {
   editCategory$ = new Subject();
   addNewTransaction$ = new Subject();
   deleteTransactions$ = new Subject();
+  editTransaction$ = new Subject();
   constructor(private http: HttpClient) {}
 
   setActiveId(data: any) {

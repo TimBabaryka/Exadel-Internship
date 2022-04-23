@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./transaction-info.component.scss'],
 })
 export class TransactionInfoComponent implements OnInit {
+  activateEdit: boolean = false;
   activeTransaction: any;
   dataOFActiveTrans: any;
 
@@ -16,7 +17,13 @@ export class TransactionInfoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  getTransDate() {}
+  saveAndSend() {
+    this.todoService
+      .sendTransactionEdit(this.activeTransaction, this.dataOFActiveTrans)
+      .subscribe(() => {
+        this.todoService.editTransaction$.next(null);
+      });
+  }
 
   deleteTrans() {
     this.todoService.deleteTransaction(this.activeTransaction);
@@ -24,6 +31,6 @@ export class TransactionInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeTransaction = this.todoService.getActiveTrans();
-    this.dataOFActiveTrans = this.data[0];
+    this.dataOFActiveTrans = { ...this.data[0] };
   }
 }

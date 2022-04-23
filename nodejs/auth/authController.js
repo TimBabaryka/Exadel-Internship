@@ -200,7 +200,6 @@ class AuthController {
         },
         { multi: true }
       );
-      console.log(user);
       return res.json(user);
     } catch (e) {
       console.log(e);
@@ -212,21 +211,12 @@ class AuthController {
     try {
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
-        return res.status(403).json({ message: " User is not authorized1" });
+        return res.status(403).json({ message: "User is not authorized1" });
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
       const { id } = req.params;
-      const {
-        activity,
-        description,
-        paidCard,
-        amount,
-        date,
-        payee,
-        typeOfTransaction,
-        title,
-      } = req.body;
+      const { transaction } = req.body;
 
       const user = await authUser.updateOne(
         {
@@ -235,14 +225,14 @@ class AuthController {
         },
         {
           $set: {
-            "transaction.$.activity": activity,
-            "transaction.$.title": title,
-            "transaction.$.description": description,
-            "transaction.$.paidCard": paidCard,
-            "transaction.$.amount": amount,
-            "transaction.$.date": date,
-            "transaction.$.payee": payee,
-            "transactions.$.typeOfTransaction": typeOfTransaction,
+            "transaction.$.activity": transaction.activity,
+            "transaction.$.title": transaction.title,
+            "transaction.$.description": transaction.description,
+            "transaction.$.paidCard": transaction.paidCard,
+            "transaction.$.amount": transaction.amount,
+            "transaction.$.date": transaction.date,
+            "transaction.$.payee": transaction.payee,
+            "transactions.$.typeOfTransaction": transaction.typeOfTransaction,
           },
         },
         { multi: true }
@@ -250,7 +240,7 @@ class AuthController {
       return res.json(user);
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "Registration failed" });
+      res.status(400).json({ message: "Transaction edition failed" });
     }
   }
 
@@ -258,7 +248,7 @@ class AuthController {
     try {
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
-        return res.status(403).json({ message: " User is not authorized1" });
+        return res.status(403).json({ message: "User is not authorized1" });
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
@@ -282,7 +272,7 @@ class AuthController {
       };
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
-        return res.status(403).json({ message: " User is not authorized1" });
+        return res.status(403).json({ message: "User is not authorized1" });
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;

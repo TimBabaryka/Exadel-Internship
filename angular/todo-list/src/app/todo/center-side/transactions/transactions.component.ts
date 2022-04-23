@@ -52,5 +52,8 @@ export class TransactionsComponent implements OnInit {
     this.todoService.deleteTransactions$.subscribe(() => {
       this.getTransdData();
     });
+    this.todoService.editTransaction$.subscribe(() => {
+      this.getTransdData();
+    });
   }
 }
