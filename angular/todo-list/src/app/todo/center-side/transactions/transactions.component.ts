@@ -16,11 +16,22 @@ export class TransactionsComponent implements OnInit {
   activeId: any;
   user: any;
   transactionsData: any;
+  filter = { expense: true, income: true };
+
+  filteredTransactions: any;
   constructor(
     private todoService: TodoService,
     private dialogRef: MatDialog,
     private route: ActivatedRoute
   ) {}
+
+  filterChange() {
+    this.filteredTransactions = this.transactionsData.filter(
+      (x: any) =>
+        (x.typeOfTransaction === 'expense' && this.filter.expense) ||
+        (x.typeOfTransaction === 'income' && this.filter.income)
+    );
+  }
 
   openTransInfo(id: string) {
     this.activeTransaction = id;
@@ -40,7 +51,13 @@ export class TransactionsComponent implements OnInit {
     });
     this.todoService.getCardDatas().subscribe((data: any) => {
       this.user = data;
-      this.transactionsData = data.user.transaction;
+      this.transactionsData = data.user.transaction.filter(
+        (x: any) => x.paidCard === this.activeId.id
+      );
+      this.filteredTransactions = this.transactionsData;
+      console.log(this.filteredTransactions);
+      this.filter.expense = true;
+      this.filter.income = true;
     });
   }
 

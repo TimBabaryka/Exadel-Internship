@@ -1,4 +1,26 @@
-<ng-container *ngFor="let n of transactionsData">
+<div class="filter-box-content">
+  <input
+    type="checkbox"
+    [(ngModel)]="filter.expense"
+    (ngModelChange)="filterChange()"
+    id="c1"
+    class="chk-btn"
+  />
+  <label for="c1">Expense</label>
+  <label class="circle-redBox">↑</label>
+
+  <input
+    type="checkbox"
+    [(ngModel)]="filter.income"
+    (ngModelChange)="filterChange()"
+    id="c2"
+    class="chk-btn"
+  />
+  <label for="c2">Income</label>
+  <div class="circle-greenBox">↓</div>
+</div>
+
+<ng-container *ngFor="let n of filteredTransactions">
   <div
     *ngIf="n.typeOfTransaction === 'expense' && n.paidCard === this.activeId.id"
     class="transaction-box"
@@ -21,7 +43,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngFor="let n of transactionsData">
+<ng-container *ngFor="let n of filteredTransactions">
   <div
     *ngIf="n.typeOfTransaction === 'income' && n.paidCard === this.activeId.id"
     class="transaction-box"
@@ -43,3 +65,15 @@
     </div>
   </div>
 </ng-container>
+<!-- <input
+  type="checkbox"
+  [(ngModel)]="filter.expense"
+  (ngModelChange)="filterChange()"
+/>
+Expense
+<input
+  type="checkbox"
+  [(ngModel)]="filter.income"
+  (ngModelChange)="filterChange()"
+/>
+Income -->
