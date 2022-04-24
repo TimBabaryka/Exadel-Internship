@@ -1,3 +1,15 @@
+<div *ngIf="this.noCards === true">
+  <h2 class="noCard-message">No cards available.</h2>
+  <div class="left-section-card">
+    <div class="noCard">
+      <h2 class="cardAdd">Add a new card</h2>
+      <mat-icon (click)="createCard()" [inline]="true" class="addCard"
+        >library_add</mat-icon
+      >
+    </div>
+  </div>
+</div>
+
 <div *ngFor="let n of arrOfCards; let i = index">
   <div
     [ngClass]="{ activeCard: n._id === activeCardId }"

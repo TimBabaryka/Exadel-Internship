@@ -3,6 +3,7 @@ import { TodoService } from '../../services/todo.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CardInfoComponent } from './card-info/card-info.component';
+import { CardCreateComponent } from '../../right-side/card-create/card-create.component';
 
 @Component({
   selector: 'app-cards',
@@ -15,6 +16,7 @@ export class CardsComponent implements OnInit {
   arrOfCards: any;
   cardInfoData: any;
   activeCardId: any;
+  noCards: boolean = false;
 
   constructor(
     private todoService: TodoService,
@@ -22,10 +24,16 @@ export class CardsComponent implements OnInit {
     private dialogRef: MatDialog
   ) {}
 
+  createCard() {
+    this.dialogRef.open(CardCreateComponent);
+  }
   getCardDatas() {
     this.todoService.getCardDatas().subscribe((data: any) => {
       this.user = data;
       this.arrOfCards = data.user.cards;
+      if (this.user.user.cards[0] === undefined) {
+        this.noCards = true;
+      }
     });
   }
   onCardClick(id: string) {
@@ -46,6 +54,7 @@ export class CardsComponent implements OnInit {
   ngOnInit(): void {
     this.getCardDatas();
     this.todoService.addNewCard$.subscribe(() => {
+      this.noCards = false;
       this.getCardDatas();
     });
     this.todoService.addNewTransaction$.subscribe(() => {

@@ -20,6 +20,22 @@
   justify-content: space-around;
   align-items: center;
 }
+.noCard-message {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.addCard {
+  font-size: 10rem;
+}
+.addCard:hover {
+  color: white;
+}
+
+.noCard {
+  align-items: center;
+  display: flex;
+}
 
 .left-side {
   align-items: center;
