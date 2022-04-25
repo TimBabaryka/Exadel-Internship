@@ -119,3 +119,7 @@
     min-width: 100px;
   }
 }
+::ng-deep .custom-style {
+  background-color: rgb(39, 190, 87);
+  color: white;
+}

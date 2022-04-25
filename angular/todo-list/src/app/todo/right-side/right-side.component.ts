@@ -5,7 +5,6 @@ import { CardCreateComponent } from './card-create/card-create.component';
 import { TransactionCreateComponent } from './transaction-create/transaction-create.component';
 import { CategoryCreateComponent } from './category-create/category-create.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-right-side',
@@ -21,9 +20,7 @@ export class RightSideComponent implements OnInit {
     private todoService: TodoService,
     private dialogRef: MatDialog,
     private _snackBar: MatSnackBar
-  ) {
-    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+  ) {}
 
   filterByExpense() {
     console.log(1);
@@ -33,18 +30,36 @@ export class RightSideComponent implements OnInit {
     console.log(2);
   }
 
+  showSnackbarCssStyles(content: any, action: any, duration: any) {
+    let sb = this._snackBar.open(content, action, {
+      duration: duration,
+      panelClass: ['custom-styleRed'],
+    });
+    sb.onAction().subscribe(() => {
+      sb.dismiss();
+    });
+  }
+
   createTransaction() {
     if (this.todoService.getActiveId() === null) {
-      this._snackBar.open('No card chosen', 'ok');
+      this.showSnackbarCssStyles('No chosen card. Select Card!', 'Close', 2000);
+
       return;
     }
-    this.dialogRef.open(TransactionCreateComponent);
+    this.dialogRef.open(TransactionCreateComponent, {
+      autoFocus: false,
+      maxHeight: '90vh',
+    });
   }
 
   createCard() {
     this.dialogRef.open(CardCreateComponent);
   }
   createCategory() {
+    if (this.todoService.getActiveId() === null) {
+      this.showSnackbarCssStyles('No chosen card. Select Card!', 'Close', 2000);
+      return;
+    }
     this.dialogRef.open(CategoryCreateComponent);
   }
 

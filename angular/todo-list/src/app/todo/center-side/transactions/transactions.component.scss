@@ -232,7 +232,8 @@
 .chk-btn + label {
   align-items: center;
   border-radius: 5px;
-  color: white;
+  color: rgb(255, 255, 255);
+  font-size: 2rem;
   margin-top: 4%;
   width: 100%;
   max-width: 200px;
@@ -278,12 +279,12 @@
 }
 @media screen and(max-width: 470px) {
   .circle-greenBox {
-    right: 50px;
+    right: 44px;
     width: 7rem;
     top: 9px;
   }
   .circle-redBox {
-    right: 50px;
+    right: 40px;
     width: 7rem;
     top: 9px;
   }

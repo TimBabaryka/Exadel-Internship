@@ -104,3 +104,8 @@
 mat-icon.disable {
   filter: opacity(0.5);
 }
+
+::ng-deep .custom-style {
+  background-color: rgb(39, 190, 87);
+  color: white;
+}

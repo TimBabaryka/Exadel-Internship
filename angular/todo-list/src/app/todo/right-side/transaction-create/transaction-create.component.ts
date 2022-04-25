@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TodoService } from '../../services/todo.service';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Fruit {
   name: string;
@@ -30,7 +31,10 @@ export class TransactionCreateComponent implements OnInit {
     typeOfTransaction: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   });
-  constructor(private todoService: TodoService) {}
+  constructor(
+    private todoService: TodoService,
+    private _snackBar: MatSnackBar
+  ) {}
   chipsControl = new FormControl('');
   chipsValue$ = this.chipsControl.valueChanges;
   addOnBlur = true;
@@ -41,6 +45,16 @@ export class TransactionCreateComponent implements OnInit {
       this.onlyCategories.push(value);
     }
     event.chipInput!.clear();
+  }
+
+  showSnackbarCssStyles(content: any, action: any, duration: any) {
+    let sb = this._snackBar.open(content, action, {
+      duration: duration,
+      panelClass: ['custom-style'],
+    });
+    sb.onAction().subscribe(() => {
+      sb.dismiss();
+    });
   }
 
   remove(fruit: any): void {
@@ -92,6 +106,11 @@ export class TransactionCreateComponent implements OnInit {
         this.todoService.addNewTransaction$.next(null);
         this.todoService.addNewCategory$.next(null);
       });
+    this.showSnackbarCssStyles(
+      'Transaction was successfully created!',
+      'Close',
+      2000
+    );
   }
 
   ngOnInit(): void {

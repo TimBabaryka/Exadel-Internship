@@ -43,3 +43,12 @@
     width: 100%;
   }
 }
+
+::ng-deep .custom-style {
+  background-color: rgb(37, 177, 81);
+  color: white;
+}
+::ng-deep .custom-styleRed {
+  background-color: rgb(212, 49, 8);
+  color: white;
+}

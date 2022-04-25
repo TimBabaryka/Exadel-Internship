@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -17,8 +18,19 @@ export class CategoriesComponent implements OnInit {
 
   constructor(
     private todoService: TodoService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {}
+
+  showSnackbarCssStyles(content: any, action: any, duration: any) {
+    let sb = this._snackBar.open(content, action, {
+      duration: duration,
+      panelClass: ['custom-style'],
+    });
+    sb.onAction().subscribe(() => {
+      sb.dismiss();
+    });
+  }
 
   getActiveCategory(id: string) {
     this.activeCategoryId = id;
@@ -29,10 +41,6 @@ export class CategoriesComponent implements OnInit {
     this.categoryInfoData = { ...temp[0] };
   }
 
-  // toggleDisable() {
-  //   this.buttonIcon = true;
-  // }
-
   getCardDatas() {
     this.todoService.getCardDatas().subscribe((data: any) => {
       this.user = data;
@@ -42,6 +50,11 @@ export class CategoriesComponent implements OnInit {
 
   getIdCatDelete(id: any) {
     this.todoService.deleteCategory(id);
+    this.showSnackbarCssStyles(
+      'Category was successfully deleted!',
+      'Close',
+      2000
+    );
   }
 
   saveAndSendCat(id: string) {

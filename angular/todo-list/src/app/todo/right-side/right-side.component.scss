@@ -133,3 +133,8 @@
     transition: 0.4s ease-in-out;
   }
 }
+
+::ng-deep .custom-styleRed {
+  background-color: brown;
+  color: white;
+}
