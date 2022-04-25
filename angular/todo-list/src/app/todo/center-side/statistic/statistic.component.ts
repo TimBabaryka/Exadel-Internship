@@ -14,10 +14,6 @@ export class StatisticComponent implements OnInit {
   user: any;
   activeId!: string;
   arrOfTransactions: any;
-  // range: any = new FormGroup({
-  //   start: new FormControl(),
-  //   end: new FormControl(),
-  // });
 
   constructor(private todoService: TodoService) {}
 
@@ -33,5 +29,8 @@ export class StatisticComponent implements OnInit {
 
   ngOnInit(): void {
     this.importData();
+    this.todoService.addNewTransaction$.subscribe(() => {
+      this.importData();
+    });
   }
 }

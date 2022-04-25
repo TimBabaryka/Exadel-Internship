@@ -15,7 +15,7 @@ export class CardsComponent implements OnInit {
   user: any;
   arrOfCards: any;
   cardInfoData: any;
-  activeCardId: any;
+  activeCardId: any = this.todoService.getActiveId();
   noCards: boolean = false;
 
   constructor(

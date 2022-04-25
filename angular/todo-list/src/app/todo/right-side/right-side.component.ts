@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CardCreateComponent } from './card-create/card-create.component';
 import { TransactionCreateComponent } from './transaction-create/transaction-create.component';
 import { CategoryCreateComponent } from './category-create/category-create.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 // import { Router } from '@angular/router';
 
 @Component({
@@ -15,11 +16,12 @@ export class RightSideComponent implements OnInit {
   activeId: any;
   user: any;
   filter = { expense: true, income: true };
+
   constructor(
     private todoService: TodoService,
-    private dialogRef: MatDialog
-  ) // private router: Router
-  {
+    private dialogRef: MatDialog,
+    private _snackBar: MatSnackBar
+  ) {
     // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
@@ -32,6 +34,10 @@ export class RightSideComponent implements OnInit {
   }
 
   createTransaction() {
+    if (this.todoService.getActiveId() === null) {
+      this._snackBar.open('No card chosen', 'ok');
+      return;
+    }
     this.dialogRef.open(TransactionCreateComponent);
   }
 
