@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CardCreateComponent } from './card-create/card-create.component';
 import { TransactionCreateComponent } from './transaction-create/transaction-create.component';
 import { CategoryCreateComponent } from './category-create/category-create.component';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-right-side',
@@ -17,10 +17,10 @@ export class RightSideComponent implements OnInit {
   filter = { expense: true, income: true };
   constructor(
     private todoService: TodoService,
-    private dialogRef: MatDialog,
-    private router: Router
-  ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    private dialogRef: MatDialog
+  ) // private router: Router
+  {
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   filterByExpense() {

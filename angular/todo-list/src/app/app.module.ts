@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { LayoutModule } from './layout/layout.module';
 import { RegModule } from './reg/reg.module';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
@@ -25,6 +26,7 @@ import { RegModule } from './reg/reg.module';
     HttpClientModule,
     LayoutModule,
     RegModule,
+    MatTableModule,
     AppRoutingModule,
   ],
   providers: [

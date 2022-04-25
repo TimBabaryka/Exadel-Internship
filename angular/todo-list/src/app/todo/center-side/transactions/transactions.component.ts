@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TodoService } from '../../services/todo.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
 
@@ -72,5 +72,9 @@ export class TransactionsComponent implements OnInit {
     this.todoService.editTransaction$.subscribe(() => {
       this.getTransdData();
     });
+    this.route.params.subscribe((params) => {
+      this.activeId = params['requestId'];
+      this.getTransdData();
+    }); // problem with style
   }
 }

@@ -1,5 +1,6 @@
 <div class="stat-box">
-  <div class="stat-choose">
+  <app-table-stat [data]="arrOfTransactions"></app-table-stat>
+  <!-- <div class="stat-choose">
     <label id="example-radio-group-label">Pick your statistic</label>
     <mat-radio-group
       aria-labelledby="example-radio-group-label"
@@ -15,9 +16,9 @@
       </mat-radio-button>
     </mat-radio-group>
     <div>Your {{ categoryModel }} statistic</div>
-  </div>
+  </div> -->
 
-  <div class="date-range">
+  <!-- <div class="date-range">
     <mat-form-field appearance="fill">
       <mat-label>Enter a date range</mat-label>
       <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
@@ -36,24 +37,5 @@
     </mat-form-field>
 
     <p>Selected range: {{ range.value | json }}</p>
-  </div>
-
-  <!-- <div class="stat-container-table">
-    <div class="top-stat">
-      <h1>Month</h1>
-      <h1>Income</h1>
-      <h1>Expenses</h1>
-      <h1>Economy</h1>
-      <h1>% of economy</h1>
-    </div>
-    <div class="content-stat">
-      <div class="stat-box-table">
-        <h1>September</h1>
-        <h1>100$</h1>
-        <h1>20$</h1>
-        <h1>80$</h1>
-        <h1>80%</h1>
-      </div>
-    </div>
   </div> -->
 </div>

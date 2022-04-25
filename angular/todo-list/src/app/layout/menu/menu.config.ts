@@ -7,10 +7,4 @@ export const MENU_CONFIG: IMenuItem[] = [
     route: '/todo',
     icon: 'listall',
   },
-  {
-    id: 'logout',
-    title: 'Logout',
-    route: '/logout',
-    icon: 'logout',
-  },
 ];

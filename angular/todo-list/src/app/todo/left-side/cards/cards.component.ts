@@ -40,6 +40,7 @@ export class CardsComponent implements OnInit {
     this.activeCardId = id;
     this.todoService.setActiveId(id);
   }
+
   openCardWindow(id: any) {
     this.activeCardId = id;
     this.todoService.setActiveId(this.activeCardId);

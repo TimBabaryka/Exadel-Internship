@@ -22,6 +22,8 @@ import { CardsComponent } from './left-side/cards/cards.component';
 import { TransactionInfoComponent } from './center-side/transactions/transaction-info/transaction-info.component';
 import { CardInfoComponent } from './left-side/cards/card-info/card-info.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { TableStatComponent } from './center-side/statistic/table-stat/table-stat.component';
+import { MatTableModule } from '@angular/material/table';
 
 const routes: Routes = [
   {
@@ -47,12 +49,16 @@ const routes: Routes = [
     CardsComponent,
     TransactionInfoComponent,
     CardInfoComponent,
+
+    TableStatComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
     MatIconModule,
+    MatTableModule,
+    MatDatepickerModule,
     ReactiveFormsModule,
     MatChipsModule,
   ],
