@@ -36,8 +36,8 @@ export class CategoriesComponent implements OnInit {
   }
   // test(event: Event) {
   //   this.activeCategoryId === null;
-  //   this.rendered.removeClass(event.target, 'disable');
-  //   // this.rendered.addClass(event.target, 'disable');
+  //   // this.rendered.removeClass(event.target, 'disable');
+  //   this.rendered.addClass(event.target, 'alertGreen');
   // }
 
   getActiveCategory(id: string) {
@@ -63,7 +63,6 @@ export class CategoriesComponent implements OnInit {
       'Close',
       2000
     );
-    // this.route.navigateByUrl('/categories');
   }
 
   saveAndSendCat(id: string) {

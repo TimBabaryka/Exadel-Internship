@@ -99,10 +99,11 @@ export class TableStatComponent implements OnInit {
 
     this.income = transactionIncomes.reduce((a: number, b: number) => a + b, 0);
     this.expense = tansactionsExpense.reduce(
-      (a: number, b: number) => -a + -b,
+      (a: number, b: number) => a + b,
       0
     );
-    this.margin = this.income + this.expense;
+
+    this.margin = this.income + -this.expense;
 
     this.marginPercent = Math.round((this.margin * 100) / this.income);
   }
