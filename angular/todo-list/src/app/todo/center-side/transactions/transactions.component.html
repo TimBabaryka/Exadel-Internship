@@ -87,7 +87,7 @@
           ↑
         </div>
         <div class="transaction-name">{{ n.typeOfTransaction }}</div>
-        <div class="date">{{ n.date }}</div>
+        <div class="date">{{ n.date | date: 'dd/MM/yyyy' }}</div>
         <div class="payee">{{ n.payee }}</div>
       </div>
       <div class="center-top">{{ n.title }}</div>

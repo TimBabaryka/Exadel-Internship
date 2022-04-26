@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -19,7 +20,9 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     private router: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private rendered: Renderer2,
+    private route: Router
   ) {}
 
   showSnackbarCssStyles(content: any, action: any, duration: any) {
@@ -31,6 +34,11 @@ export class CategoriesComponent implements OnInit {
       sb.dismiss();
     });
   }
+  // test(event: Event) {
+  //   this.activeCategoryId === null;
+  //   this.rendered.removeClass(event.target, 'disable');
+  //   // this.rendered.addClass(event.target, 'disable');
+  // }
 
   getActiveCategory(id: string) {
     this.activeCategoryId = id;
@@ -55,6 +63,7 @@ export class CategoriesComponent implements OnInit {
       'Close',
       2000
     );
+    // this.route.navigateByUrl('/categories');
   }
 
   saveAndSendCat(id: string) {

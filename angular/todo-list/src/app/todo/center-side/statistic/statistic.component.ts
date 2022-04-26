@@ -14,23 +14,27 @@ export class StatisticComponent implements OnInit {
   user: any;
   activeId!: string;
   arrOfTransactions: any;
+  margin!: number;
+  income!: number;
+  marginPercent!: number;
+  expense!: number;
 
   constructor(private todoService: TodoService) {}
 
-  importData() {
-    this.activeId = this.todoService.getActiveId();
-    this.todoService.getCardDatas().subscribe((data) => {
-      this.user = data;
-      this.arrOfTransactions = this.user.user.transaction.filter((obj: any) => {
-        return obj.paidCard === this.activeId;
-      });
-    });
-  }
+  // importData() {
+  //   this.activeId = this.todoService.getActiveId();
+  //   this.todoService.getCardDatas().subscribe((data) => {
+  //     this.user = data;
+  //     this.arrOfTransactions = this.user.user.transaction.filter((obj: any) => {
+  //       return obj.paidCard === this.activeId;
+  //     });
+  //   });
+  // }
 
   ngOnInit(): void {
-    this.importData();
-    this.todoService.addNewTransaction$.subscribe(() => {
-      this.importData();
-    });
+    // this.importData();
+    // this.todoService.addNewTransaction$.subscribe(() => {
+    //   this.importData();
+    // });
   }
 }

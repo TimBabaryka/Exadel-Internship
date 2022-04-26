@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataSource } from '@angular/cdk/table';
 import { FormGroup, FormControl } from '@angular/forms';
+import { TodoService } from 'src/app/todo/services/todo.service';
 
 /**
  * @title Table with filtering
@@ -11,22 +12,39 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './table-stat.component.html',
   styleUrls: ['./table-stat.component.scss'],
 })
-export class TableStatComponent {
+export class TableStatComponent implements OnInit {
+  activeId!: string;
+  user: any;
+  arrOfTransactions: any = [];
   range: any = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
   });
   @Input() data = [];
 
+  toggleButton: boolean = false;
+
+  income!: number;
+  expense!: number;
+  margin!: number;
+  marginPercent!: number;
+
   dataforrender: any;
 
   displayedColumns: string[] = ['date', 'value'];
   dataSource = new MatTableDataSource(this.data);
 
-  constructor() {}
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  constructor(private todoService: TodoService) {}
+
+  importData() {
+    this.activeId = this.todoService.getActiveId();
+    this.todoService.getCardDatas().subscribe((data) => {
+      this.user = data;
+      this.arrOfTransactions = this.user.user.transaction.filter((obj: any) => {
+        return obj.paidCard === this.activeId;
+      });
+      this.clicked();
+    });
   }
 
   clicked() {
@@ -46,13 +64,22 @@ export class TableStatComponent {
       'NOV',
       'DEC',
     ];
-    const map = this.data.reduce((a: any, b: any) => {
+    let mutatedTransactionsExpense: any = [];
+
+    this.arrOfTransactions.forEach((element: any) => {
+      const newEl = { ...element };
+      if (element.typeOfTransaction === 'expense') {
+        newEl.amount = element.amount * -1;
+      }
+      mutatedTransactionsExpense.push(newEl);
+    });
+
+    const map = mutatedTransactionsExpense.reduce((a: any, b: any) => {
       const m = toDate(b.date).getMonth();
       a[m] = a[m] ? +a[m] + b.amount : +b.amount;
       return a;
     }, {});
 
-    console.log(map);
     this.dataforrender = Object.entries(map).map(([key, value]) => ({
       value,
       date: month[+key],
@@ -60,12 +87,8 @@ export class TableStatComponent {
 
     let tansactionsExpense: any = [];
     let transactionIncomes: any = [];
-    let totalSum;
-    let totalExpense;
-    let margin;
-    let marginPercent;
 
-    this.data.forEach((element: any) => {
+    this.arrOfTransactions.forEach((element: any) => {
       if (element.typeOfTransaction === 'expense') {
         tansactionsExpense.push(element.amount);
       }
@@ -74,14 +97,20 @@ export class TableStatComponent {
       }
     });
 
-    totalSum = transactionIncomes.reduce((a: number, b: number) => a + b, 0);
-    totalExpense = tansactionsExpense.reduce(
+    this.income = transactionIncomes.reduce((a: number, b: number) => a + b, 0);
+    this.expense = tansactionsExpense.reduce(
       (a: number, b: number) => -a + -b,
       0
     );
-    margin = totalSum + totalExpense;
-    marginPercent = (margin * 100) / totalSum;
+    this.margin = this.income + this.expense;
 
-    console.log(totalSum, totalExpense, margin, marginPercent);
+    this.marginPercent = Math.round((this.margin * 100) / this.income);
+  }
+
+  ngOnInit(): void {
+    this.importData();
+    this.todoService.addNewTransaction$.subscribe(() => {
+      this.importData();
+    });
   }
 }

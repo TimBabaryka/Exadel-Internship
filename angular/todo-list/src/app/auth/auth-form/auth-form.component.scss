@@ -1,14 +1,20 @@
 @use 'src/variable' as var;
 
 .auth-box {
-  height: 100%;
-  border-radius: 25px;
-  width: 25%;
+  // height: 90vh;
+  // background-image: url(../../../assets/msp.png);
+  // background-position: right center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // height: 100%;
+
+  width: 100%;
   margin: 0 auto;
   padding-top: 10rem;
 }
 
 .auth-form {
+  margin: 0 auto;
   border-radius: 10px;
   max-width: 400px;
   background-color: white;
@@ -41,7 +47,7 @@
 @media screen and (max-width: 900px) {
   .auth-box {
     width: 100%;
-    display: flex;
+
     justify-content: center;
   }
   .auth-form {
