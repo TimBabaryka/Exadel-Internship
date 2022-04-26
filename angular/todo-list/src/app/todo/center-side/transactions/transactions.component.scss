@@ -281,6 +281,10 @@
   background-color: rgb(39, 190, 87);
   color: white;
 }
+::ng-deep .custom-styleRed {
+  background-color: rgb(232, 52, 28);
+  color: white;
+}
 
 @media screen and(max-width: 900px) {
   .transaction-box {
@@ -299,12 +303,12 @@
 }
 @media screen and(max-width: 470px) {
   .circle-greenBox {
-    right: 40px;
+    right: 34px;
     width: 7rem;
     top: 9px;
   }
   .circle-redBox {
-    right: 37px;
+    right: 31px;
     width: 7rem;
     top: 9px;
   }

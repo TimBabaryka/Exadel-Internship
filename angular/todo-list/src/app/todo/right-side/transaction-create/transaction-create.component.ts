@@ -14,6 +14,7 @@ export interface Fruit {
   styleUrls: ['./transaction-create.component.scss'],
 })
 export class TransactionCreateComponent implements OnInit {
+  maxDate = new Date();
   category: any;
   onlyCategories: any;
   arrOfCategories: any;

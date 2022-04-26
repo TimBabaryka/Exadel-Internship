@@ -36,6 +36,15 @@ export class TransactionsComponent implements OnInit {
       sb.dismiss();
     });
   }
+  showSnackbarCssStylesRed(content: any, action: any, duration: any) {
+    let sb = this._snackBar.open(content, action, {
+      duration: duration,
+      panelClass: ['custom-styleRed'],
+    });
+    sb.onAction().subscribe(() => {
+      sb.dismiss();
+    });
+  }
 
   filterChange() {
     this.filteredTransactions = this.transactionsData.filter(
@@ -57,6 +66,10 @@ export class TransactionsComponent implements OnInit {
   }
 
   sortTrans() {
+    if (this.filteredTransactions[0] === undefined) {
+      this.showSnackbarCssStylesRed('No transactions to sort!', 'Close', 2000);
+      return;
+    }
     const reversed = this.filteredTransactions.reverse();
     this.showSnackbarCssStyles('Transactions sorted!', 'Close', 2000);
   }
