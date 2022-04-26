@@ -48,3 +48,7 @@
 .active {
   color: #369ce5;
 }
+::ng-deep .custom-styleRed {
+  background-color: rgb(222, 54, 36);
+  color: white;
+}

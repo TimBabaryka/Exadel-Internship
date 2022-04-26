@@ -3,18 +3,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DataSource } from '@angular/cdk/table';
 import { FormGroup, FormControl } from '@angular/forms';
 
-// export interface PeriodicElement {
-//   title: string;
-//   date: number;
-//   typeOfTransaction: string;
-//   amount: number;
-// }
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   { date: 1, title: 'Hydrogen', typeOfTransaction: 'income', amount: 1 },
-//   { date: 2, title: 'Helium', typeOfTransaction: 'income', amount: 2 },
-//   { date: 3, title: 'Lithium', typeOfTransaction: 'expense', amount: 3 },
-// ];
 /**
  * @title Table with filtering
  */

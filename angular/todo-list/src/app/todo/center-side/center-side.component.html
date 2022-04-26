@@ -1,15 +1,17 @@
 <div class="center-box">
   <div class="center-header">
     <a
+      *ngIf="hasId == true"
       routerLinkActive="active"
       class="link-categories"
       [routerLink]="['categories']"
       >Categories</a
     >
 
-    <a class="link-categories">Subscription</a>
-    <a class="link-categories">Obligatory</a>
+    <a class="link-categories" *ngIf="hasId == true">Subscription</a>
+    <a class="link-categories" *ngIf="hasId == true">Obligatory</a>
     <a
+      *ngIf="hasId == true"
       routerLinkActive="active"
       class="link-categories"
       [routerLink]="['statistic']"
@@ -26,7 +28,7 @@
 
   <div class="search-box">
     <input class="my-input" autocomplete="off" />
-    <mat-icon class="search-icon" (click)="doSomething()">search</mat-icon>
+    <mat-icon class="search-icon">search</mat-icon>
   </div>
   <router-outlet></router-outlet>
 </div>

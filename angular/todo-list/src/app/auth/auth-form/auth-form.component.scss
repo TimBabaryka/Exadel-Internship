@@ -3,12 +3,16 @@
 .auth-box {
   height: 100%;
   border-radius: 25px;
-  width: 40%;
+  width: 25%;
   margin: 0 auto;
   padding-top: 10rem;
 }
 
 .auth-form {
+  border-radius: 10px;
+  max-width: 400px;
+  background-color: white;
+  max-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +28,7 @@
 
 .auth-button-reg {
   margin-top: 1rem;
+  margin-bottom: 1rem;
   text-decoration: none;
   color: var.$base-color;
 }
@@ -35,6 +40,11 @@
 
 @media screen and (max-width: 900px) {
   .auth-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .auth-form {
     width: 100%;
   }
 }

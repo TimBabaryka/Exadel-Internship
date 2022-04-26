@@ -61,6 +61,7 @@ export class TodoService {
     return this.http
       .delete(`http://localhost:3000/api/deleteCard/${id}`)
       .subscribe((data) => {
+        this.activeId = null;
         this.addNewCard$.next(null);
       });
   }

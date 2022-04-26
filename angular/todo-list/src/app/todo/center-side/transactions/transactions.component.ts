@@ -4,6 +4,7 @@ import { TodoService } from '../../services/todo.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TransactionInfoComponent } from './transaction-info/transaction-info.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-transactions',
@@ -22,8 +23,19 @@ export class TransactionsComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     private dialogRef: MatDialog,
+    private _snackBar: MatSnackBar,
     private route: ActivatedRoute
   ) {}
+
+  showSnackbarCssStyles(content: any, action: any, duration: any) {
+    let sb = this._snackBar.open(content, action, {
+      duration: duration,
+      panelClass: ['custom-style'],
+    });
+    sb.onAction().subscribe(() => {
+      sb.dismiss();
+    });
+  }
 
   filterChange() {
     this.filteredTransactions = this.transactionsData.filter(
@@ -44,6 +56,11 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
+  sortTrans() {
+    const reversed = this.filteredTransactions.reverse();
+    this.showSnackbarCssStyles('Transactions sorted!', 'Close', 2000);
+  }
+
   getTransdData() {
     this.route.params.subscribe((params: Params) => {
       this.activeId = params;
@@ -55,7 +72,6 @@ export class TransactionsComponent implements OnInit {
         (x: any) => x.paidCard === this.activeId.id
       );
       this.filteredTransactions = this.transactionsData;
-      console.log(this.filteredTransactions);
       this.filter.expense = true;
       this.filter.income = true;
     });
@@ -75,6 +91,6 @@ export class TransactionsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.activeId = params['requestId'];
       this.getTransdData();
-    }); // problem with style
+    });
   }
 }

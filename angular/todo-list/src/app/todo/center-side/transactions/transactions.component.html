@@ -8,7 +8,9 @@
   />
   <label for="c1">Expense</label>
   <label for="c1" class="circle-redBox">↑</label>
-
+  <div class="box-icon">
+    <mat-icon class="sort-icon" (click)="sortTrans()">sort</mat-icon>
+  </div>
   <input
     type="checkbox"
     [(ngModel)]="filter.income"
@@ -20,7 +22,7 @@
   <label for="c2" class="circle-greenBox">↓</label>
 </div>
 
-<ng-container *ngFor="let n of filteredTransactions">
+<!-- <ng-container *ngFor="let n of filteredTransactions">
   <div
     *ngIf="n.typeOfTransaction === 'expense' && n.paidCard === this.activeId.id"
     class="transaction-box"
@@ -41,22 +43,49 @@
       <div class="center-top">{{ n.title }}</div>
     </div>
   </div>
-</ng-container>
+</ng-container> -->
 
 <ng-container *ngFor="let n of filteredTransactions">
-  <div
-    *ngIf="n.typeOfTransaction === 'income' && n.paidCard === this.activeId.id"
-    class="transaction-box"
-  >
+  <div class="transaction-box">
     <div class="left-box">
       <button class="transaction-box-button" (click)="openTransInfo(n._id)">
         {{ n.activity }}
       </button>
     </div>
-    <div class="right-box green-amount">{{ n.amount }}</div>
+    <div
+      class="right-box green-amount"
+      *ngIf="
+        n.typeOfTransaction === 'income' && n.paidCard === this.activeId.id
+      "
+    >
+      {{ n.amount }}
+    </div>
+    <div
+      class="right-box red-amount"
+      *ngIf="
+        n.typeOfTransaction === 'expense' && n.paidCard === this.activeId.id
+      "
+    >
+      {{ n.amount }}
+    </div>
     <div class="central-box">
       <div class="center-bottom">
-        <div class="circle-box circle-green">↓</div>
+        <div
+          class="circle-box circle-green"
+          *ngIf="
+            n.typeOfTransaction === 'income' && n.paidCard === this.activeId.id
+          "
+        >
+          ↓
+        </div>
+        <div
+          class="circle-box circle-red"
+          *ngIf="
+            n.typeOfTransaction === 'expense' && n.paidCard === this.activeId.id
+          "
+        >
+          ↑
+        </div>
         <div class="transaction-name">{{ n.typeOfTransaction }}</div>
         <div class="date">{{ n.date }}</div>
         <div class="payee">{{ n.payee }}</div>
@@ -65,15 +94,3 @@
     </div>
   </div>
 </ng-container>
-<!-- <input
-  type="checkbox"
-  [(ngModel)]="filter.expense"
-  (ngModelChange)="filterChange()"
-/>
-Expense
-<input
-  type="checkbox"
-  [(ngModel)]="filter.income"
-  (ngModelChange)="filterChange()"
-/>
-Income -->

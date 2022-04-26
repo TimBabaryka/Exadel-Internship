@@ -134,6 +134,12 @@
   }
 }
 
+@media screen and(max-width: 900px) {
+  .left-box {
+    height: 600px;
+  }
+}
+
 ::ng-deep .custom-styleRed {
   background-color: brown;
   color: white;

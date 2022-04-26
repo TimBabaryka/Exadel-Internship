@@ -115,6 +115,5 @@ export class TransactionCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    console.log((this.activeId = this.todoService.getActiveId())); //how does it know the active number?
   }
 }

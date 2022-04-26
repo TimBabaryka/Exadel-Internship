@@ -137,8 +137,8 @@
 }
 
 .filter-box-content {
-  width: 100%;
-  margin-left: 3%;
+  width: 95%;
+  margin-left: 5%;
   display: flex;
   justify-content: center;
 }
@@ -202,7 +202,7 @@
   right: 55px;
   top: 5px;
   margin-top: 5%;
-  width: 3em;
+  width: 3.5em;
   height: 2em;
   display: flex;
   background: #00da3a;
@@ -213,10 +213,10 @@
 }
 .circle-redBox {
   position: relative;
-  right: 55px;
+  right: 52px;
   top: 5px;
   margin-top: 5%;
-  width: 3em;
+  width: 3.5em;
   height: 2em;
   display: flex;
   background: #ff0000;
@@ -233,7 +233,7 @@
   align-items: center;
   border-radius: 5px;
   color: rgb(255, 255, 255);
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-top: 4%;
   width: 100%;
   max-width: 200px;
@@ -249,7 +249,7 @@
 .chk-btn:checked + label {
   border: 1px solid black;
   color: rgb(0, 0, 0);
-  font-size: 2rem;
+  font-size: 1.8rem;
   border-radius: 5px;
   margin-top: 4%;
   width: 100%;
@@ -260,6 +260,26 @@
   justify-content: center;
   cursor: pointer;
   align-self: center;
+}
+
+.sort-icon {
+  color: #767879;
+}
+
+.sort-icon:hover {
+  color: #369ce5;
+  transition: 0.3s ease-in-out;
+}
+.box-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5%;
+}
+
+::ng-deep .custom-style {
+  background-color: rgb(39, 190, 87);
+  color: white;
 }
 
 @media screen and(max-width: 900px) {
@@ -279,12 +299,12 @@
 }
 @media screen and(max-width: 470px) {
   .circle-greenBox {
-    right: 44px;
+    right: 40px;
     width: 7rem;
     top: 9px;
   }
   .circle-redBox {
-    right: 40px;
+    right: 37px;
     width: 7rem;
     top: 9px;
   }

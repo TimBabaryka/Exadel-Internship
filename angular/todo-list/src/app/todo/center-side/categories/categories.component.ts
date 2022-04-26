@@ -59,7 +59,6 @@ export class CategoriesComponent implements OnInit {
 
   saveAndSendCat(id: string) {
     this.getActiveCategory(id);
-    console.log(this.activeCategoryId, this.categoryInfoData);
     this.todoService
       .sendCategoryEdit(this.activeCategoryId, this.categoryInfoData)
       .subscribe(() => {
