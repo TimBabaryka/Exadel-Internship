@@ -34,11 +34,6 @@ export class CategoriesComponent implements OnInit {
       sb.dismiss();
     });
   }
-  // test(event: Event) {
-  //   this.activeCategoryId === null;
-  //   // this.rendered.removeClass(event.target, 'disable');
-  //   this.rendered.addClass(event.target, 'alertGreen');
-  // }
 
   getActiveCategory(id: string) {
     this.activeCategoryId = id;

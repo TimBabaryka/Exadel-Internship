@@ -64,7 +64,10 @@
         <div *ngIf="name.errors?.['required']">Min 1 symbol</div>
       </div>
 
-      <mat-icon class="icon-colorGreen" (click)="saveAndSendCat(n._id)"
+      <mat-icon
+        [ngClass]="{ disable: activeCategoryId !== n._id || name.errors }"
+        class="icon-colorGreen"
+        (click)="saveAndSendCat(n._id)"
         >done</mat-icon
       >
       <mat-icon class="icon-colorGreen" (click)="getIdCatDelete(n._id)"
