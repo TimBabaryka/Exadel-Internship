@@ -19,7 +19,11 @@ const routes: Routes = [
     path: 'todo',
     component: TodoComponent,
     children: [
-      { path: 'categories', component: CategoriesComponent },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        children: [{ path: 'category/:id', component: CategoriesComponent }],
+      },
       { path: 'statistic', component: StatisticComponent },
       { path: 'transactions/:id', component: TransactionsComponent },
       {
@@ -27,7 +31,6 @@ const routes: Routes = [
         component: AdminComponent,
         canActivate: [AthGuardGuard],
       },
-      // { path: 'transactions', component: TransactionsComponent },
     ],
   },
   {

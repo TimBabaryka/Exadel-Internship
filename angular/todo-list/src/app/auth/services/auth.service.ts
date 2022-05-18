@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { TodoService } from 'src/app/todo/services/todo.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private todo: TodoService) {}
 
   login(email: string, password: string) {
     return this.http
@@ -30,6 +31,7 @@ export class AuthService {
     localStorage.removeItem('idToken');
     localStorage.removeItem('authuser');
     localStorage.removeItem('cardname');
+    this.todo.setActiveId(null);
   }
 
   private setSession(res: any) {

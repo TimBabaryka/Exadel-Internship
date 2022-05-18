@@ -19,6 +19,11 @@ import { AdminComponent } from './center-side/admin/admin.component';
 import { CategoryCreateComponent } from './right-side/category-create/category-create.component';
 import { TransactionsComponent } from './center-side/transactions/transactions.component';
 import { CardsComponent } from './left-side/cards/cards.component';
+import { TransactionInfoComponent } from './center-side/transactions/transaction-info/transaction-info.component';
+import { CardInfoComponent } from './left-side/cards/card-info/card-info.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { TableStatComponent } from './center-side/statistic/table-stat/table-stat.component';
+import { MatTableModule } from '@angular/material/table';
 
 const routes: Routes = [
   {
@@ -42,13 +47,20 @@ const routes: Routes = [
     CategoryCreateComponent,
     TransactionsComponent,
     CardsComponent,
+    TransactionInfoComponent,
+    CardInfoComponent,
+
+    TableStatComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
     MatIconModule,
+    MatTableModule,
+    MatDatepickerModule,
     ReactiveFormsModule,
+    MatChipsModule,
   ],
 })
 export class TodoModule {}

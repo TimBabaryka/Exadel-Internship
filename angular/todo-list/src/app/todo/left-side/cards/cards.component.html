@@ -1,15 +1,30 @@
+<div *ngIf="this.noCards === true">
+  <h2 class="noCard-message">No cards available.</h2>
+  <div class="left-section-card">
+    <div class="noCard">
+      <h2 class="cardAdd">Add a new card</h2>
+      <mat-icon (click)="createCard()" [inline]="true" class="addCard"
+        >library_add</mat-icon
+      >
+    </div>
+  </div>
+</div>
+
 <div *ngFor="let n of arrOfCards; let i = index">
   <div
-    routerLinkActive="activeCard"
+    [ngClass]="{ activeCard: n._id === activeCardId }"
     routerLink="transactions/{{ n._id }}"
     class="left-section-card"
+    (click)="onCardClick(n._id)"
   >
-    <div class="card-content">
-      <div class="card-content-top">
-        <div class="card-name">{{ n.cardName }}</div>
-        <div class="card-currency">{{ n.currency }}</div>
-      </div>
-      <div class="card-sum">{{ n.cardAmount }}</div>
+    <div class="left-side">
+      <h1 class="cardName">{{ n.cardName }}</h1>
+      <h1 class="cardAmount">{{ n.cardAmount }}</h1>
+      <mat-icon class="cardIcon" (click)="openCardWindow(n._id)"
+        >payment</mat-icon
+      >
     </div>
+
+    <div class="card-currency">{{ n.currency }}</div>
   </div>
 </div>

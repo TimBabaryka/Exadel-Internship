@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatButtonModule,
@@ -40,6 +42,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule {}

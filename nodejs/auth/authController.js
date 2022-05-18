@@ -10,7 +10,7 @@ const generateAccessToken = (id, roles) => {
     id,
     roles,
   };
-  return jwt.sign(payload, process.env.secret, { expiresIn: "1h" });
+  return jwt.sign(payload, process.env.secret, { expiresIn: "2h" });
 };
 
 class AuthController {
@@ -30,7 +30,7 @@ class AuthController {
       return res.send({
         authuser: { user },
         apiKey: generateAccessToken(user._id, user.roles),
-        expiresIn: 10 * 60 * 1000,
+        expiresIn: 30 * 60 * 1000,
       });
     }
     return res.status(401).send("Login failed");
@@ -154,7 +154,7 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
       const { id } = req.params;
-      const { currency, cardAmount, cardName } = req.body;
+      const { card } = req.body;
       const user = await authUser.updateOne(
         {
           _id: `${decodedData.id}`,
@@ -162,9 +162,10 @@ class AuthController {
         },
         {
           $set: {
-            "cards.$.cardAmount": cardAmount,
-            "cards.$.currency": currency,
-            "cards.$.cardName": cardName,
+            "cards.$.cardAmount": card.cardAmount,
+            "cards.$.currency": card.currency,
+            "cards.$.cardName": card.cardName,
+            "cards.$.description": card.description,
           },
         },
         { multi: true }
@@ -172,11 +173,10 @@ class AuthController {
       return res.json(user);
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "Registration failed" });
+      res.status(400).json({ message: "Card edition failed" });
     }
   }
-
-  async editTransaction(req, res) {
+  async editCategory(req, res) {
     try {
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
@@ -185,15 +185,38 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
       const { id } = req.params;
-      const {
-        activity,
-        description,
-        paidCard,
-        amount,
-        date,
-        payee,
-        typeOfTransaction,
-      } = req.body;
+      const { category } = req.body;
+      const user = await authUser.updateOne(
+        {
+          _id: `${decodedData.id}`,
+          "categories._id": id,
+        },
+        {
+          $set: {
+            "categories.$.cardId": category.cardId,
+            "categories.$.categoryName": category.categoryName,
+            "categories.$.categoryType": category.categoryType,
+          },
+        },
+        { multi: true }
+      );
+      return res.json(user);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: "Category edition failed" });
+    }
+  }
+
+  async editTransaction(req, res) {
+    try {
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res.status(403).json({ message: "User is not authorized1" });
+      }
+      const decodedData = jwt.verify(token, process.env.secret);
+      req.authUser = decodedData;
+      const { id } = req.params;
+      const { transaction } = req.body;
 
       const user = await authUser.updateOne(
         {
@@ -202,13 +225,14 @@ class AuthController {
         },
         {
           $set: {
-            "transaction.$.activity": activity,
-            "transaction.$.description": activity,
-            "transaction.$.paidCard": paidCard,
-            "transaction.$.amount": amount,
-            "transaction.$.date": date,
-            "transaction.$.payee": payee,
-            "transactions.$.typeOfTransaction": typeOfTransaction,
+            "transaction.$.activity": transaction.activity,
+            "transaction.$.title": transaction.title,
+            "transaction.$.description": transaction.description,
+            "transaction.$.paidCard": transaction.paidCard,
+            "transaction.$.amount": transaction.amount,
+            "transaction.$.date": transaction.date,
+            "transaction.$.payee": transaction.payee,
+            "transactions.$.typeOfTransaction": transaction.typeOfTransaction,
           },
         },
         { multi: true }
@@ -216,7 +240,7 @@ class AuthController {
       return res.json(user);
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "Registration failed" });
+      res.status(400).json({ message: "Transaction edition failed" });
     }
   }
 
@@ -224,14 +248,14 @@ class AuthController {
     try {
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
-        return res.status(403).json({ message: " User is not authorized1" });
+        return res.status(403).json({ message: "User is not authorized1" });
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
-      const { cardName } = req.body;
-      const deletedCard = await authUser.updateOne(
+      const { id } = req.params;
+      const deletedCard = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
-        { $pull: { cards: { cardName: cardName } } }
+        { $pull: { cards: { _id: id } } }
       );
       return res.json(deletedCard);
     } catch (e) {
@@ -241,17 +265,65 @@ class AuthController {
 
   async deletedTransaction(req, res) {
     try {
+      let state = {
+        type: "",
+        amount: 0,
+        paidCard: "",
+      };
       const token = req.headers.authorization.split(" ")[1];
       if (!token) {
-        return res.status(403).json({ message: " User is not authorized1" });
+        return res.status(403).json({ message: "User is not authorized1" });
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
-      const { paidCard } = req.body;
-      const deletedTran = await authUser.updateOne(
-        { _id: `${decodedData.id}` },
-        { $pull: { transaction: { paidCard: paidCard } } }
+      const { id } = req.params;
+
+      const amountOfTrans = await authUser.findOne(
+        {
+          _id: decodedData.id,
+          "transaction._id": id,
+        },
+        {
+          "transaction.$": 1,
+        }
       );
+
+      state.amount = amountOfTrans.transaction[0].amount;
+      state.type = amountOfTrans.transaction[0].typeOfTransaction;
+      state.paidCard = amountOfTrans.transaction[0].paidCard;
+
+      const deletedTran = await authUser.findOneAndUpdate(
+        { _id: `${decodedData.id}` },
+        { $pull: { transaction: { _id: id } } }
+      );
+
+      if (state.type === "expense") {
+        const tempData = await authUser.updateOne(
+          {
+            _id: `${decodedData.id}`,
+            "cards._id": state.paidCard,
+          },
+          {
+            $inc: {
+              "cards.$.cardAmount": state.amount,
+            },
+          }
+        );
+      }
+
+      if (state.type === "income") {
+        const tempData = await authUser.updateOne(
+          {
+            _id: `${decodedData.id}`,
+            "cards._id": state.paidCard,
+          },
+          {
+            $inc: {
+              "cards.$.cardAmount": -state.amount,
+            },
+          }
+        );
+      }
       return res.json(deletedTran);
     } catch (e) {
       res.status(500).json(e);
@@ -266,10 +338,10 @@ class AuthController {
       }
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
-      const { categoryName } = req.body;
+      const { id } = req.params;
       const deletedCategory = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
-        { $pull: { categories: { categoryName: categoryName } } }
+        { $pull: { categories: { _id: id } } }
       );
       return res.json(deletedCategory);
     } catch (e) {
@@ -286,8 +358,7 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
 
-      const { categoryName, categoryType } = req.body;
-      const { id } = req.params;
+      const { cardId, categoryName, categoryType } = req.body;
 
       const createdCategory = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
@@ -295,7 +366,7 @@ class AuthController {
           $addToSet: {
             categories: [
               {
-                cardId: id,
+                cardId: cardId,
                 categoryName: categoryName,
                 categoryType: categoryType,
               },
@@ -303,6 +374,7 @@ class AuthController {
           },
         }
       );
+
       return res.json(createdCategory);
     } catch (e) {
       res.status(500).json(e);
@@ -318,7 +390,7 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
 
-      const { cardName, cardAmount, currency } = req.body;
+      const { cardName, cardAmount, currency, description } = req.body;
 
       const createdCard = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
@@ -329,6 +401,7 @@ class AuthController {
                 cardName: `${cardName}`,
                 currency: `${currency}`,
                 cardAmount: cardAmount,
+                description: `${description}`,
               },
             ],
           },
@@ -349,9 +422,16 @@ class AuthController {
       const decodedData = jwt.verify(token, process.env.secret);
       req.authUser = decodedData;
 
-      const { activity, description, amount, date, payee, typeOfTransaction } =
-        req.body;
-      const { id } = req.params;
+      const {
+        paidCard,
+        activity,
+        description,
+        amount,
+        date,
+        payee,
+        typeOfTransaction,
+        title,
+      } = req.body;
 
       const createdTran = await authUser.findOneAndUpdate(
         { _id: `${decodedData.id}` },
@@ -360,12 +440,28 @@ class AuthController {
             transaction: [
               {
                 activity: `${activity}`,
+                title: `${title}`,
                 description: `${description}`,
-                paidCard: `${id}`,
+                paidCard: `${paidCard}`,
                 amount: amount,
                 date: `${date}`,
                 payee: `${payee}`,
                 typeOfTransaction: `${typeOfTransaction}`,
+              },
+            ],
+          },
+        }
+      );
+
+      const createdCategory = await authUser.findOneAndUpdate(
+        { _id: `${decodedData.id}` },
+        {
+          $addToSet: {
+            categories: [
+              {
+                cardId: paidCard,
+                categoryName: activity,
+                categoryType: typeOfTransaction,
               },
             ],
           },
@@ -378,7 +474,7 @@ class AuthController {
         editCard = await authUser.updateOne(
           {
             _id: `${decodedData.id}`,
-            "cards._id": id,
+            "cards._id": paidCard,
           },
           {
             $inc: {
@@ -392,7 +488,7 @@ class AuthController {
         editCard = await authUser.updateOne(
           {
             _id: `${decodedData.id}`,
-            "cards._id": id,
+            "cards._id": paidCard,
           },
           {
             $inc: {
@@ -401,7 +497,7 @@ class AuthController {
           }
         );
       }
-      const obj = { createdTran, editCard };
+      const obj = { createdTran, editCard, createdCategory };
       return res.status(200).json(obj);
     } catch (e) {
       res.status(500).json(e);

@@ -8,14 +8,14 @@
   border-radius: 5px;
   flex-direction: row;
   align-content: flex-start;
-  height: 100vh;
-  max-height: 250px;
   width: 100%;
+  height: 100%;
+  max-height: 1000px;
 }
 
 .category-expense {
   margin-right: 1em;
-  margin-top: 1%;
+  margin-top: 2%;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -23,13 +23,12 @@
   border: 1px solid red;
   width: 100%;
   max-width: 200px;
-  height: 100%;
-  max-height: 30px;
-  overflow: hidden;
+  height: 30px;
+  cursor: pointer;
 }
 .category-income {
   margin-right: 1em;
-  margin-top: 1%;
+  margin-top: 2%;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -38,16 +37,79 @@
   width: 100%;
   max-width: 200px;
   height: 100%;
-  max-height: 30px;
   overflow: hidden;
+  height: 30px;
+  cursor: pointer;
+}
+
+.icon-colorGreen:hover {
+  color: #03b24c;
+}
+.icon-colorRed:hover {
+  color: red;
 }
 
 .category-name {
-  margin-right: 5%;
-  line-height: 10px;
-  font-size: 1.5rem;
+  border: none;
+  font-size: 2rem;
+  text-transform: uppercase;
+  width: 90%;
+  margin-left: 3%;
+  line-height: 28px;
 }
 
 .mat-icon {
   font-size: 1.5rem;
+}
+
+.activeCatRed {
+  background-color: #ff0303;
+  color: white;
+  transition: 0.3s ease-in-out;
+  .mat-icon:hover {
+    color: black;
+  }
+}
+
+.activeCatGreen {
+  background-color: #00da3a;
+  color: white;
+  transition: 0.3s ease-in-out;
+
+  .mat-icon:hover {
+    color: black;
+  }
+}
+
+.alert {
+  background-color: rgb(255, 0, 0);
+  max-height: 30px;
+  line-height: 14px;
+}
+.alertGreen {
+  background-color: #00da3a;
+  max-height: 30px;
+  line-height: 14px;
+}
+
+.disable {
+  display: none;
+}
+
+.disable2 {
+  display: none;
+}
+.disable:hover {
+  cursor: not-allowed;
+}
+.disable:active {
+  pointer-events: none;
+}
+mat-icon.disable {
+  filter: opacity(0.5);
+}
+
+::ng-deep .custom-style {
+  background-color: rgb(39, 190, 87);
+  color: white;
 }

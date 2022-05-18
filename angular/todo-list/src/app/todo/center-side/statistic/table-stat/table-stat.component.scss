@@ -1,0 +1,74 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.table-size {
+  width: 10rem;
+}
+.date-range {
+  margin-top: 3%;
+  border-radius: 5px;
+  background-color: #e6e3e3;
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+.date-picker {
+  width: 25rem;
+  border-radius: 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+  cursor: pointer;
+}
+.date-picker:hover {
+  background-color: #319fa4;
+  color: white;
+
+  .icon {
+    color: white;
+  }
+  transition: 0.9s ease-in-out;
+}
+.icon {
+  color: #319fa4;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+
+.tableRow {
+  min-height: 20rem;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+}
+.tableRow__row {
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid black;
+}
+
+.row-decor {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.income-title {
+  margin-left: 3%;
+  color: green;
+}
+.expense-title {
+  margin-left: 3%;
+  color: rgb(223, 19, 9);
+}

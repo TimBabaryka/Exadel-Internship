@@ -11,10 +11,14 @@
   flex-direction: column;
   align-items: center;
   &__row {
-    width: 30rem;
+    width: 25rem;
   }
 
   &__form {
     display: contents;
   }
+}
+::ng-deep .custom-style {
+  background-color: rgb(39, 190, 87);
+  color: white;
 }

@@ -1,0 +1,134 @@
+<div class="transaction-box">
+  <div class="transaction-form">
+    <div class="transaction-form__form">
+      <div class="transaction-form__row">
+        <h1 class="transactionHeader">Transaction Information</h1>
+        <mat-icon class="iconStyle" (click)="activateEdit = !activateEdit"
+          >build</mat-icon
+        >
+        <mat-icon class="iconStyle" (click)="deleteTrans()" mat-dialog-close
+          >delete_forever</mat-icon
+        >
+        <mat-icon class="iconStyle" mat-dialog-close>highlight_off</mat-icon>
+      </div>
+      <div class="transaction-content-top">
+        <div
+          class="circle-box circle-red"
+          *ngIf="dataOFActiveTrans.typeOfTransaction === 'expense'"
+        >
+          ↑
+        </div>
+        <div
+          class="circle-box circle-green"
+          *ngIf="dataOFActiveTrans.typeOfTransaction === 'income'"
+        >
+          ↓
+        </div>
+        <p>{{ dataOFActiveTrans.typeOfTransaction }}</p>
+
+        <p
+          *ngIf="dataOFActiveTrans.typeOfTransaction === 'expense'"
+          class="red-amount"
+        >
+          {{ dataOFActiveTrans.amount }}
+        </p>
+        <p
+          *ngIf="dataOFActiveTrans.typeOfTransaction === 'income'"
+          class="green-amount"
+        >
+          {{ dataOFActiveTrans.amount }}
+        </p>
+
+        <!-- <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="number"
+          [(ngModel)]="dataOFActiveTrans.amount"
+        /> -->
+      </div>
+
+      <div class="transaction-content-title">
+        <input
+          class="row-input-title"
+          [disabled]="!activateEdit"
+          [ngClass]="{ activeTitle: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.title"
+        />
+      </div>
+      <div class="transaction-content-category">
+        <input
+          class="row-input-category"
+          [disabled]="!activateEdit"
+          [ngClass]="{ activeCategory: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.activity"
+        />
+      </div>
+      <div class="transaction-content">
+        <p class="trans-field">Payment date:</p>
+
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.date"
+        />
+      </div>
+      <div class="transaction-content">
+        <p class="trans-field">Payee:</p>
+
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.payee"
+        />
+      </div>
+      <div class="transaction-content">
+        <p class="trans-field">Description:</p>
+
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveTrans.description"
+        />
+      </div>
+    </div>
+    <button
+      *ngIf="!activateEdit"
+      class="button-close"
+      mat-button
+      mat-dialog-close
+    >
+      Close
+    </button>
+
+    <button
+      *ngIf="activateEdit"
+      class="button-close"
+      (click)="saveAndSend()"
+      mat-button
+      mat-dialog-close
+    >
+      Save
+    </button>
+  </div>
+</div>

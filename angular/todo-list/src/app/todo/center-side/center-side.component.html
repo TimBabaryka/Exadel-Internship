@@ -1,20 +1,29 @@
 <div class="center-box">
   <div class="center-header">
+    <div class="card-choose" *ngIf="hasId === false">
+      <h1 class="textHead">No chosen card! Select Card!</h1>
+      <mat-icon class="iconHead">report</mat-icon>
+    </div>
+
     <a
+      *ngIf="hasId === true"
       routerLinkActive="active"
       class="link-categories"
       [routerLink]="['categories']"
       >Categories</a
     >
-    <a class="link-categories">Subscription</a>
-    <a class="link-categories">Obligatory</a>
+
+    <a class="link-categories" *ngIf="hasId == true">Subscription</a>
+    <a class="link-categories" *ngIf="hasId == true">Obligatory</a>
     <a
+      *ngIf="hasId == true"
       routerLinkActive="active"
       class="link-categories"
       [routerLink]="['statistic']"
       >Statistic</a
     >
     <a
+      *ngIf="hasId == true"
       [hidden]="!admPermission"
       routerLinkActive="active"
       class="link-categories"
@@ -23,10 +32,9 @@
     >
   </div>
 
-  <div class="search-box">
+  <div class="search-box" *ngIf="hasId == true">
     <input class="my-input" autocomplete="off" />
-    <mat-icon class="search-icon" (click)="doSomething()">search</mat-icon>
+    <mat-icon class="search-icon">search</mat-icon>
   </div>
-
   <router-outlet></router-outlet>
 </div>

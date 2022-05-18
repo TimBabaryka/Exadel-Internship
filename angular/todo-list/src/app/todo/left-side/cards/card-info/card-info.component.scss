@@ -1,0 +1,127 @@
+* {
+  box-sizing: border-box;
+}
+
+.transaction-box {
+  height: 100%;
+  min-height: 500px;
+  border-radius: 25px;
+  width: 40%;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__row {
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    width: 50rem;
+  }
+
+  &__form {
+    display: contents;
+  }
+}
+
+.transaction-content-top {
+  margin: 5%;
+  display: flex;
+  justify-content: space-around;
+  width: 50rem;
+}
+.transaction-content-title {
+  text-transform: uppercase;
+  font-size: 3rem;
+  margin: 5%;
+  display: flex;
+  justify-content: space-around;
+  width: 50rem;
+}
+.transaction-content-category {
+  border: 2px solid black;
+  font-size: 1.5rem;
+  margin: 5%;
+  display: flex;
+  justify-content: space-around;
+  width: 8rem;
+  height: 5rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.transaction-content {
+  margin-top: 2%;
+  font-weight: bold;
+  font-size: 2rem;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  width: 40rem;
+}
+.date-content {
+  width: 80%;
+  font-weight: 200;
+  font-size: 2rem;
+  font-style: italic;
+}
+
+.row-input {
+  background-color: transparent;
+  border: none;
+}
+.active {
+  border-radius: 5px;
+  padding: 0px 5px;
+  border: 1px solid black;
+}
+
+.trans-field {
+  width: 48%;
+}
+
+.button-close {
+  margin-top: 5%;
+}
+
+.iconStyle {
+  margin-left: 1em;
+}
+
+.iconStyle:hover {
+  color: #b8e2e4;
+  transition: 0.3s ease-in-out;
+}
+
+::ng-deep .custom-style {
+  background-color: rgb(35, 205, 126);
+  color: white;
+}
+
+@media screen and(max-width:900px) {
+  .transaction-form__row {
+    width: 25rem;
+  }
+
+  .transaction-content-top {
+    width: 25rem;
+  }
+  .transaction-content-title {
+    width: 25rem;
+    font-size: 2rem;
+  }
+  .trans-field {
+    font-size: 1.5rem;
+  }
+  .date-content {
+    width: 25rem;
+  }
+  .transaction-content {
+    flex-direction: column;
+    width: 25rem;
+  }
+}

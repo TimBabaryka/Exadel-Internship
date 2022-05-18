@@ -9,6 +9,7 @@ const categoryName = new mongoose.Schema({
 const transactionSchema = new mongoose.Schema(
   {
     activity: { type: String, required: true },
+    title: { type: String, required: true },
     description: { type: String, required: true },
     paidCard: { type: String, required: true },
     amount: { type: Number, required: true },
@@ -26,6 +27,7 @@ const cardSchema = new mongoose.Schema(
     cardName: { type: String, required: true },
     cardAmount: { type: Number, required: true },
     currency: { type: String, required: true },
+    description: { type: String, required: true },
   },
   {
     timestamps: true,

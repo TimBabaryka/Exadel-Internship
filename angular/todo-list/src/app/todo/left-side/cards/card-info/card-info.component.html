@@ -1,0 +1,84 @@
+<div class="transaction-box">
+  <div class="transaction-form">
+    <div class="transaction-form__form">
+      <div class="transaction-form__row">
+        <h1 class="transactionHeader">Card Information</h1>
+        <mat-icon class="iconStyle" (click)="activateEdit = !activateEdit"
+          >build</mat-icon
+        >
+        <mat-icon class="iconStyle" mat-dialog-close (click)="deleteCard()"
+          >delete_forever</mat-icon
+        >
+        <mat-icon class="iconStyle" mat-dialog-close>highlight_off</mat-icon>
+      </div>
+
+      <div class="transaction-content">
+        <p class="trans-field">Title:</p>
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="25"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveCard.cardName"
+        />
+      </div>
+      <div class="transaction-content">
+        <p class="trans-field">Currency:</p>
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="15"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveCard.currency"
+        />
+      </div>
+      <div class="transaction-content">
+        <p class="trans-field">Balance:</p>
+
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="25"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveCard.cardAmount"
+        />
+      </div>
+      <div class="transaction-content">
+        <p class="trans-field">Description:</p>
+
+        <input
+          class="row-input"
+          [disabled]="!activateEdit"
+          [ngClass]="{ active: activateEdit }"
+          maxlength="25"
+          minlength="1"
+          type="text"
+          [(ngModel)]="dataOFActiveCard.description"
+        />
+      </div>
+    </div>
+    <button
+      *ngIf="!activateEdit"
+      class="button-close"
+      mat-button
+      mat-dialog-close
+    >
+      Close
+    </button>
+    <button
+      *ngIf="activateEdit"
+      class="button-close"
+      (click)="saveAndSend()"
+      mat-button
+      mat-dialog-close
+    >
+      Save
+    </button>
+  </div>
+</div>

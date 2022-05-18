@@ -5,16 +5,57 @@
   width: 90%;
   max-width: 500px;
   min-height: 150px;
+
   background: linear-gradient(
       217deg,
       rgba(255, 0, 0, 0.8),
       rgba(255, 0, 0, 0) 70.71%
     ),
-    linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(127deg, rgba(192, 81, 188, 0.8), rgba(0, 255, 0, 0) 70.71%),
     linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
-  box-shadow: 21px 23px 11px -1px rgba(34, 60, 80, 0.29);
   margin-bottom: 5%;
   border-radius: 25px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+.noCard-message {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.addCard {
+  font-size: 10rem;
+}
+.addCard:hover {
+  color: white;
+}
+
+.noCard {
+  align-items: center;
+  display: flex;
+}
+
+.left-side {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardAmount {
+  font-size: 2.2rem;
+  color: var.$app-white;
+  display: flex;
+  justify-content: center;
+  width: 242px;
+  margin-left: 3%;
+}
+.cardName {
+  font-size: 2.5em;
+  color: var.$app-white;
+  max-width: fit-content;
 }
 
 .left-section-card:hover {
@@ -23,10 +64,20 @@
 }
 
 .activeCard {
-  border: 5px solid black;
+  border: 4px solid black;
   .card-currency {
     background-color: #b8e2e4;
-    color: white;
+    color: rgb(0, 0, 0);
+    border: 3px solid black;
+    transition: 0.1s ease-in-out;
+  }
+  .cardName {
+    color: black;
+    transition: 0.4s ease-in-out;
+  }
+  .cardAmount {
+    color: black;
+    transition: 0.4s ease-in-out;
   }
 }
 
@@ -46,11 +97,11 @@
 }
 
 .card-currency {
-  margin-top: 5%;
-  width: 6em;
-  height: 6em;
+  margin-right: 2%;
+  width: 7em;
+  height: 5em;
   display: flex;
-  background: rgb(255, 255, 255);
+  background: #ffffff;
   border-radius: 50%;
   color: #000000;
   justify-content: center;
@@ -64,4 +115,13 @@
   color: var.$app-white;
   display: flex;
   justify-content: center;
+}
+.cardIcon {
+  position: relative;
+  right: 90px;
+  cursor: pointer;
+}
+
+.cardIcon:hover {
+  color: #ffffff;
 }

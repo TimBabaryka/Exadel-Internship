@@ -1,5 +1,5 @@
 .transaction-box {
-  margin-top: 3%;
+  margin: 5% auto;
   border-radius: 5px;
   height: 10vh;
   max-height: 250px;
@@ -10,10 +10,19 @@
   grid-template-rows: 1.7fr;
   gap: 1% 11px;
   grid-template-areas: 'left-box central-box right-box';
-  background-color: #d2d1d1;
+
+  background: linear-gradient(to right, rgb(220, 220, 220), rgb(220, 220, 220));
+
   min-height: 100px;
+  max-width: 1000px;
+}
+.radioButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
 }
 .left-box {
+  margin-left: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +40,8 @@
 }
 .center-top {
   margin-top: 10px;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   grid-area: 1 / 1 / 2 / 5;
 }
 .center-bottom {
@@ -51,10 +61,13 @@
   grid-area: 2 / 3 / 3 / 4;
 }
 .payee {
+  width: fit-content;
   grid-area: 2 / 4 / 3 / 5;
 }
 
 .transaction-box-button {
+  font-size: 1rem;
+  text-transform: uppercase;
   max-width: 80px;
   max-height: 50px;
   height: 100%;
@@ -108,4 +121,195 @@
   color: #ffffff;
   justify-content: center;
   align-items: center;
+}
+
+.box-filter {
+  border-radius: 5px;
+  margin-top: 4%;
+  width: 100%;
+  max-width: 300px;
+  max-height: 50px;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-self: center;
+}
+
+.filter-box-content {
+  width: 95%;
+  margin-left: 5%;
+  display: flex;
+  justify-content: center;
+}
+
+.circle-red {
+  margin-top: 5%;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  background: rgb(255, 0, 0);
+  border-radius: 50%;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-green {
+  margin-top: 5%;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  background: #00da3a;
+  border-radius: 50%;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-size-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: small;
+  margin-left: 3rem;
+}
+
+.box-filter:hover {
+  background-color: #369ce5;
+  transition: 0.4s ease-in-out;
+
+  .form-size-text {
+    color: white;
+    transition: 0.4s ease-in-out;
+  }
+
+  .circle-red {
+    background: #ffffff;
+    color: #ff0202;
+    transition: 0.4s ease-in-out;
+  }
+  .circle-green {
+    background: #ffffff;
+    color: #00da3a;
+    transition: 0.4s ease-in-out;
+  }
+}
+
+.circle-greenBox {
+  position: relative;
+  right: 45px;
+  top: 5px;
+  margin-top: 5%;
+  width: 3em;
+  height: 2em;
+  display: flex;
+  background: #00da3a;
+  border-radius: 50%;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+}
+.circle-redBox {
+  position: relative;
+  right: 45px;
+  top: 5px;
+  margin-top: 5%;
+  width: 3em;
+  height: 2em;
+  display: flex;
+  background: #ff0000;
+  border-radius: 50%;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+}
+
+.chk-btn {
+  display: none;
+}
+.chk-btn + label {
+  align-items: center;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  font-size: 1.8rem;
+  margin-top: 4%;
+  width: 100%;
+  max-width: 200px;
+  height: 50px;
+  background: linear-gradient(to right, #8d8a8a, #828080);
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-self: center;
+}
+
+.chk-btn + label:active,
+.chk-btn:checked + label {
+  border: 1px solid black;
+  color: rgb(0, 0, 0);
+  font-size: 1.8rem;
+  border-radius: 5px;
+  margin-top: 4%;
+  width: 100%;
+  max-width: 200px;
+  max-height: 50px;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  align-self: center;
+}
+
+.sort-icon {
+  color: #767879;
+}
+
+.sort-icon:hover {
+  color: #369ce5;
+  transition: 0.3s ease-in-out;
+}
+.box-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5%;
+}
+
+::ng-deep .custom-style {
+  background-color: rgb(39, 190, 87);
+  color: white;
+}
+::ng-deep .custom-styleRed {
+  background-color: rgb(232, 52, 28);
+  color: white;
+}
+
+@media screen and(max-width: 900px) {
+  .transaction-box {
+    max-width: 300px;
+  }
+  .circle-greenBox {
+    right: 50px;
+    width: 4rem;
+    top: 6px;
+  }
+  .circle-redBox {
+    right: 50px;
+    width: 4rem;
+    top: 6px;
+  }
+}
+@media screen and(max-width: 470px) {
+  .circle-greenBox {
+    right: 34px;
+    width: 7rem;
+    top: 9px;
+  }
+  .circle-redBox {
+    right: 31px;
+    width: 7rem;
+    top: 9px;
+  }
 }

@@ -1,73 +1,78 @@
 <div class="category-box">
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
+  <ng-container *ngFor="let n of arrOfCategories; let i = index">
+    <div
+      routerLinkActive="activeCatRed"
+      routerLink="category/{{ n._id }}"
+      class="category-expense"
+      (click)="getActiveCategory(n._id)"
+      *ngIf="n.categoryType === 'expense' && n.cardId === this.activeId"
+    >
+      <input
+        class="category-name"
+        [disabled]="rowIWannaDisable === i"
+        type="text"
+        maxlength="10"
+        required
+        minlength="1"
+        id="name"
+        [(ngModel)]="n.categoryName"
+        #name="ngModel"
+        name="name"
+      />
 
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+        <div *ngIf="name.errors?.['required']">Min 1 symbol</div>
+      </div>
 
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
+      <mat-icon
+        [ngClass]="{ disable: activeCategoryId !== n._id || name.errors }"
+        class="icon-colorGreen"
+        (click)="saveAndSendCat(n._id)"
+        >done</mat-icon
+      >
+      <mat-icon class="icon-colorRed" (click)="getIdCatDelete(n._id)"
+        >delete_forever</mat-icon
+      >
+    </div>
+  </ng-container>
 
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
+  <ng-container *ngFor="let n of arrOfCategories; let i = index">
+    <div
+      routerLinkActive="activeCatGreen"
+      routerLink="category/{{ n._id }}"
+      class="category-income"
+      (click)="getActiveCategory(n._id)"
+      *ngIf="n.categoryType === 'income' && n.cardId === this.activeId"
+    >
+      <input
+        class="category-name"
+        [disabled]="rowIWannaDisable === i"
+        type="text"
+        maxlength="10"
+        minlength="1"
+        required
+        value="n.categoryName"
+        [(ngModel)]="n.categoryName"
+        #name="ngModel"
+        name="name"
+      />
 
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
+      <div
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="alertGreen"
+      >
+        <div *ngIf="name.errors?.['required']">Min 1 symbol</div>
+      </div>
 
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-expense">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
-
-  <div class="category-income">
-    <h1 class="category-name">Home</h1>
-    <mat-icon>build</mat-icon>
-    <mat-icon>delete_forever</mat-icon>
-  </div>
+      <mat-icon
+        [ngClass]="{ disable: activeCategoryId !== n._id || name.errors }"
+        class="icon-colorGreen"
+        (click)="saveAndSendCat(n._id)"
+        >done</mat-icon
+      >
+      <mat-icon class="icon-colorGreen" (click)="getIdCatDelete(n._id)"
+        >delete_forever</mat-icon
+      >
+    </div>
+  </ng-container>
 </div>

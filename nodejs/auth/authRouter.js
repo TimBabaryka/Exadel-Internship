@@ -33,15 +33,16 @@ authRouter.delete("/users/:id", authController.postDelete);
 authRouter.post("/login", authController.login);
 
 authRouter.post("/edit-card/:id", authController.editCard);
+authRouter.post("/edit-category/:id", authController.editCategory);
 authRouter.post("/edit-transaction/:id", authController.editTransaction);
 
 authRouter.post("/createCard", authController.addCard);
-authRouter.post("/createTransaction/:id", authController.addTransaction);
-authRouter.post("/createCategory/:id", authController.addCategory);
+authRouter.post("/createTransaction", authController.addTransaction);
+authRouter.post("/createCategory", authController.addCategory);
 
-authRouter.delete("/deleteCard", authController.deleteCard);
-authRouter.delete("/deleteTransaction", authController.deletedTransaction);
-authRouter.delete("/deleteCategory", authController.deleteCategory);
+authRouter.delete("/deleteCard/:id", authController.deleteCard);
+authRouter.delete("/deleteTransaction/:id", authController.deletedTransaction);
+authRouter.delete("/deleteCategory/:id", authController.deleteCategory);
 
 authRouter.get("/user", authController.getUser);
 

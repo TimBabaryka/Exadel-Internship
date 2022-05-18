@@ -11,7 +11,10 @@
   flex-direction: column;
   align-items: center;
   &__row {
-    width: 30rem;
+    width: 25rem;
+  }
+  &__title {
+    width: 11rem;
   }
 
   &__form {
@@ -62,5 +65,9 @@
 }
 .income-radio-input:checked + .income-radio {
   background-color: rgb(18, 177, 1);
+  color: white;
+}
+::ng-deep .custom-style {
+  background-color: rgb(39, 190, 87);
   color: white;
 }
